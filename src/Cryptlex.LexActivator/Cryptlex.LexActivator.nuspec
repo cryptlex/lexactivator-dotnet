@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package
+    xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Cryptlex.LexActivator</id>
+        <version>3.4.1</version>
+        <title>Cryptlex Licensing Library</title>
+        <authors>Cryptlex</authors>
+        <owners>Cryptlex LLC</owners>
+        <projectUrl>https://github.com/cryptlex/lexactivator-csharp</projectUrl>
+        <repository type="git" url="https://github.com/cryptlex/lexactivator-csharp" />
+        <license type="expression">MIT</license>
+        <language>en-US</language>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Cryptlex lets you license your software apps effortlessly. You can easily generate license keys using the REST API or Dashboard and validate the license keys in your software apps using LexActivator (Cryptlex client library).</description>
+        <copyright>Copyright (c) 2019 Cryptlex LLC </copyright>
+        <tags>lexactivator cryptlex licensing-library</tags>
+        <references>
+            <reference file="Cryptlex.LexActivator.dll" />
+        </references>
+    </metadata>
+    <files>
+        <file src="build\Cryptlex.LexActivator.targets" target="build\Cryptlex.LexActivator.targets" />
+        <file src="runtimes\win-x86\native\*.dll" target="runtimes\win-x86\native" />
+        <file src="runtimes\win-x64\native\*.dll" target="runtimes\win-x64\native" />
+        <file src="bin\Release\net45\Cryptlex.LexActivator.dll" target="lib\net45" />
+        <file src="bin\Release\Cryptlex.LexActivator.xml" target="lib\net45" />
+        <file src="bin\Release\netstandard1.1\Cryptlex.LexActivator.dll" target="lib\netstandard1.1" />
+        <file src="bin\Release\Cryptlex.LexActivator.xml" target="lib\netstandard1.1" />
+    </files>
+</package>

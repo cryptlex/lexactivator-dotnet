@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryptlex.LexActivator", "src\Cryptlex.LexActivator\Cryptlex.LexActivator.csproj", "{EBC82588-D477-4BAF-A288-151E362C718F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBC82588-D477-4BAF-A288-151E362C718F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC82588-D477-4BAF-A288-151E362C718F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC82588-D477-4BAF-A288-151E362C718F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC82588-D477-4BAF-A288-151E362C718F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {03C7BF45-C58B-4A99-BBD2-DC9622F5C944}
+	EndGlobalSection
+EndGlobal
