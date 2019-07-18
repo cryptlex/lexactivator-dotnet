@@ -15,18 +15,4 @@
             <CopyToPublishDirectory>Always</CopyToPublishDirectory>
         </Content>
     </ItemGroup>
-    <ItemGroup Condition=" '$(OS)' == 'Unix' AND $([System.IO.File]::Exists('/usr/lib/libc.dylib'))">
-        <Content Include="$(MSBuildThisFileDirectory)..\runtimes\osx-x64\native\*.dylib">
-            <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
-        </Content>
-    </ItemGroup>
-    <ItemGroup Condition=" '$(OS)' == 'Unix' AND ! $([System.IO.File]::Exists('/usr/lib/libc.dylib'))">
-        <Content Include="$(MSBuildThisFileDirectory)..\runtimes\linux-x64\native\*.so">
-            <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
-        </Content>
-    </ItemGroup>
 </Project>

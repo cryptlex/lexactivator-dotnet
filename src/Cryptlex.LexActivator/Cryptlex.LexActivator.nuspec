@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Cryptlex.LexActivator</id>
-        <version>3.5.3</version>
+        <version>3.6.0</version>
         <title>Cryptlex Licensing Library</title>
         <authors>Cryptlex</authors>
         <owners>Cryptlex LLC</owners>
@@ -29,7 +29,7 @@
         <file src="runtimes\win-x64\native\*.dll" target="runtimes\win-x64\native" />
         <file src="runtimes\osx-x64\native\*.dylib" target="runtimes\osx-x64\native" />
         <file src="runtimes\linux-x64\native\*.so" target="runtimes\linux-x64\native" />
-        <!-- <file src="runtimes\linux-musl-x64\native\*.so" target="runtimes\linux-musl-x64\native" /> -->
+        <file src="runtimes\linux-musl-x64\native\*.so" target="runtimes\linux-musl-x64\native" />
         <file src="bin\Release\net45\Cryptlex.LexActivator.dll" target="lib\net45" />
         <file src="bin\Release\Cryptlex.LexActivator.xml" target="lib\net45" />
         <file src="bin\Release\netstandard1.1\Cryptlex.LexActivator.dll" target="lib\netstandard1.1" />
