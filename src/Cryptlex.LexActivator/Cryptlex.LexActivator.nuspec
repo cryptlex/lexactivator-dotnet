@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Cryptlex.LexActivator</id>
-        <version>3.4.1</version>
+        <version>3.5.0</version>
         <title>Cryptlex Licensing Library</title>
         <authors>Cryptlex</authors>
         <owners>Cryptlex LLC</owners>
