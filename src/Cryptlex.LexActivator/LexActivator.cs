@@ -29,7 +29,15 @@ namespace Cryptlex
         /// <param name="filePath">absolute path of the product file (Product.dat)</param>
         public static void SetProductFile(string filePath)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.SetProductFile_x64(filePath) : LexActivatorNative.SetProductFile(filePath);
+            int status;
+            if(LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetProductFile_x86(filePath) : LexActivatorNative.SetProductFile(filePath);
+            }
+            else
+            {
+                status = LexActivatorNative.SetProductFileA(filePath);
+            }
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -48,7 +56,15 @@ namespace Cryptlex
         /// <param name="productData">content of the Product.dat file</param>
         public static void SetProductData(string productData)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.SetProductData_x64(productData) : LexActivatorNative.SetProductData(productData);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetProductData_x86(productData) : LexActivatorNative.SetProductData(productData);
+            }
+            else
+            {
+                status = LexActivatorNative.SetProductDataA(productData);
+            }
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -66,7 +82,7 @@ namespace Cryptlex
         /// <param name="flags">depending upon whether your application requires admin/root permissions to run or not, this parameter can have one of the following values: LA_SYSTEM, LA_USER, LA_IN_MEMORY</param>
         public static void SetProductId(string productId, PermissionFlags flags)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.SetProductId_x64(productId, flags) : LexActivatorNative.SetProductId(productId, flags);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.SetProductId_x86(productId, flags) : LexActivatorNative.SetProductId(productId, flags);
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -79,7 +95,7 @@ namespace Cryptlex
         /// <param name="licenseKey">a valid license key</param>
         public static void SetLicenseKey(string licenseKey)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.SetLicenseKey_x64(licenseKey) : LexActivatorNative.SetLicenseKey(licenseKey);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.SetLicenseKey_x86(licenseKey) : LexActivatorNative.SetLicenseKey(licenseKey);
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -96,7 +112,7 @@ namespace Cryptlex
         /// <param name="password">user password</param>
         public static void SetLicenseUserCredential(string email, string password)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.SetLicenseUserCredential_x64(email, password) : LexActivatorNative.SetLicenseUserCredential(email, password);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.SetLicenseUserCredential_x86(email, password) : LexActivatorNative.SetLicenseUserCredential(email, password);
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -125,7 +141,7 @@ namespace Cryptlex
 #endif
             callbackList.Add(wrappedCallback);
 
-            int status = IntPtr.Size == 8 ? LexActivatorNative.SetLicenseCallback_x64(wrappedCallback) : LexActivatorNative.SetLicenseCallback(wrappedCallback);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.SetLicenseCallback_x86(wrappedCallback) : LexActivatorNative.SetLicenseCallback(wrappedCallback);
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -142,7 +158,7 @@ namespace Cryptlex
         /// <param name="value">string of maximum length 256 characters with utf-8 encoding</param>
         public static void SetActivationMetadata(string key, string value)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.SetActivationMetadata_x64(key, value) : LexActivatorNative.SetActivationMetadata(key, value);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.SetActivationMetadata_x86(key, value) : LexActivatorNative.SetActivationMetadata(key, value);
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -159,7 +175,7 @@ namespace Cryptlex
         /// <param name="value">string of maximum length 256 characters with utf-8 encoding</param>
         public static void SetTrialActivationMetadata(string key, string value)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.SetTrialActivationMetadata_x64(key, value) : LexActivatorNative.SetTrialActivationMetadata(key, value);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.SetTrialActivationMetadata_x86(key, value) : LexActivatorNative.SetTrialActivationMetadata(key, value);
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -175,7 +191,7 @@ namespace Cryptlex
         /// <param name="appVersion"></param>
         public static void SetAppVersion(string appVersion)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.SetAppVersion_x64(appVersion) : LexActivatorNative.SetAppVersion(appVersion);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.SetAppVersion_x86(appVersion) : LexActivatorNative.SetAppVersion(appVersion);
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -193,7 +209,7 @@ namespace Cryptlex
         /// <param name="proxy"></param>
         public static void SetNetworkProxy(string proxy)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.SetNetworkProxy_x64(proxy) : LexActivatorNative.SetNetworkProxy(proxy);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.SetNetworkProxy_x86(proxy) : LexActivatorNative.SetNetworkProxy(proxy);
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -210,7 +226,7 @@ namespace Cryptlex
         public static string GetProductMetadata(string key)
         {
             var builder = new StringBuilder(256);
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetProductMetadata_x64(key, builder, builder.Length) : LexActivatorNative.GetProductMetadata(key, builder, builder.Length);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetProductMetadata_x86(key, builder, builder.Length) : LexActivatorNative.GetProductMetadata(key, builder, builder.Length);
             if (LexStatusCodes.LA_OK == status)
             {
                 return builder.ToString();
@@ -226,7 +242,7 @@ namespace Cryptlex
         public static string GetLicenseMetadata(string key)
         {
             var builder = new StringBuilder(256);
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetLicenseMetadata_x64(key, builder, builder.Length) : LexActivatorNative.GetLicenseMetadata(key, builder, builder.Length);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseMetadata_x86(key, builder, builder.Length) : LexActivatorNative.GetLicenseMetadata(key, builder, builder.Length);
             if (LexStatusCodes.LA_OK == status)
             {
                 return builder.ToString();
@@ -242,7 +258,7 @@ namespace Cryptlex
         public static LicenseMeterAttribute GetLicenseMeterAttribute(string name)
         {
             uint allowedUses = 0, totalUses = 0;
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetLicenseMeterAttribute_x64(name, ref allowedUses, ref totalUses) : LexActivatorNative.GetLicenseMeterAttribute(name, ref allowedUses, ref totalUses);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseMeterAttribute_x86(name, ref allowedUses, ref totalUses) : LexActivatorNative.GetLicenseMeterAttribute(name, ref allowedUses, ref totalUses);
             if (LexStatusCodes.LA_OK == status)
             {
                 return new LicenseMeterAttribute(name, allowedUses, totalUses);
@@ -257,7 +273,7 @@ namespace Cryptlex
         public static string GetLicenseKey()
         {
             var builder = new StringBuilder(256);
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetLicenseKey_x64(builder, builder.Length) : LexActivatorNative.GetLicenseKey(builder, builder.Length);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseKey_x86(builder, builder.Length) : LexActivatorNative.GetLicenseKey(builder, builder.Length);
             if (LexStatusCodes.LA_OK == status)
             {
                 return builder.ToString();
@@ -272,7 +288,7 @@ namespace Cryptlex
         public static uint GetLicenseExpiryDate()
         {
             uint expiryDate = 0;
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetLicenseExpiryDate_x64(ref expiryDate) : LexActivatorNative.GetLicenseExpiryDate(ref expiryDate);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseExpiryDate_x86(ref expiryDate) : LexActivatorNative.GetLicenseExpiryDate(ref expiryDate);
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -291,7 +307,7 @@ namespace Cryptlex
         public static string GetLicenseUserEmail()
         {
             var builder = new StringBuilder(256);
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetLicenseUserEmail_x64(builder, builder.Length) : LexActivatorNative.GetLicenseUserEmail(builder, builder.Length);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseUserEmail_x86(builder, builder.Length) : LexActivatorNative.GetLicenseUserEmail(builder, builder.Length);
             if (LexStatusCodes.LA_OK == status)
             {
                 return builder.ToString();
@@ -306,7 +322,7 @@ namespace Cryptlex
         public static string GetLicenseUserName()
         {
             var builder = new StringBuilder(256);
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetLicenseUserName_x64(builder, builder.Length) : LexActivatorNative.GetLicenseUserName(builder, builder.Length);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseUserName_x86(builder, builder.Length) : LexActivatorNative.GetLicenseUserName(builder, builder.Length);
             if (LexStatusCodes.LA_OK == status)
             {
                 return builder.ToString();
@@ -321,7 +337,7 @@ namespace Cryptlex
         public static string GetLicenseUserCompany()
         {
             var builder = new StringBuilder(256);
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetLicenseUserCompany_x64(builder, builder.Length) : LexActivatorNative.GetLicenseUserCompany(builder, builder.Length);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseUserCompany_x86(builder, builder.Length) : LexActivatorNative.GetLicenseUserCompany(builder, builder.Length);
             if (LexStatusCodes.LA_OK == status)
             {
                 return builder.ToString();
@@ -337,7 +353,7 @@ namespace Cryptlex
         public static string GetLicenseUserMetadata(string key)
         {
             var builder = new StringBuilder(256);
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetLicenseUserMetadata_x64(key, builder, builder.Length) : LexActivatorNative.GetLicenseUserMetadata(key, builder, builder.Length);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseUserMetadata_x86(key, builder, builder.Length) : LexActivatorNative.GetLicenseUserMetadata(key, builder, builder.Length);
             if (LexStatusCodes.LA_OK == status)
             {
                 return builder.ToString();
@@ -352,7 +368,7 @@ namespace Cryptlex
         public static string GetLicenseType()
         {
             var builder = new StringBuilder(256);
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetLicenseType_x64(builder, builder.Length) : LexActivatorNative.GetLicenseType(builder, builder.Length);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseType_x86(builder, builder.Length) : LexActivatorNative.GetLicenseType(builder, builder.Length);
             if (LexStatusCodes.LA_OK == status)
             {
                 return builder.ToString();
@@ -368,7 +384,7 @@ namespace Cryptlex
         public static string GetActivationMetadata(string key)
         {
             var builder = new StringBuilder(256);
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetActivationMetadata_x64(key, builder, builder.Length) : LexActivatorNative.GetActivationMetadata(key, builder, builder.Length);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetActivationMetadata_x86(key, builder, builder.Length) : LexActivatorNative.GetActivationMetadata(key, builder, builder.Length);
             if (LexStatusCodes.LA_OK == status)
             {
                 return builder.ToString();
@@ -384,7 +400,7 @@ namespace Cryptlex
         public static uint GetActivationMeterAttributeUses(string name)
         {
             uint uses = 0;
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetActivationMeterAttributeUses_x64(name, ref uses) : LexActivatorNative.GetActivationMeterAttributeUses(name, ref uses);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetActivationMeterAttributeUses_x86(name, ref uses) : LexActivatorNative.GetActivationMeterAttributeUses(name, ref uses);
             if (LexStatusCodes.LA_OK == status)
             {
                 return uses;
@@ -399,7 +415,7 @@ namespace Cryptlex
         public static uint GetServerSyncGracePeriodExpiryDate()
         {
             uint expiryDate = 0;
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetServerSyncGracePeriodExpiryDate_x64(ref expiryDate) : LexActivatorNative.GetServerSyncGracePeriodExpiryDate(ref expiryDate);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetServerSyncGracePeriodExpiryDate_x86(ref expiryDate) : LexActivatorNative.GetServerSyncGracePeriodExpiryDate(ref expiryDate);
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -419,7 +435,7 @@ namespace Cryptlex
         public static string GetTrialActivationMetadata(string key)
         {
             var builder = new StringBuilder(256);
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetTrialActivationMetadata_x64(key, builder, builder.Length) : LexActivatorNative.GetTrialActivationMetadata(key, builder, builder.Length);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetTrialActivationMetadata_x86(key, builder, builder.Length) : LexActivatorNative.GetTrialActivationMetadata(key, builder, builder.Length);
             if (LexStatusCodes.LA_OK == status)
             {
                 return builder.ToString();
@@ -434,7 +450,7 @@ namespace Cryptlex
         public static uint GetTrialExpiryDate()
         {
             uint trialExpiryDate = 0;
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetTrialExpiryDate_x64(ref trialExpiryDate) : LexActivatorNative.GetTrialExpiryDate(ref trialExpiryDate);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetTrialExpiryDate_x86(ref trialExpiryDate) : LexActivatorNative.GetTrialExpiryDate(ref trialExpiryDate);
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -453,7 +469,7 @@ namespace Cryptlex
         public static string GetTrialId()
         {
             var builder = new StringBuilder(256);
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetTrialId_x64(builder, builder.Length) : LexActivatorNative.GetTrialId(builder, builder.Length);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetTrialId_x86(builder, builder.Length) : LexActivatorNative.GetTrialId(builder, builder.Length);
             if (LexStatusCodes.LA_OK == status)
             {
                 return builder.ToString();
@@ -468,7 +484,7 @@ namespace Cryptlex
         public static uint GetLocalTrialExpiryDate()
         {
             uint trialExpiryDate = 0;
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GetLocalTrialExpiryDate_x64(ref trialExpiryDate) : LexActivatorNative.GetLocalTrialExpiryDate(ref trialExpiryDate);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLocalTrialExpiryDate_x86(ref trialExpiryDate) : LexActivatorNative.GetLocalTrialExpiryDate(ref trialExpiryDate);
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -501,7 +517,7 @@ namespace Cryptlex
             }
 #endif
             callbackList.Add(wrappedCallback);
-            int status = IntPtr.Size == 8 ? LexActivatorNative.CheckForReleaseUpdate_x64(platform, version, channel, wrappedCallback) : LexActivatorNative.CheckForReleaseUpdate(platform, version, channel, wrappedCallback);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.CheckForReleaseUpdate_x86(platform, version, channel, wrappedCallback) : LexActivatorNative.CheckForReleaseUpdate(platform, version, channel, wrappedCallback);
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -519,7 +535,7 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_EXPIRED, LA_SUSPENDED, LA_FAIL</returns>
         public static int ActivateLicense()
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.ActivateLicense_x64() : LexActivatorNative.ActivateLicense();
+            int status = IntPtr.Size == 4 ? LexActivatorNative.ActivateLicense_x86() : LexActivatorNative.ActivateLicense();
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -542,7 +558,7 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_EXPIRED, LA_SUSPENDED, LA_FAIL</returns>
         public static int ActivateLicenseOffline(string filePath)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.ActivateLicenseOffline_x64(filePath) : LexActivatorNative.ActivateLicenseOffline(filePath);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.ActivateLicenseOffline_x86(filePath) : LexActivatorNative.ActivateLicenseOffline(filePath);
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -565,7 +581,7 @@ namespace Cryptlex
         /// <param name="filePath">path of the file for the offline request.</param>
         public static void GenerateOfflineActivationRequest(string filePath)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GenerateOfflineActivationRequest_x64(filePath) : LexActivatorNative.GenerateOfflineActivationRequest(filePath);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GenerateOfflineActivationRequest_x86(filePath) : LexActivatorNative.GenerateOfflineActivationRequest(filePath);
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -582,7 +598,7 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_FAIL</returns>
         public static int DeactivateLicense()
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.DeactivateLicense_x64() : LexActivatorNative.DeactivateLicense();
+            int status = IntPtr.Size == 4 ? LexActivatorNative.DeactivateLicense_x86() : LexActivatorNative.DeactivateLicense();
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -605,7 +621,7 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_FAIL</returns>
         public static int GenerateOfflineDeactivationRequest(string filePath)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GenerateOfflineDeactivationRequest_x64(filePath) : LexActivatorNative.GenerateOfflineDeactivationRequest(filePath);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GenerateOfflineDeactivationRequest_x86(filePath) : LexActivatorNative.GenerateOfflineDeactivationRequest(filePath);
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -633,7 +649,7 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_EXPIRED, LA_SUSPENDED, LA_GRACE_PERIOD_OVER, LA_FAIL</returns>
         public static int IsLicenseGenuine()
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.IsLicenseGenuine_x64() : LexActivatorNative.IsLicenseGenuine();
+            int status = IntPtr.Size == 4 ? LexActivatorNative.IsLicenseGenuine_x86() : LexActivatorNative.IsLicenseGenuine();
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -663,7 +679,7 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_EXPIRED, LA_SUSPENDED, LA_GRACE_PERIOD_OVER, LA_FAIL</returns>
         public static int IsLicenseValid()
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.IsLicenseValid_x64() : LexActivatorNative.IsLicenseValid();
+            int status = IntPtr.Size == 4 ? LexActivatorNative.IsLicenseValid_x86() : LexActivatorNative.IsLicenseValid();
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -691,7 +707,7 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_TRIAL_EXPIRED</returns>
         public static int ActivateTrial()
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.ActivateTrial_x64() : LexActivatorNative.ActivateTrial();
+            int status = IntPtr.Size == 4 ? LexActivatorNative.ActivateTrial_x86() : LexActivatorNative.ActivateTrial();
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -712,7 +728,7 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_TRIAL_EXPIRED, LA_FAIL</returns>
         public static int ActivateTrialOffline(string filePath)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.ActivateTrialOffline_x64(filePath) : LexActivatorNative.ActivateTrialOffline(filePath);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.ActivateTrialOffline_x86(filePath) : LexActivatorNative.ActivateTrialOffline(filePath);
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -733,7 +749,7 @@ namespace Cryptlex
         /// <param name="filePath">path of the file for the offline request</param>
         public static void GenerateOfflineTrialActivationRequest(string filePath)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.GenerateOfflineTrialActivationRequest_x64(filePath) : LexActivatorNative.GenerateOfflineTrialActivationRequest(filePath);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GenerateOfflineTrialActivationRequest_x86(filePath) : LexActivatorNative.GenerateOfflineTrialActivationRequest(filePath);
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -750,7 +766,7 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_TRIAL_EXPIRED, LA_FAIL</returns>
         public static int IsTrialGenuine()
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.IsTrialGenuine_x64() : LexActivatorNative.IsTrialGenuine();
+            int status = IntPtr.Size == 4 ? LexActivatorNative.IsTrialGenuine_x86() : LexActivatorNative.IsTrialGenuine();
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -774,7 +790,7 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_LOCAL_TRIAL_EXPIRED, LA_FAIL</returns>
         public static int ActivateLocalTrial(uint trialLength)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.ActivateLocalTrial_x64(trialLength) : LexActivatorNative.ActivateLocalTrial(trialLength);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.ActivateLocalTrial_x86(trialLength) : LexActivatorNative.ActivateLocalTrial(trialLength);
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -799,7 +815,7 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_LOCAL_TRIAL_EXPIRED, LA_FAIL</returns>
         public static int IsLocalTrialGenuine()
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.IsLocalTrialGenuine_x64() : LexActivatorNative.IsLocalTrialGenuine();
+            int status = IntPtr.Size == 4 ? LexActivatorNative.IsLocalTrialGenuine_x86() : LexActivatorNative.IsLocalTrialGenuine();
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -822,7 +838,7 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_FAIL</returns>
         public static int ExtendLocalTrial(uint trialExtensionLength)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.ExtendLocalTrial_x64(trialExtensionLength) : LexActivatorNative.ExtendLocalTrial(trialExtensionLength);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.ExtendLocalTrial_x86(trialExtensionLength) : LexActivatorNative.ExtendLocalTrial(trialExtensionLength);
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -841,7 +857,7 @@ namespace Cryptlex
         /// <param name="increment">the increment value</param>
         public static void IncrementActivationMeterAttributeUses(string name, uint increment)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.IncrementActivationMeterAttributeUses_x64(name, increment) : LexActivatorNative.IncrementActivationMeterAttributeUses(name, increment);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.IncrementActivationMeterAttributeUses_x86(name, increment) : LexActivatorNative.IncrementActivationMeterAttributeUses(name, increment);
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -855,7 +871,7 @@ namespace Cryptlex
         /// <param name="decrement">the decrement value</param>
         public static void DecrementActivationMeterAttributeUses(string name, uint decrement)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.DecrementActivationMeterAttributeUses_x64(name, decrement) : LexActivatorNative.DecrementActivationMeterAttributeUses(name, decrement);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.DecrementActivationMeterAttributeUses_x86(name, decrement) : LexActivatorNative.DecrementActivationMeterAttributeUses(name, decrement);
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -868,7 +884,7 @@ namespace Cryptlex
         /// <param name="name">name of the meter attribute</param>
         public static void ResetActivationMeterAttributeUses(string name)
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.ResetActivationMeterAttributeUses_x64(name) : LexActivatorNative.ResetActivationMeterAttributeUses(name);
+            int status = IntPtr.Size == 4 ? LexActivatorNative.ResetActivationMeterAttributeUses_x86(name) : LexActivatorNative.ResetActivationMeterAttributeUses(name);
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -884,7 +900,7 @@ namespace Cryptlex
         /// </summary>
         public static void Reset()
         {
-            int status = IntPtr.Size == 8 ? LexActivatorNative.Reset_x64() : LexActivatorNative.Reset();
+            int status = IntPtr.Size == 4 ? LexActivatorNative.Reset_x86() : LexActivatorNative.Reset();
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
