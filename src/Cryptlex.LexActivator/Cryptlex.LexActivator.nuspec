@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<package
-    xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Cryptlex.LexActivator</id>
-        <version>3.5.0</version>
+        <version>3.5.1</version>
         <title>Cryptlex Licensing Library</title>
         <authors>Cryptlex</authors>
         <owners>Cryptlex LLC</owners>
@@ -12,7 +11,12 @@
         <license type="expression">MIT</license>
         <language>en-US</language>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <summary>LexActivator API wrapper for .NET (licensing library).</summary>
         <description>Cryptlex lets you license your software apps effortlessly. You can easily generate license keys using the REST API or Dashboard and validate the license keys in your software apps using LexActivator (Cryptlex client library).</description>
+        <dependencies>
+            <group targetFramework="net45" />
+            <group targetFramework="netstandard1.1"/>
+        </dependencies>
         <copyright>Copyright (c) 2019 Cryptlex LLC </copyright>
         <tags>lexactivator cryptlex licensing-library</tags>
         <references>
