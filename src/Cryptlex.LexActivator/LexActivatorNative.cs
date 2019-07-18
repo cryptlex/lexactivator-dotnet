@@ -6,8 +6,9 @@ namespace Cryptlex
 {
     static class LexActivatorNative
     {
-        private const string DLL_FILE_NAME_X86 = "LexActivator32.dll";
-        private const string DLL_FILE_NAME_X64 = "LexActivator64.dll";
+        private const string DLL_FILE_NAME_X86 = "LexActivator32";
+        private const string DLL_FILE_NAME_X64 = "LexActivator";
+
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetProductFile(string filePath);

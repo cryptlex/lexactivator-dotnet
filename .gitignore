@@ -286,3 +286,7 @@ __pycache__/
 
 # Build files
 *.dll
+*.so
+*.dylib
+*.exe
+tmp/
