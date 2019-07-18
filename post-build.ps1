@@ -14,7 +14,7 @@ $output = "$PSScriptRoot\tmp\LexActivator-Linux.zip"
 (New-Object System.Net.WebClient).DownloadFile($url, $output)
 Expand-Archive "$PSScriptRoot\tmp\LexActivator-Linux.zip" -DestinationPath "$PSScriptRoot\tmp\LexActivator-Linux"
 Copy-Item -Path "$PSScriptRoot\tmp\LexActivator-Linux\libs\gcc\amd64\libLexActivator.so" -Destination "$PSScriptRoot\src\Cryptlex.LexActivator\runtimes\linux-x64\native\libLexActivator.so"
-Copy-Item -Path "$PSScriptRoot\tmp\LexActivator-Linux\libs\musl\amd64\libLexActivator.so" -Destination "$PSScriptRoot\src\Cryptlex.LexActivator\runtimes\linux-musl-x64\native\libLexActivator.so"
+#Copy-Item -Path "$PSScriptRoot\tmp\LexActivator-Linux\libs\musl\amd64\libLexActivator.so" -Destination "$PSScriptRoot\src\Cryptlex.LexActivator\runtimes\linux-musl-x64\native\libLexActivator.so"
 
 $url = "$base_url/$lexactivator_version/LexActivator-Mac.zip"
 $output = "$PSScriptRoot\tmp\LexActivator-Mac.zip"

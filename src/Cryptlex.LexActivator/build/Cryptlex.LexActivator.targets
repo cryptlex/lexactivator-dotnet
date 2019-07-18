@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0"
     xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <ItemGroup Condition=" '$(Platform)' == 'x64' OR '$(Platform)' == 'AnyCPU'  ">
+    <ItemGroup Condition=" '$(OS)' == 'Windows_NT' AND ('$(Platform)' == 'x64' OR '$(Platform)' == 'AnyCPU')  ">
         <Content Include="$(MSBuildThisFileDirectory)..\runtimes\win-x64\native\*.dll">
             <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
             <CopyToPublishDirectory>Always</CopyToPublishDirectory>
         </Content>
     </ItemGroup>
-    <ItemGroup Condition=" '$(Platform)' == 'x86' OR '$(Platform)' == 'AnyCPU' ">
+    <ItemGroup Condition=" '$(OS)' == 'Windows_NT' AND  ('$(Platform)' == 'x86' OR '$(Platform)' == 'AnyCPU') ">
         <Content Include="$(MSBuildThisFileDirectory)..\runtimes\win-x86\native\*.dll">
+            <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+        </Content>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(OS)' == 'Unix' AND $([System.IO.File]::Exists('/usr/lib/libc.dylib'))">
+        <Content Include="$(MSBuildThisFileDirectory)..\runtimes\osx-x64\native\*.dylib">
+            <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+        </Content>
+    </ItemGroup>
+    <ItemGroup Condition=" '$(OS)' == 'Unix' AND ! $([System.IO.File]::Exists('/usr/lib/libc.dylib'))">
+        <Content Include="$(MSBuildThisFileDirectory)..\runtimes\linux-x64\native\*.so">
             <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
             <CopyToPublishDirectory>Always</CopyToPublishDirectory>
