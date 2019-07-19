@@ -39,7 +39,7 @@ namespace Sample
                     Console.WriteLine("License is genuinely activated!");
                     uint expiryDate = LexActivator.GetLicenseExpiryDate();
                     int daysLeft = (int)(expiryDate - DateTimeOffset.Now.ToUnixTimeSeconds()) / 86400;
-                    Console.WriteLine("Days left:", daysLeft);
+                    Console.WriteLine("Days left:" + daysLeft);
 
                     // Checking for software release update
                     // LexActivator.CheckForReleaseUpdate("windows", "1.0.0", "stable", SoftwareReleaseUpdateCallback);
