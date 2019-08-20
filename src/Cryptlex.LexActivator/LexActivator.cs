@@ -285,11 +285,11 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetProductMetadata_x86(key, builder, builder.Length) : LexActivatorNative.GetProductMetadata(key, builder, builder.Length);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetProductMetadata_x86(key, builder, builder.Capacity) : LexActivatorNative.GetProductMetadata(key, builder, builder.Capacity);
             }
             else
             {
-                status = LexActivatorNative.GetProductMetadataA(key, builder, builder.Length);
+                status = LexActivatorNative.GetProductMetadataA(key, builder, builder.Capacity);
             }
             if (LexStatusCodes.LA_OK == status)
             {
@@ -309,11 +309,11 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseMetadata_x86(key, builder, builder.Length) : LexActivatorNative.GetLicenseMetadata(key, builder, builder.Length);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseMetadata_x86(key, builder, builder.Capacity) : LexActivatorNative.GetLicenseMetadata(key, builder, builder.Capacity);
             }
             else
             {
-                status = LexActivatorNative.GetLicenseMetadataA(key, builder, builder.Length);
+                status = LexActivatorNative.GetLicenseMetadataA(key, builder, builder.Capacity);
             }
             if (LexStatusCodes.LA_OK == status)
             {
@@ -356,11 +356,11 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseKey_x86(builder, builder.Length) : LexActivatorNative.GetLicenseKey(builder, builder.Length);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseKey_x86(builder, builder.Capacity) : LexActivatorNative.GetLicenseKey(builder, builder.Capacity);
             }
             else
             {
-                status = LexActivatorNative.GetLicenseKeyA(builder, builder.Length);
+                status = LexActivatorNative.GetLicenseKeyA(builder, builder.Capacity);
             }
             if (LexStatusCodes.LA_OK == status)
             {
@@ -398,11 +398,11 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseUserEmail_x86(builder, builder.Length) : LexActivatorNative.GetLicenseUserEmail(builder, builder.Length);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseUserEmail_x86(builder, builder.Capacity) : LexActivatorNative.GetLicenseUserEmail(builder, builder.Capacity);
             }
             else
             {
-                status = LexActivatorNative.GetLicenseUserEmailA(builder, builder.Length);
+                status = LexActivatorNative.GetLicenseUserEmailA(builder, builder.Capacity);
             }
             if (LexStatusCodes.LA_OK == status)
             {
@@ -421,11 +421,11 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseUserName_x86(builder, builder.Length) : LexActivatorNative.GetLicenseUserName(builder, builder.Length);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseUserName_x86(builder, builder.Capacity) : LexActivatorNative.GetLicenseUserName(builder, builder.Capacity);
             }
             else
             {
-                status = LexActivatorNative.GetLicenseUserNameA(builder, builder.Length);
+                status = LexActivatorNative.GetLicenseUserNameA(builder, builder.Capacity);
             }
             if (LexStatusCodes.LA_OK == status)
             {
@@ -444,11 +444,11 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseUserCompany_x86(builder, builder.Length) : LexActivatorNative.GetLicenseUserCompany(builder, builder.Length);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseUserCompany_x86(builder, builder.Capacity) : LexActivatorNative.GetLicenseUserCompany(builder, builder.Capacity);
             }
             else
             {
-                status = LexActivatorNative.GetLicenseUserCompanyA(builder, builder.Length);
+                status = LexActivatorNative.GetLicenseUserCompanyA(builder, builder.Capacity);
             }
             if (LexStatusCodes.LA_OK == status)
             {
@@ -468,11 +468,11 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseUserMetadata_x86(key, builder, builder.Length) : LexActivatorNative.GetLicenseUserMetadata(key, builder, builder.Length);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseUserMetadata_x86(key, builder, builder.Capacity) : LexActivatorNative.GetLicenseUserMetadata(key, builder, builder.Capacity);
             }
             else
             {
-                status = LexActivatorNative.GetLicenseUserMetadataA(key, builder, builder.Length);
+                status = LexActivatorNative.GetLicenseUserMetadataA(key, builder, builder.Capacity);
             }
             if (LexStatusCodes.LA_OK == status)
             {
@@ -491,11 +491,11 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseType_x86(builder, builder.Length) : LexActivatorNative.GetLicenseType(builder, builder.Length);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseType_x86(builder, builder.Capacity) : LexActivatorNative.GetLicenseType(builder, builder.Capacity);
             }
             else
             {
-                status = LexActivatorNative.GetLicenseTypeA(builder, builder.Length);
+                status = LexActivatorNative.GetLicenseTypeA(builder, builder.Capacity);
             }
             if (LexStatusCodes.LA_OK == status)
             {
@@ -515,11 +515,11 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetActivationMetadata_x86(key, builder, builder.Length) : LexActivatorNative.GetActivationMetadata(key, builder, builder.Length);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetActivationMetadata_x86(key, builder, builder.Capacity) : LexActivatorNative.GetActivationMetadata(key, builder, builder.Capacity);
             }
             else
             {
-                status = LexActivatorNative.GetActivationMetadataA(key, builder, builder.Length);
+                status = LexActivatorNative.GetActivationMetadataA(key, builder, builder.Capacity);
             }
             if (LexStatusCodes.LA_OK == status)
             {
@@ -582,11 +582,11 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetTrialActivationMetadata_x86(key, builder, builder.Length) : LexActivatorNative.GetTrialActivationMetadata(key, builder, builder.Length);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetTrialActivationMetadata_x86(key, builder, builder.Capacity) : LexActivatorNative.GetTrialActivationMetadata(key, builder, builder.Capacity);
             }
             else
             {
-                status = LexActivatorNative.GetTrialActivationMetadataA(key, builder, builder.Length);
+                status = LexActivatorNative.GetTrialActivationMetadataA(key, builder, builder.Capacity);
             }
             if (LexStatusCodes.LA_OK == status)
             {
@@ -624,11 +624,11 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetTrialId_x86(builder, builder.Length) : LexActivatorNative.GetTrialId(builder, builder.Length);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetTrialId_x86(builder, builder.Capacity) : LexActivatorNative.GetTrialId(builder, builder.Capacity);
             }
             else
             {
-                status = LexActivatorNative.GetTrialIdA(builder, builder.Length);
+                status = LexActivatorNative.GetTrialIdA(builder, builder.Capacity);
             }
             if (LexStatusCodes.LA_OK == status)
             {
