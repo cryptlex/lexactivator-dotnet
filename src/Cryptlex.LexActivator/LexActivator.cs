@@ -247,6 +247,31 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Sets the meter attribute uses for the offline activation request.
+        /// 
+        /// This function should only be called before GenerateOfflineActivationRequest()
+        /// function to set the meter attributes in case of offline activation.
+        /// </summary>
+        /// <param name="name">name of the meter attribute</param>
+        /// <param name="uses">the uses value</param>
+        public static void SetOfflineActivationRequestMeterAttributeUses(string name, uint uses)
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetOfflineActivationRequestMeterAttributeUses_x86(name, uses) : LexActivatorNative.SetOfflineActivationRequestMeterAttributeUses(name, uses);
+            }
+            else
+            {
+                status = LexActivatorNative.SetOfflineActivationRequestMeterAttributeUsesA(name, uses);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
         /// Sets the network proxy to be used when contacting Cryptlex servers.
         /// 
         /// The proxy format should be: [protocol://][username:password@]machine[:port]

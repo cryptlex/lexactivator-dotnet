@@ -71,6 +71,12 @@ namespace Cryptlex
         public static extern int SetAppVersionA(string appVersion);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetOfflineActivationRequestMeterAttributeUses(string name, uint uses);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetOfflineActivationRequestMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetOfflineActivationRequestMeterAttributeUsesA(string name, uint uses);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetNetworkProxy(string proxy);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetNetworkProxy", CallingConvention = CallingConvention.Cdecl)]
@@ -278,6 +284,9 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetAppVersion", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetAppVersion_x86(string appVersion);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetOfflineActivationRequestMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetOfflineActivationRequestMeterAttributeUses_x86(string name, uint uses);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetNetworkProxy", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetNetworkProxy_x86(string proxy);

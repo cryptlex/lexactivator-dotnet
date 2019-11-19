@@ -1,5 +1,5 @@
 $base_url = "https://dl.cryptlex.com/downloads"
-$lexactivator_version = "v3.7.2"
+$lexactivator_version = "v3.8.0"
 new-item -Name tmp -ItemType directory
 
 $url = "$base_url/$lexactivator_version/LexActivator-Win.zip"
