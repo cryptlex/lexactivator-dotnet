@@ -1,4 +1,4 @@
-![Build Cryptlex.Lexactivator package](https://github.com/cryptlex/lexactivator-dotnet/workflows/Build%20Cryptlex.Lexactivator%20package/badge.svg)
+![Build Cryptlex.LexActivator package](https://github.com/cryptlex/lexactivator-dotnet/workflows/Build%20Cryptlex.LexActivator%20package/badge.svg)
 
 # Cryptlex.LexActivator
 
