@@ -1,0 +1,38 @@
+name: Build Cryptlex.Lexactivator package
+
+on:
+  push:
+    branches: 
+    - develop
+    tags:
+    - '3.*'
+
+jobs:
+  build-publish:
+
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Setup NuGet
+    - uses: nuget/setup-nuget@v1
+      with:
+        nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+        nuget-version: '5.x'
+      
+    - name: Restore NuGet Packages
+      run: nuget restore Cryptlex.LexActivator.sln
+      
+    - name: Build Solution
+      run: msbuild Cryptlex.LexActivator.sln /t:"Clean" /p:platform="Any CPU" /p:configuration="Release" /p:VisualStudioVersion="16.0"
+    
+    - name: Download Native Libs
+      run: post-build.ps1
+      shell: powershell
+      
+    - name: Pack NuGet Package
+      run: nuget pack src\Cryptlex.LexActivator\Cryptlex.LexActivator.nuspec -NonInteractive -OutputDirectory nupkg -Properties Configuration=Release -Verbosity Detailed
+    
+    - name: Push NuGet Package
+      run: nuget push nupkg\*.nupkg -Source https://api.nuget.org/v3/index.json
+
