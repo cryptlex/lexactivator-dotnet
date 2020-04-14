@@ -37,5 +37,5 @@ jobs:
       run: nuget pack src\Cryptlex.LexActivator\Cryptlex.LexActivator.nuspec -NonInteractive -OutputDirectory nupkg -Properties Configuration=Release -Verbosity Detailed
     
     - name: Push NuGet Package
-      run: nuget push nupkg\*.nupkg -Source https://api.nuget.org/v3/index.json
+      run: nuget push nupkg\*.nupkg -SkipDuplicate -Source https://api.nuget.org/v3/index.json
 
