@@ -27,10 +27,10 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.0
     
     - name: Build Solution
-      run: msbuild Cryptlex.LexActivator.sln /t:"Clean" /p:platform="Any CPU" /p:configuration="Release" /p:VisualStudioVersion="16.0"
+      run: msbuild Cryptlex.LexActivator.sln /p:platform="Any CPU" /p:configuration="Release" /p:VisualStudioVersion="16.0"
     
     - name: Download Native Libs
-      run: post-build.ps1
+      run: .\post-build.ps1
       shell: powershell
       
     - name: Pack NuGet Package
