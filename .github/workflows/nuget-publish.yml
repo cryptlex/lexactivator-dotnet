@@ -2,8 +2,6 @@ name: Build Cryptlex.Lexactivator package
 
 on:
   push:
-    branches: 
-    - develop
     tags:
     - '3.*'
 
