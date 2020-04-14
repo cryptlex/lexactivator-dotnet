@@ -1,4 +1,4 @@
-name: Build Cryptlex.Lexactivator package
+name: Build Cryptlex.LexActivator package
 
 on:
   push:
