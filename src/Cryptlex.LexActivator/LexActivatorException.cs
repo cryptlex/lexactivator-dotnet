@@ -30,7 +30,7 @@ namespace Cryptlex
                     return "The product id is incorrect.";
 
                 case LexStatusCodes.LA_E_SYSTEM_PERMISSION:
-                    return "Insufficent system permissions.";
+                    return "Insufficient system permissions.";
 
                 case LexStatusCodes.LA_E_FILE_PERMISSION:
                     return "No permission to write to file.";
