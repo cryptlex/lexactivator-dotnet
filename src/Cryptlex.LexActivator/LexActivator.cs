@@ -99,7 +99,7 @@ namespace Cryptlex
 
         /// <summary>
         /// In case you don't want to use the LexActivator's advanced
-        /// device fingerpinting algorithm, this function can be used to set a custom
+        /// device fingerprinting algorithm, this function can be used to set a custom
         /// device fingerprint.
 
         /// If you decide to use your own custom device fingerprint then this function must be
