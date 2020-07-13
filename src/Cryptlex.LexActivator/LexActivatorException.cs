@@ -119,6 +119,9 @@ namespace Cryptlex
                 case LexStatusCodes.LA_E_METER_ATTRIBUTE_USES_LIMIT_REACHED:
                     return "The meter attribute has reached it's usage limit.";
 
+                case LexStatusCodes.LA_E_CUSTOM_FINGERPRINT_LENGTH:
+                    return "Custom device fingerprint length is less than 64 characters or more than 256 characters.";
+
                 case LexStatusCodes.LA_E_VM:
                     return "Application is being run inside a virtual machine / hypervisor, and activation has been disallowed in the VM.";
 
