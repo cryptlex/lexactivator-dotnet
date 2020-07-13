@@ -11,6 +11,9 @@
     <PropertyGroup Condition="'$(Configuration)'=='Release'">
       <DocumentationFile>bin\release\Cryptlex.LexActivator.xml</DocumentationFile>
     </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0" />
+    </ItemGroup>
     <ItemGroup Condition="$([System.Text.RegularExpressions.Regex]::IsMatch('$(TargetFramework)', '^net\d'))">
         <Reference Include="System.Windows.Forms" />
     </ItemGroup>
