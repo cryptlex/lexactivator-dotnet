@@ -98,6 +98,35 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// In case you don't want to use the LexActivator's advanced
+        /// device fingerpinting algorithm, this function can be used to set a custom
+        /// device fingerprint.
+
+        /// If you decide to use your own custom device fingerprint then this function must be
+        /// called on every start of your program immediately after calling SetProductFile()
+        /// or SetProductData() function.
+
+        /// The license fingerprint matching strategy is ignored if this function is used.
+        /// </summary>
+        /// <param name="fingerprint">string of minimum length 64 characters and maximum length 256 characters</param>
+        public static void SetCustomDeviceFingerprint(string fingerprint)
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetCustomDeviceFingerprint_x86(fingerprint) : LexActivatorNative.SetCustomDeviceFingerprint(fingerprint);
+            }
+            else
+            {
+                status = LexActivatorNative.SetCustomDeviceFingerprintA(fingerprint);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
         /// Sets the license key required to activate the license.
         /// </summary>
         /// <param name="licenseKey">a valid license key</param>
@@ -348,25 +377,25 @@ namespace Cryptlex
         }
 
         /// <summary>
-        /// Gets the license meter attribute allowed uses and total uses.
+        /// Gets the license meter attribute allowed, total and gross uses.
         /// </summary>
         /// <param name="name">name of the meter attribute</param>
-        /// <returns>Returns the values of meter attribute allowed and total uses.</returns>
+        /// <returns>Returns the values of meter attribute allowed, total and gross uses.</returns>
         public static LicenseMeterAttribute GetLicenseMeterAttribute(string name)
         {
-            uint allowedUses = 0, totalUses = 0;
+            uint allowedUses = 0, totalUses = 0, grossUses = 0;
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseMeterAttribute_x86(name, ref allowedUses, ref totalUses) : LexActivatorNative.GetLicenseMeterAttribute(name, ref allowedUses, ref totalUses);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseMeterAttribute_x86(name, ref allowedUses, ref totalUses, ref grossUses) : LexActivatorNative.GetLicenseMeterAttribute(name, ref allowedUses, ref totalUses, ref grossUses);
             }
             else
             {
-                status = LexActivatorNative.GetLicenseMeterAttributeA(name, ref allowedUses, ref totalUses);
+                status = LexActivatorNative.GetLicenseMeterAttributeA(name, ref allowedUses, ref totalUses, ref grossUses);
             }
             if (LexStatusCodes.LA_OK == status)
             {
-                return new LicenseMeterAttribute(name, allowedUses, totalUses);
+                return new LicenseMeterAttribute(name, allowedUses, totalUses, grossUses);
             }
             throw new LexActivatorException(status);
         }
@@ -392,6 +421,44 @@ namespace Cryptlex
                 return builder.ToString();
             }
             throw new LexActivatorException(status);
+        }
+
+        /// <summary>
+        /// Gets the allowed activations of the license.
+        /// </summary>
+        /// <returns>Returns the allowed activations.</returns>
+        public static uint GetLicenseAllowedActivations()
+        {
+            uint allowedActivations = 0;
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseAllowedActivations_x86(ref allowedActivations) : LexActivatorNative.GetLicenseAllowedActivations(ref allowedActivations);
+            switch (status)
+            {
+                case LexStatusCodes.LA_OK:
+                    return allowedActivations;
+                case LexStatusCodes.LA_FAIL:
+                    return 0;
+                default:
+                    throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
+        /// Gets the total activations of the license.
+        /// </summary>
+        /// <returns>Returns the total activations.</returns>
+        public static uint GetLicenseTotalActivations()
+        {
+            uint totalActivations = 0;
+            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseTotalActivations_x86(ref totalActivations) : LexActivatorNative.GetLicenseTotalActivations(ref totalActivations);
+            switch (status)
+            {
+                case LexStatusCodes.LA_OK:
+                    return totalActivations;
+                case LexStatusCodes.LA_FAIL:
+                    return 0;
+                default:
+                    throw new LexActivatorException(status);
+            }
         }
 
         /// <summary>
@@ -682,6 +749,29 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Gets the version of this library.
+        /// </summary>
+        /// <returns>Returns the version of this library.</returns>
+        public static string GetLibraryVersion()
+        {
+            var builder = new StringBuilder(256);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLibraryVersion_x86(builder, builder.Capacity) : LexActivatorNative.GetLibraryVersion(builder, builder.Capacity);
+            }
+            else
+            {
+                status = LexActivatorNative.GetLibraryVersionA(builder, builder.Capacity);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                return builder.ToString();
+            }
+            throw new LexActivatorException(status);
+        }
+
+        /// <summary>
         /// Checks whether a new release is available for the product.
         /// 
         /// This function should only be used if you manage your releases through
@@ -779,7 +869,7 @@ namespace Cryptlex
         /// Generates the offline activation request needed for generating
         /// offline activation response in the dashboard.
         /// </summary>
-        /// <param name="filePath">path of the file for the offline request.</param>
+        /// <param name="filePath">path of the file for the offline request</param>
         public static void GenerateOfflineActivationRequest(string filePath)
         {
             int status;
@@ -941,7 +1031,7 @@ namespace Cryptlex
         /// <summary>
         /// Activates your trial using the offline activation response file.
         /// </summary>
-        /// <param name="filePath">path of the offline activation response file.</param>
+        /// <param name="filePath">path of the offline activation response file</param>
         /// <returns>LA_OK, LA_TRIAL_EXPIRED, LA_FAIL</returns>
         public static int ActivateTrialOffline(string filePath)
         {

@@ -38,6 +38,12 @@ namespace Cryptlex
         public static extern int SetProductIdA(string productId, LexActivator.PermissionFlags flags);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetCustomDeviceFingerprint(string fingerprint);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetCustomDeviceFingerprint", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetCustomDeviceFingerprintA(string fingerprint);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetLicenseKey(string licenseKey);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetLicenseKey", CallingConvention = CallingConvention.Cdecl)]
@@ -95,16 +101,22 @@ namespace Cryptlex
         public static extern int GetLicenseMetadataA(string key, StringBuilder value, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetLicenseMeterAttribute(string name, ref uint allowedUses, ref uint totalUses);
+        public static extern int GetLicenseMeterAttribute(string name, ref uint allowedUses, ref uint totalUses, ref uint grossUses);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetLicenseMeterAttribute", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetLicenseMeterAttributeA(string name, ref uint allowedUses, ref uint totalUses);
+        public static extern int GetLicenseMeterAttributeA(string name, ref uint allowedUses, ref uint totalUses, ref uint grossUses);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseKey(StringBuilder licenseKey, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetLicenseKey", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseKeyA(StringBuilder licenseKey, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseAllowedActivations(ref uint allowedActivations);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseTotalActivations(ref uint totalActivations);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseExpiryDate(ref uint expiryDate);
@@ -171,6 +183,12 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLocalTrialExpiryDate(ref uint trialExpiryDate);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLibraryVersion(StringBuilder libraryVersion, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetLibraryVersion", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLibraryVersionA(StringBuilder libraryVersion, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int CheckForReleaseUpdate(string platform, string version, string channel, LexActivator.CallbackType callback);
@@ -267,6 +285,9 @@ namespace Cryptlex
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetProductId", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetProductId_x86(string productId, LexActivator.PermissionFlags flags);
 
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetCustomDeviceFingerprint", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetCustomDeviceFingerprint_x86(string fingerprint);
+
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetLicenseKey", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetLicenseKey_x86(string licenseKey);
 
@@ -298,10 +319,16 @@ namespace Cryptlex
         public static extern int GetLicenseMetadata_x86(string key, StringBuilder value, int length);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseMeterAttribute", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetLicenseMeterAttribute_x86(string name, ref uint allowedUses, ref uint totalUses);
+        public static extern int GetLicenseMeterAttribute_x86(string name, ref uint allowedUses, ref uint totalUses, ref uint grossUses);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseKey", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseKey_x86(StringBuilder licenseKey, int length);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseAllowedActivations", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseAllowedActivations_x86(ref uint allowedActivations);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseTotalActivations", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseTotalActivations_x86(ref uint totalActivations);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseExpiryDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseExpiryDate_x86(ref uint expiryDate);
@@ -341,6 +368,9 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLocalTrialExpiryDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLocalTrialExpiryDate_x86(ref uint trialExpiryDate);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLibraryVersion", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLibraryVersion_x86(StringBuilder libraryVersion, int length);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "CheckForReleaseUpdate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int CheckForReleaseUpdate_x86(string platform, string version, string channel, LexActivator.CallbackType callback);
