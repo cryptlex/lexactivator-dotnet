@@ -335,7 +335,7 @@ namespace Cryptlex
         /// <returns>Returns the value of metadata for the key.</returns>
         public static string GetProductMetadata(string key)
         {
-            var builder = new StringBuilder(256);
+            var builder = new StringBuilder(512);
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -359,7 +359,7 @@ namespace Cryptlex
         /// <returns>Returns the value of metadata for the key.</returns>
         public static string GetLicenseMetadata(string key)
         {
-            var builder = new StringBuilder(256);
+            var builder = new StringBuilder(512);
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -406,7 +406,7 @@ namespace Cryptlex
         /// <returns>Returns the license key.</returns>
         public static string GetLicenseKey()
         {
-            var builder = new StringBuilder(256);
+            var builder = new StringBuilder(512);
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -486,7 +486,7 @@ namespace Cryptlex
         /// <returns>Returns the license user email.</returns>
         public static string GetLicenseUserEmail()
         {
-            var builder = new StringBuilder(256);
+            var builder = new StringBuilder(512);
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -509,7 +509,7 @@ namespace Cryptlex
         /// <returns>Returns the license user name.</returns>
         public static string GetLicenseUserName()
         {
-            var builder = new StringBuilder(256);
+            var builder = new StringBuilder(512);
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -532,7 +532,7 @@ namespace Cryptlex
         /// <returns>Returns the license user company.</returns>
         public static string GetLicenseUserCompany()
         {
-            var builder = new StringBuilder(256);
+            var builder = new StringBuilder(512);
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -556,7 +556,7 @@ namespace Cryptlex
         /// <returns>Returns the value of metadata for the key.</returns>
         public static string GetLicenseUserMetadata(string key)
         {
-            var builder = new StringBuilder(256);
+            var builder = new StringBuilder(512);
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -579,7 +579,7 @@ namespace Cryptlex
         /// <returns>Returns the license type.</returns>
         public static string GetLicenseType()
         {
-            var builder = new StringBuilder(256);
+            var builder = new StringBuilder(512);
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -603,7 +603,7 @@ namespace Cryptlex
         /// <returns>Returns the value of metadata for the key.</returns>
         public static string GetActivationMetadata(string key)
         {
-            var builder = new StringBuilder(256);
+            var builder = new StringBuilder(512);
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -670,7 +670,7 @@ namespace Cryptlex
         /// <returns>Returns the value of metadata for the key.</returns>
         public static string GetTrialActivationMetadata(string key)
         {
-            var builder = new StringBuilder(256);
+            var builder = new StringBuilder(512);
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -712,7 +712,7 @@ namespace Cryptlex
         /// <returns>Returns the trial id.</returns>
         public static string GetTrialId()
         {
-            var builder = new StringBuilder(256);
+            var builder = new StringBuilder(512);
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -754,7 +754,7 @@ namespace Cryptlex
         /// <returns>Returns the version of this library.</returns>
         public static string GetLibraryVersion()
         {
-            var builder = new StringBuilder(256);
+            var builder = new StringBuilder(512);
             int status;
             if (LexActivatorNative.IsWindows())
             {
