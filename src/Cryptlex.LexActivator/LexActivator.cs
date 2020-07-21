@@ -14,6 +14,8 @@ namespace Cryptlex
             LA_IN_MEMORY = 4
         }
 
+        private const int MetadataBufferSize = 4096;
+
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void CallbackType(uint status);
 
@@ -335,7 +337,7 @@ namespace Cryptlex
         /// <returns>Returns the value of metadata for the key.</returns>
         public static string GetProductMetadata(string key)
         {
-            var builder = new StringBuilder(512);
+            var builder = new StringBuilder(MetadataBufferSize);
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -359,7 +361,7 @@ namespace Cryptlex
         /// <returns>Returns the value of metadata for the key.</returns>
         public static string GetLicenseMetadata(string key)
         {
-            var builder = new StringBuilder(512);
+            var builder = new StringBuilder(MetadataBufferSize);
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -556,7 +558,7 @@ namespace Cryptlex
         /// <returns>Returns the value of metadata for the key.</returns>
         public static string GetLicenseUserMetadata(string key)
         {
-            var builder = new StringBuilder(512);
+            var builder = new StringBuilder(MetadataBufferSize);
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -603,7 +605,7 @@ namespace Cryptlex
         /// <returns>Returns the value of metadata for the key.</returns>
         public static string GetActivationMetadata(string key)
         {
-            var builder = new StringBuilder(512);
+            var builder = new StringBuilder(MetadataBufferSize);
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -670,7 +672,7 @@ namespace Cryptlex
         /// <returns>Returns the value of metadata for the key.</returns>
         public static string GetTrialActivationMetadata(string key)
         {
-            var builder = new StringBuilder(512);
+            var builder = new StringBuilder(4096);
             int status;
             if (LexActivatorNative.IsWindows())
             {
