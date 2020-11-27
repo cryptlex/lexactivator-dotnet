@@ -22,7 +22,7 @@ jobs:
       run: nuget restore Cryptlex.LexActivator.sln
       
     - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.0
+      uses: microsoft/setup-msbuild@v1.0.2
     
     - name: Build Solution
       run: msbuild Cryptlex.LexActivator.sln /p:platform="Any CPU" /p:configuration="Release" /p:VisualStudioVersion="16.0"
