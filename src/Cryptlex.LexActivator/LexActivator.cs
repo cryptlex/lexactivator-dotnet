@@ -310,7 +310,7 @@ namespace Cryptlex
         /// NOTE: Proxy settings of the computer are automatically detected. So, in most of the
         /// cases you don't need to care whether your user is behind a proxy server or not.
         /// </summary>
-        /// <param name="proxy"></param>
+        /// <param name="proxy">proxy string having correct proxy format</param>
         public static void SetNetworkProxy(string proxy)
         {
             int status;
@@ -321,6 +321,28 @@ namespace Cryptlex
             else
             {
                 status = LexActivatorNative.SetNetworkProxyA(proxy);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
+        /// In case you are running Cryptlex on-premise, you can set the host for your on-premise server.
+        /// 
+        /// </summary>
+        /// <param name="host">the address of the Cryptlex on-premise server</param>
+        public static void SetCryptlexHost(string host)
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetCryptlexHost_x86(host) : LexActivatorNative.SetCryptlexHost(host);
+            }
+            else
+            {
+                status = LexActivatorNative.SetCryptlexHostA(host);
             }
             if (LexStatusCodes.LA_OK != status)
             {

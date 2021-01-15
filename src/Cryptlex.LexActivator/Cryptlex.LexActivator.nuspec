@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Cryptlex.LexActivator</id>
-        <version>3.14.0</version>
+        <version>3.14.1</version>
         <title>Cryptlex Licensing Library</title>
         <authors>Cryptlex</authors>
         <owners>Cryptlex LLC</owners>
@@ -17,7 +17,7 @@
             <group targetFramework="net45" />
             <group targetFramework="netstandard1.1"/>
         </dependencies>
-        <copyright>Copyright (c) 2020 Cryptlex LLC </copyright>
+        <copyright>Copyright (c) 2021 Cryptlex LLC </copyright>
         <tags>lexactivator cryptlex licensing-library</tags>
         <references>
             <reference file="Cryptlex.LexActivator.dll" />

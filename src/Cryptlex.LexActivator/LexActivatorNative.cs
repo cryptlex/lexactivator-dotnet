@@ -89,6 +89,12 @@ namespace Cryptlex
         public static extern int SetNetworkProxyA(string proxy);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetCryptlexHost(string host);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetCryptlexHost", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetCryptlexHostA(string host);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetProductMetadata(string key, StringBuilder value, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetProductMetadata", CallingConvention = CallingConvention.Cdecl)]
@@ -311,6 +317,9 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetNetworkProxy", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetNetworkProxy_x86(string proxy);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetCryptlexHost", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetCryptlexHost_x86(string host);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetProductMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetProductMetadata_x86(string key, StringBuilder value, int length);
