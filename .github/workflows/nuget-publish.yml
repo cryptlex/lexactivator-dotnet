@@ -27,7 +27,7 @@ jobs:
       
       - name: Update Library Version
         run: |
-          sed -i '/lexactivator_version =/!b;c$lexactivator_version ="${{ github.event.inputs.libraryVersion }}"' post-build.ps1
+          sed -i '/lexactivator_version =/!b;c$lexactivator_version ="v${{ github.event.inputs.libraryVersion }}"' post-build.ps1
      
       - name: Commit and Tag
         run: |
