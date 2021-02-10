@@ -29,26 +29,22 @@ jobs:
         run: |
           sed -i '/lexactivator_version =/!b;c$lexactivator_version ="v${{ github.event.inputs.libraryVersion }}"' post-build.ps1
      
-      - name: Commit and Tag
+      - name: Commit, Tag and Push
         run: |
           git add ./src/Cryptlex.LexActivator/Cryptlex.LexActivator.nuspec
           git add post-build.ps1
           git config --local user.email "github-actions@users.noreply.github.com"
           git config --local user.name "github-actions"
           git commit -m "updated version" | exit 0
-          git tag ${{ github.event.inputs.packageVersion }}    
-      
-      - name: Push Changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tags: true  
+          git tag ${{ github.event.inputs.packageVersion }}
+          git push --follow-tags 
      
   build-publish:
     needs: update-version
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
+    - run: git pull origin master --ff-only
       
     - name: Setup NuGet
       uses: nuget/setup-nuget@v1
