@@ -31,8 +31,8 @@ jobs:
         run: |
           git add ./src/Cryptlex.LexActivator/Cryptlex.LexActivator.nuspec
           git add post-build.ps1
-          git config --local user.email "github-actions@users.noreply.github.com"
-          git config --local user.name "github-actions"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git commit -m "updated version" | exit 0
           git tag ${{ github.event.inputs.packageVersion }}
           git push --follow-tags 
