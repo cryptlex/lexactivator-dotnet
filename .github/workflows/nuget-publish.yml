@@ -48,7 +48,7 @@ jobs:
       uses: nuget/setup-nuget@v1
       with:
         nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-        nuget-version: '5.x'
+        nuget-version: '5.8.1'
       
     - name: Restore NuGet Packages
       run: nuget restore Cryptlex.LexActivator.sln
