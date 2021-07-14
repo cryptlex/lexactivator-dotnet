@@ -38,6 +38,12 @@ namespace Cryptlex
         public static extern int SetProductIdA(string productId, LexActivator.PermissionFlags flags);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetDataDirectory(string directoryPath);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetDataDirectory", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetDataDirectoryA(string directoryPath);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetCustomDeviceFingerprint(string fingerprint);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetCustomDeviceFingerprint", CallingConvention = CallingConvention.Cdecl)]
@@ -290,6 +296,9 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetProductId", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetProductId_x86(string productId, LexActivator.PermissionFlags flags);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetDataDirectory", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetDataDirectory_x86(string directoryPath);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetCustomDeviceFingerprint", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetCustomDeviceFingerprint_x86(string fingerprint);

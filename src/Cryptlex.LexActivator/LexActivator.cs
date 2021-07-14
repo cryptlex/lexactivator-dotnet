@@ -100,6 +100,35 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// In case you want to change the default directory used by LexActivator to
+        /// store the activation data on Linux and macOS, this function can be used to
+        /// set a different directory.
+        
+        /// If you decide to use this function, then it must be called on every start of
+        /// your program before calling SetProductFile() or SetProductData() function.
+        
+        /// Please ensure that the directory exists and your app has read and write
+        /// permissions in the directory.
+        /// </summary>
+        /// <param name="directoryPath">absolute path of the directory.</param>
+        public static void SetDataDirectory(string directoryPath)
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetDataDirectory_x86(directoryPath) : LexActivatorNative.SetDataDirectory(directoryPath);
+            }
+            else
+            {
+                status = LexActivatorNative.SetDataDirectoryA(directoryPath);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
         /// In case you don't want to use the LexActivator's advanced
         /// device fingerprinting algorithm, this function can be used to set a custom
         /// device fingerprint.
