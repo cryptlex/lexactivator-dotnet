@@ -224,8 +224,15 @@ namespace Cryptlex
             }
 #endif
             callbackList.Add(wrappedCallback);
-
-            int status = IntPtr.Size == 4 ? LexActivatorNative.SetLicenseCallback_x86(wrappedCallback) : LexActivatorNative.SetLicenseCallback(wrappedCallback);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetLicenseCallback_x86(wrappedCallback) : LexActivatorNative.SetLicenseCallback(wrappedCallback);
+            }
+            else
+            {
+                status =  LexActivatorNative.SetLicenseCallback(wrappedCallback);
+            }
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);
@@ -483,7 +490,15 @@ namespace Cryptlex
         public static uint GetLicenseAllowedActivations()
         {
             uint allowedActivations = 0;
-            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseAllowedActivations_x86(ref allowedActivations) : LexActivatorNative.GetLicenseAllowedActivations(ref allowedActivations);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseAllowedActivations_x86(ref allowedActivations) : LexActivatorNative.GetLicenseAllowedActivations(ref allowedActivations);
+            }
+            else
+            {
+                status =  LexActivatorNative.GetLicenseAllowedActivations(ref allowedActivations);
+            }
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -502,7 +517,15 @@ namespace Cryptlex
         public static uint GetLicenseTotalActivations()
         {
             uint totalActivations = 0;
-            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseTotalActivations_x86(ref totalActivations) : LexActivatorNative.GetLicenseTotalActivations(ref totalActivations);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseTotalActivations_x86(ref totalActivations) : LexActivatorNative.GetLicenseTotalActivations(ref totalActivations);
+            }
+            else
+            {
+                status =  LexActivatorNative.GetLicenseTotalActivations(ref totalActivations);
+            }
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -521,7 +544,15 @@ namespace Cryptlex
         public static uint GetLicenseExpiryDate()
         {
             uint expiryDate = 0;
-            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseExpiryDate_x86(ref expiryDate) : LexActivatorNative.GetLicenseExpiryDate(ref expiryDate);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseExpiryDate_x86(ref expiryDate) : LexActivatorNative.GetLicenseExpiryDate(ref expiryDate);
+            }
+            else
+            {
+                status =  LexActivatorNative.GetLicenseExpiryDate(ref expiryDate);
+            }
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -704,7 +735,15 @@ namespace Cryptlex
         public static uint GetServerSyncGracePeriodExpiryDate()
         {
             uint expiryDate = 0;
-            int status = IntPtr.Size == 4 ? LexActivatorNative.GetServerSyncGracePeriodExpiryDate_x86(ref expiryDate) : LexActivatorNative.GetServerSyncGracePeriodExpiryDate(ref expiryDate);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetServerSyncGracePeriodExpiryDate_x86(ref expiryDate) : LexActivatorNative.GetServerSyncGracePeriodExpiryDate(ref expiryDate);
+            }
+            else
+            {
+                status =  LexActivatorNative.GetServerSyncGracePeriodExpiryDate(ref expiryDate);
+            }
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -747,7 +786,15 @@ namespace Cryptlex
         public static uint GetTrialExpiryDate()
         {
             uint trialExpiryDate = 0;
-            int status = IntPtr.Size == 4 ? LexActivatorNative.GetTrialExpiryDate_x86(ref trialExpiryDate) : LexActivatorNative.GetTrialExpiryDate(ref trialExpiryDate);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetTrialExpiryDate_x86(ref trialExpiryDate) : LexActivatorNative.GetTrialExpiryDate(ref trialExpiryDate);
+            }
+            else
+            {
+                status =  LexActivatorNative.GetTrialExpiryDate(ref trialExpiryDate);
+            }
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -789,7 +836,15 @@ namespace Cryptlex
         public static uint GetLocalTrialExpiryDate()
         {
             uint trialExpiryDate = 0;
-            int status = IntPtr.Size == 4 ? LexActivatorNative.GetLocalTrialExpiryDate_x86(ref trialExpiryDate) : LexActivatorNative.GetLocalTrialExpiryDate(ref trialExpiryDate);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLocalTrialExpiryDate_x86(ref trialExpiryDate) : LexActivatorNative.GetLocalTrialExpiryDate(ref trialExpiryDate);
+            }
+            else
+            {
+                status =  LexActivatorNative.GetLocalTrialExpiryDate(ref trialExpiryDate);
+            }
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -871,7 +926,15 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_EXPIRED, LA_SUSPENDED, LA_FAIL</returns>
         public static int ActivateLicense()
         {
-            int status = IntPtr.Size == 4 ? LexActivatorNative.ActivateLicense_x86() : LexActivatorNative.ActivateLicense();
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.ActivateLicense_x86() : LexActivatorNative.ActivateLicense();
+            }
+            else
+            {
+                status =  LexActivatorNative.ActivateLicense();
+            }
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -950,7 +1013,15 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_FAIL</returns>
         public static int DeactivateLicense()
         {
-            int status = IntPtr.Size == 4 ? LexActivatorNative.DeactivateLicense_x86() : LexActivatorNative.DeactivateLicense();
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.DeactivateLicense_x86() : LexActivatorNative.DeactivateLicense();
+            }
+            else
+            {
+                status =  LexActivatorNative.DeactivateLicense();
+            }
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -1009,7 +1080,15 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_EXPIRED, LA_SUSPENDED, LA_GRACE_PERIOD_OVER, LA_FAIL</returns>
         public static int IsLicenseGenuine()
         {
-            int status = IntPtr.Size == 4 ? LexActivatorNative.IsLicenseGenuine_x86() : LexActivatorNative.IsLicenseGenuine();
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.IsLicenseGenuine_x86() : LexActivatorNative.IsLicenseGenuine();
+            }
+            else
+            {
+                status =  LexActivatorNative.IsLicenseGenuine();
+            }
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -1039,7 +1118,15 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_EXPIRED, LA_SUSPENDED, LA_GRACE_PERIOD_OVER, LA_FAIL</returns>
         public static int IsLicenseValid()
         {
-            int status = IntPtr.Size == 4 ? LexActivatorNative.IsLicenseValid_x86() : LexActivatorNative.IsLicenseValid();
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.IsLicenseValid_x86() : LexActivatorNative.IsLicenseValid();
+            }
+            else
+            {
+                status =  LexActivatorNative.IsLicenseValid();
+            }
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -1067,7 +1154,15 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_TRIAL_EXPIRED</returns>
         public static int ActivateTrial()
         {
-            int status = IntPtr.Size == 4 ? LexActivatorNative.ActivateTrial_x86() : LexActivatorNative.ActivateTrial();
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.ActivateTrial_x86() : LexActivatorNative.ActivateTrial();
+            }
+            else
+            {
+                status =  LexActivatorNative.ActivateTrial();
+            }
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -1142,7 +1237,15 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_TRIAL_EXPIRED, LA_FAIL</returns>
         public static int IsTrialGenuine()
         {
-            int status = IntPtr.Size == 4 ? LexActivatorNative.IsTrialGenuine_x86() : LexActivatorNative.IsTrialGenuine();
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.IsTrialGenuine_x86() : LexActivatorNative.IsTrialGenuine();
+            }
+            else
+            {
+                status =  LexActivatorNative.IsTrialGenuine();
+            }
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -1166,7 +1269,15 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_LOCAL_TRIAL_EXPIRED, LA_FAIL</returns>
         public static int ActivateLocalTrial(uint trialLength)
         {
-            int status = IntPtr.Size == 4 ? LexActivatorNative.ActivateLocalTrial_x86(trialLength) : LexActivatorNative.ActivateLocalTrial(trialLength);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.ActivateLocalTrial_x86(trialLength) : LexActivatorNative.ActivateLocalTrial(trialLength);
+            }
+            else
+            {
+                status =  LexActivatorNative.ActivateLocalTrial(trialLength);
+            }
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -1191,7 +1302,15 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_LOCAL_TRIAL_EXPIRED, LA_FAIL</returns>
         public static int IsLocalTrialGenuine()
         {
-            int status = IntPtr.Size == 4 ? LexActivatorNative.IsLocalTrialGenuine_x86() : LexActivatorNative.IsLocalTrialGenuine();
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.IsLocalTrialGenuine_x86() : LexActivatorNative.IsLocalTrialGenuine();
+            }
+            else
+            {
+                status =  LexActivatorNative.IsLocalTrialGenuine();
+            }
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -1214,7 +1333,15 @@ namespace Cryptlex
         /// <returns>LA_OK, LA_FAIL</returns>
         public static int ExtendLocalTrial(uint trialExtensionLength)
         {
-            int status = IntPtr.Size == 4 ? LexActivatorNative.ExtendLocalTrial_x86(trialExtensionLength) : LexActivatorNative.ExtendLocalTrial(trialExtensionLength);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.ExtendLocalTrial_x86(trialExtensionLength) : LexActivatorNative.ExtendLocalTrial(trialExtensionLength);
+            }
+            else
+            {
+                status =  LexActivatorNative.ExtendLocalTrial(trialExtensionLength);
+            }
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
@@ -1300,7 +1427,15 @@ namespace Cryptlex
         /// </summary>
         public static void Reset()
         {
-            int status = IntPtr.Size == 4 ? LexActivatorNative.Reset_x86() : LexActivatorNative.Reset();
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.Reset_x86() : LexActivatorNative.Reset();
+            }
+            else
+            {
+                status =  LexActivatorNative.Reset();
+            }
             if (LexStatusCodes.LA_OK != status)
             {
                 throw new LexActivatorException(status);

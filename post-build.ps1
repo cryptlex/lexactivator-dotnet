@@ -18,7 +18,7 @@ $output = "$PSScriptRoot\tmp\LexActivator-Linux.zip"
 Expand-Archive "$PSScriptRoot\tmp\LexActivator-Linux.zip" -DestinationPath "$PSScriptRoot\tmp\LexActivator-Linux"
 Copy-Item -Path "$PSScriptRoot\tmp\LexActivator-Linux\libs\gcc\amd64\libLexActivator.so" -Destination "$PSScriptRoot\src\Cryptlex.LexActivator\runtimes\linux-x64\native\libLexActivator.so"
 Copy-Item -Path "$PSScriptRoot\tmp\LexActivator-Linux\libs\gcc\arm64\libLexActivator.so" -Destination "$PSScriptRoot\src\Cryptlex.LexActivator\runtimes\linux-arm64\native\libLexActivator.so"
-Copy-Item -Path "$PSScriptRoot\tmp\LexActivator-Linux\libs\gcc\armhf\libLexActivator.so" -Destination "$PSScriptRoot\src\Cryptlex.LexActivator\runtimes\linux-arm\native\libLexActivator32.so"
+Copy-Item -Path "$PSScriptRoot\tmp\LexActivator-Linux\libs\gcc\armhf\libLexActivator.so" -Destination "$PSScriptRoot\src\Cryptlex.LexActivator\runtimes\linux-arm\native\libLexActivator.so"
 Copy-Item -Path "$PSScriptRoot\tmp\LexActivator-Linux\libs\musl\amd64\libLexActivator.so" -Destination "$PSScriptRoot\src\Cryptlex.LexActivator\runtimes\linux-musl-x64\native\libLexActivator.so"
 
 $url = "$base_url/$lexactivator_version/LexActivator-Mac.zip"
