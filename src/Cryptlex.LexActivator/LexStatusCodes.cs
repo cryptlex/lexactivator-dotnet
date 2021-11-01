@@ -317,12 +317,26 @@ namespace Cryptlex
         public const int LA_E_METER_ATTRIBUTE_USES_LIMIT_REACHED = 73;
 
         /*
-        CODE: LA_E_CUSTOM_FINGERPRINT_LENGTH
+            CODE: LA_E_CUSTOM_FINGERPRINT_LENGTH
 
-        MESSAGE: Custom device fingerprint length is less than 64 characters
-        or more than 256 characters.
+            MESSAGE: Custom device fingerprint length is less than 64 characters
+            or more than 256 characters.
         */
         public const int LA_E_CUSTOM_FINGERPRINT_LENGTH = 74;
+
+        /*
+            CODE: LA_E_PRODUCT_VERSION_NOT_LINKED
+
+            MESSAGE: No product version is linked with the license.
+        */
+        public const int LA_E_PRODUCT_VERSION_NOT_LINKED = 75;
+
+        /*
+            CODE: LA_E_FEATURE_FLAG_NOT_FOUND
+
+            MESSAGE: The product version feature flag does not exist.
+        */
+        public const int LA_E_FEATURE_FLAG_NOT_FOUND = 76;
 
         /*
             CODE: LA_E_VM

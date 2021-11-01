@@ -413,6 +413,77 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Gets the product version name.
+        /// </summary>
+        /// <returns>Returns the value of the product version name.</returns>
+        public static string GetProductVersionName()
+        {
+            var builder = new StringBuilder(MetadataBufferSize);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetProductVersionName_x86(builder, builder.Capacity) : LexActivatorNative.GetProductVersionName(builder, builder.Capacity);
+            }
+            else
+            {
+                status = LexActivatorNative.GetProductVersionNameA(builder, builder.Capacity);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                return builder.ToString();
+            }
+            throw new LexActivatorException(status);
+        }
+
+        /// <summary>
+        /// Gets the product version display name.
+        /// </summary>
+        /// <returns>Returns the value of the product version display name.</returns>
+        public static string GetProductVersionDisplayName()
+        {
+            var builder = new StringBuilder(MetadataBufferSize);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetProductVersionDisplayName_x86(builder, builder.Capacity) : LexActivatorNative.GetProductVersionDisplayName(builder, builder.Capacity);
+            }
+            else
+            {
+                status = LexActivatorNative.GetProductVersionDisplayNameA(builder, builder.Capacity);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                return builder.ToString();
+            }
+            throw new LexActivatorException(status);
+        }
+
+        /// <summary>
+        /// Gets the product version feature flag.
+        /// </summary>
+        /// <param name="name">name of the product version feature flag</param>
+        /// <returns>Returns the product version feature flag.</returns>
+        public static ProductVersionFeatureFlag GetProductVersionFeatureFlag(string name)
+        {
+            uint enabled = 0;
+            var builder = new StringBuilder(MetadataBufferSize);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetProductVersionFeatureFlag_x86(name, ref enabled, builder, builder.Capacity) : LexActivatorNative.GetProductVersionFeatureFlag(name, ref enabled, builder, builder.Capacity);
+            }
+            else
+            {
+                status = LexActivatorNative.GetProductVersionFeatureFlagA(name, ref enabled, builder, builder.Capacity);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                return new ProductVersionFeatureFlag(name, enabled > 0, builder.ToString());
+            }
+            throw new LexActivatorException(status);
+        }
+
+        /// <summary>
         /// Gets the license metadata of the license.
         /// </summary>
         /// <param name="key">metadata key to retrieve the value</param>
