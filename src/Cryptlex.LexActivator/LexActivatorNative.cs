@@ -83,6 +83,12 @@ namespace Cryptlex
         public static extern int SetAppVersionA(string appVersion);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetActivationLeaseDuration(uint leaseDuration);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetActivationLeaseDuration", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetActivationLeaseDurationA(uint leaseDuration);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetOfflineActivationRequestMeterAttributeUses(string name, uint uses);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetOfflineActivationRequestMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
@@ -338,6 +344,9 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetAppVersion", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetAppVersion_x86(string appVersion);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetActivationLeaseDuration", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetActivationLeaseDuration_x86(uint leaseDuration);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetOfflineActivationRequestMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetOfflineActivationRequestMeterAttributeUses_x86(string name, uint uses);

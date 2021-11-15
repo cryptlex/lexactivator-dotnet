@@ -314,6 +314,30 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Sets the lease duration for the activation.
+        ///
+        /// The activation lease duration is honoured when the allow client
+        /// lease duration property is enabled.
+        /// </summary>
+        /// <param name="leaseDuration"></param>
+        public static void SetActivationLeaseDuration(uint leaseDuration)
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetActivationLeaseDuration_x86(leaseDuration) : LexActivatorNative.SetActivationLeaseDuration(leaseDuration);
+            }
+            else
+            {
+                status = LexActivatorNative.SetActivationLeaseDurationA(leaseDuration);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
         /// Sets the meter attribute uses for the offline activation request.
         /// 
         /// This function should only be called before GenerateOfflineActivationRequest()
