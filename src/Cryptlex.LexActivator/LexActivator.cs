@@ -240,6 +240,30 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Sets the lease duration for the activation.
+        ///
+        /// The activation lease duration is honoured when the allow client
+        /// lease duration property is enabled.
+        /// </summary>
+        /// <param name="leaseDuration"></param>
+        public static void SetActivationLeaseDuration(uint leaseDuration)
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetActivationLeaseDuration_x86(leaseDuration) : LexActivatorNative.SetActivationLeaseDuration(leaseDuration);
+            }
+            else
+            {
+                status = LexActivatorNative.SetActivationLeaseDurationA(leaseDuration);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
         /// Sets the activation metadata.
         /// 
         /// The  metadata appears along with the activation details of the license
@@ -306,30 +330,6 @@ namespace Cryptlex
             else
             {
                 status = LexActivatorNative.SetAppVersionA(appVersion);
-            }
-            if (LexStatusCodes.LA_OK != status)
-            {
-                throw new LexActivatorException(status);
-            }
-        }
-
-        /// <summary>
-        /// Sets the lease duration for the activation.
-        ///
-        /// The activation lease duration is honoured when the allow client
-        /// lease duration property is enabled.
-        /// </summary>
-        /// <param name="leaseDuration"></param>
-        public static void SetActivationLeaseDuration(uint leaseDuration)
-        {
-            int status;
-            if (LexActivatorNative.IsWindows())
-            {
-                status = IntPtr.Size == 4 ? LexActivatorNative.SetActivationLeaseDuration_x86(leaseDuration) : LexActivatorNative.SetActivationLeaseDuration(leaseDuration);
-            }
-            else
-            {
-                status = LexActivatorNative.SetActivationLeaseDurationA(leaseDuration);
             }
             if (LexStatusCodes.LA_OK != status)
             {
