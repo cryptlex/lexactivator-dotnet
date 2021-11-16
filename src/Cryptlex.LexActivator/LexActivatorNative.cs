@@ -65,6 +65,12 @@ namespace Cryptlex
         public static extern int SetLicenseCallback(LexActivator.CallbackType callback);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetActivationLeaseDuration(uint leaseDuration);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetActivationLeaseDuration", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetActivationLeaseDurationA(uint leaseDuration);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetActivationMetadata(string key, string value);
         
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
@@ -329,6 +335,9 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetLicenseCallback", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetLicenseCallback_x86(LexActivator.CallbackType callback);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetActivationLeaseDuration", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetActivationLeaseDuration_x86(uint leaseDuration);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetActivationMetadata_x86(string key, string value);
