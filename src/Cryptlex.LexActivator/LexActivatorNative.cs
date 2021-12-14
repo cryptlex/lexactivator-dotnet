@@ -360,13 +360,13 @@ namespace Cryptlex
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetProductMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetProductMetadata_x86(string key, StringBuilder value, int length);
 
-        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, EntryPoint = "GetProductVersionName", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetProductVersionName", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetProductVersionName_x86(StringBuilder name, int length);
 
-        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, EntryPoint = "GetProductVersionDisplayName", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetProductVersionDisplayName", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetProductVersionDisplayName_x86(StringBuilder displayName, int length);
 
-        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, EntryPoint = "GetProductVersionFeatureFlag", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetProductVersionFeatureFlag", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetProductVersionFeatureFlag_x86(string name, ref uint enabled, StringBuilder data, int length);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseMetadata", CallingConvention = CallingConvention.Cdecl)]
