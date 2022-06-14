@@ -338,6 +338,29 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Sets the current release version of your application.
+        /// 
+        /// The release version appears along with the activation details in dashboard.
+        /// </summary>
+        /// <param name="releaseVersion"></param>
+        public static void SetReleaseVersion(string releaseVersion)
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetReleaseVersion_x86(releaseVersion) : LexActivatorNative.SetReleaseVersion(releaseVersion);
+            }
+            else
+            {
+                status = LexActivatorNative.SetReleaseVersionA(releaseVersion);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
         /// Sets the meter attribute uses for the offline activation request.
         /// 
         /// This function should only be called before GenerateOfflineActivationRequest()
@@ -660,6 +683,33 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Gets the license maintenance expiry date timestamp.
+        /// </summary>
+        /// <returns>Returns the timestamp.</returns>
+        public static uint GetLicenseMaintenanceExpiryDate()
+        {
+            uint expiryDate = 0;
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseMaintenanceExpiryDate_x86(ref maintenanceExpiryDate) : LexActivatorNative.GetLicenseMaintenanceExpiryDate(ref maintenanceExpiryDate);
+            }
+            else
+            {
+                status =  LexActivatorNative.GetLicenseMaintenanceExpiryDate(ref maintenanceExpiryDate);
+            }
+            switch (status)
+            {
+                case LexStatusCodes.LA_OK:
+                    return maintenanceExpiryDate;
+                case LexStatusCodes.LA_FAIL:
+                    return 0;
+                default:
+                    throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
         /// Gets the email associated with the license user.
         /// </summary>
         /// <returns>Returns the license user email.</returns>
@@ -795,6 +845,31 @@ namespace Cryptlex
             if (LexStatusCodes.LA_OK == status)
             {
                 return builder.ToString();
+            }
+            throw new LexActivatorException(status);
+        }
+
+        /// <summary>
+        /// Gets the initial and current mode of activation (online or offline).
+        /// </summary>
+        /// <returns>Returns the activation mode.</returns>
+        public static string GetActivationMode(string key)
+        {
+            var builder = new StringBuilder(MetadataBufferSize);
+            var builder2 = new StringBuilder(MetadataBufferSize);
+
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetActivationMode_x86(builder, builder.Capacity, builder2, builder2.Capacity) : LexActivatorNative.GetActivationMode(builder, builder.Capacity, builder2, builder2.Capacity);
+            }
+            else
+            {
+                status = LexActivatorNative.GetActivationModeA(builder, builder.Capacity, builder2, builder2.Capacity);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                 return new ActivationMode(builder1.ToString(), builder2.ToString());
             }
             throw new LexActivatorException(status);
         }

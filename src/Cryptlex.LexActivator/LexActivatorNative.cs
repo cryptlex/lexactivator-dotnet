@@ -89,6 +89,12 @@ namespace Cryptlex
         public static extern int SetAppVersionA(string appVersion);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetReleaseVersion(string releaseVersion);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetReleaseVersion", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetReleaseVersionA(string releaseVersion);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetOfflineActivationRequestMeterAttributeUses(string name, uint uses);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetOfflineActivationRequestMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
@@ -158,6 +164,9 @@ namespace Cryptlex
         public static extern int GetLicenseExpiryDate(ref uint expiryDate);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseMaintenanceExpiryDate(ref uint maintenanceExpiryDate);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseUserEmail(StringBuilder email, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetLicenseUserEmail", CallingConvention = CallingConvention.Cdecl)]
@@ -192,6 +201,12 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationMetadataA(string key, StringBuilder value, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetActivationMode(StringBuilder initialMode, int length, StringBuilder currentMode, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetActivationModeA(StringBuilder initialMode, int length, StringBuilder currentMode, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationMeterAttributeUses(string name, ref uint uses);
@@ -348,6 +363,9 @@ namespace Cryptlex
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetAppVersion", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetAppVersion_x86(string appVersion);
 
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetReleaseVersion", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetReleaseVersion_x86(string releaseVersion);
+
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetOfflineActivationRequestMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetOfflineActivationRequestMeterAttributeUses_x86(string name, uint uses);
 
@@ -387,6 +405,9 @@ namespace Cryptlex
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseExpiryDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseExpiryDate_x86(ref uint expiryDate);
 
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseMaintenanceExpiryDate", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseMaintenanceExpiryDate_x86(ref uint maintenanceExpiryDate);
+
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseUserEmail", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseUserEmail_x86(StringBuilder email, int length);
 
@@ -404,6 +425,9 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationMetadata_x86(string key, StringBuilder value, int length);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationMode", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetActivationMode_x86(StringBuilder initialMode, int length, StringBuilder currentMode, int length);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationMeterAttributeUses_x86(string name, ref uint uses);
