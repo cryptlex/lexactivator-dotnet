@@ -342,7 +342,7 @@ namespace Cryptlex
         /// 
         /// The release version appears along with the activation details in dashboard.
         /// </summary>
-        /// <param name="releaseVersion"></param>
+        /// <param name="releaseVersion"> string in following allowed formats: x.x, x.x.x, x.x.x.x </param>
         public static void SetReleaseVersion(string releaseVersion)
         {
             int status;
@@ -853,7 +853,7 @@ namespace Cryptlex
         /// Gets the initial and current mode of activation (online or offline).
         /// </summary>
         /// <returns>Returns the activation mode.</returns>
-        public static string GetActivationMode(string key)
+        public static string GetActivationMode()
         {
             var builder = new StringBuilder(MetadataBufferSize);
             var builder2 = new StringBuilder(MetadataBufferSize);
