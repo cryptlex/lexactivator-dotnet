@@ -203,10 +203,10 @@ namespace Cryptlex
         public static extern int GetActivationMetadataA(string key, StringBuilder value, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetActivationMode(StringBuilder initialMode, int length, StringBuilder currentMode, int length);
+        public static extern int GetActivationMode(StringBuilder initialMode, int initialModeLength, StringBuilder currentMode, int currentModeLength);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetActivationModeA(StringBuilder initialMode, int length, StringBuilder currentMode, int length);
+        public static extern int GetActivationModeA(StringBuilder initialMode, int initialModeLength, StringBuilder currentMode, int currentModeLength);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationMeterAttributeUses(string name, ref uint uses);
@@ -427,7 +427,7 @@ namespace Cryptlex
         public static extern int GetActivationMetadata_x86(string key, StringBuilder value, int length);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationMode", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetActivationMode_x86(StringBuilder initialMode, int length, StringBuilder currentMode, int length);
+        public static extern int GetActivationMode_x86(StringBuilder initialMode, int initialModeLength, StringBuilder currentMode, int currentModeLength);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationMeterAttributeUses_x86(string name, ref uint uses);

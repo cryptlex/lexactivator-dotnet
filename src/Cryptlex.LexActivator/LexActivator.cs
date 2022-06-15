@@ -688,7 +688,7 @@ namespace Cryptlex
         /// <returns>Returns the timestamp.</returns>
         public static uint GetLicenseMaintenanceExpiryDate()
         {
-            uint expiryDate = 0;
+            uint maintenanceExpiryDate = 0;
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -853,23 +853,23 @@ namespace Cryptlex
         /// Gets the initial and current mode of activation (online or offline).
         /// </summary>
         /// <returns>Returns the activation mode.</returns>
-        public static string GetActivationMode()
+        public static ActivationMode GetActivationMode()
         {
-            var builder = new StringBuilder(MetadataBufferSize);
-            var builder2 = new StringBuilder(MetadataBufferSize);
+            var initialModeBuilder = new StringBuilder(MetadataBufferSize);
+            var currentModeBuilder = new StringBuilder(MetadataBufferSize);
 
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetActivationMode_x86(builder, builder.Capacity, builder2, builder2.Capacity) : LexActivatorNative.GetActivationMode(builder, builder.Capacity, builder2, builder2.Capacity);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetActivationMode_x86(initialModeBuilder, initialModeBuilder.Capacity, currentModeBuilder, currentModeBuilder.Capacity) : LexActivatorNative.GetActivationMode(initialModeBuilder, initialModeBuilder.Capacity, currentModeBuilder, currentModeBuilder.Capacity);
             }
             else
             {
-                status = LexActivatorNative.GetActivationModeA(builder, builder.Capacity, builder2, builder2.Capacity);
+                status = LexActivatorNative.GetActivationModeA(initialModeBuilder, initialModeBuilder.Capacity, currentModeBuilder, currentModeBuilder.Capacity);
             }
             if (LexStatusCodes.LA_OK == status)
             {
-                 return new ActivationMode(builder1.ToString(), builder2.ToString());
+                 return new ActivationMode(initialModeBuilder.ToString(), currentModeBuilder.ToString());
             }
             throw new LexActivatorException(status);
         }
