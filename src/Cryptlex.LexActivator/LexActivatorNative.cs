@@ -205,7 +205,7 @@ namespace Cryptlex
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationMode(StringBuilder initialMode, int initialModeLength, StringBuilder currentMode, int currentModeLength);
 
-        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetActivationMode", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationModeA(StringBuilder initialMode, int initialModeLength, StringBuilder currentMode, int currentModeLength);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
