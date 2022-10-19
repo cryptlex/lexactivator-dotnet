@@ -83,7 +83,7 @@ jobs:
         cert-password: '${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}'
         cert-sha1: '${{ secrets.SIGNING_CERTIFICATE_SHA }}'
         folder: '.\nupkg\'
-        recursive: true
+        recursive: false
         timestamp-server: 'http://timestamp.sectigo.com'
 
     - name: Push NuGet Package
