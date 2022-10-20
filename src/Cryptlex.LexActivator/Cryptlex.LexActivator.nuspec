@@ -5,7 +5,7 @@
     <version>3.19.5</version>
         <title>Cryptlex Licensing Library</title>
         <authors>Cryptlex</authors>
-        <owners>Cryptlex LLC</owners>
+        <owners>Cryptlex LLP</owners>
         <projectUrl>https://cryptlex.com</projectUrl>
         <repository type="git" url="https://github.com/cryptlex/lexactivator-dotnet" />
         <license type="expression">MIT</license>
@@ -17,7 +17,7 @@
             <group targetFramework="net45" />
             <group targetFramework="netstandard1.1"/>
         </dependencies>
-        <copyright>Copyright (c) 2021 Cryptlex LLC </copyright>
+        <copyright>Copyright (c) 2022 Cryptlex LLP </copyright>
         <tags>lexactivator cryptlex licensing-library</tags>
         <references>
             <reference file="Cryptlex.LexActivator.dll" />

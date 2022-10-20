@@ -59,6 +59,16 @@ jobs:
     - name: Build Solution
       run: msbuild Cryptlex.LexActivator.sln /p:platform="Any CPU" /p:configuration="Release" /p:VisualStudioVersion="16.0"
     
+    - name: Signing DLLs
+      uses: GabrielAcostaEngler/signtool-code-sign@main
+      with:
+        certificate: '${{ secrets.SIGNING_CERTIFICATE }}'
+        cert-password: '${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}'
+        cert-sha1: '${{ secrets.SIGNING_CERTIFICATE_SHA }}'
+        folder: '.\src\Cryptlex.LexActivator\bin\Release\'
+        recursive: true
+        timestamp-server: 'http://timestamp.sectigo.com'
+
     - name: Download Native Libs
       run: .\post-build.ps1
       shell: powershell
@@ -66,6 +76,16 @@ jobs:
     - name: Pack NuGet Package
       run: nuget pack src\Cryptlex.LexActivator\Cryptlex.LexActivator.nuspec -NonInteractive -OutputDirectory nupkg -Properties Configuration=Release -Verbosity Detailed
     
+    - name: Sign NuGet Package
+      uses: GabrielAcostaEngler/signtool-code-sign@main
+      with:
+        certificate: '${{ secrets.SIGNING_CERTIFICATE }}'
+        cert-password: '${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}'
+        cert-sha1: '${{ secrets.SIGNING_CERTIFICATE_SHA }}'
+        folder: '.\nupkg\'
+        recursive: false
+        timestamp-server: 'http://timestamp.sectigo.com'
+
     - name: Push NuGet Package
       run: nuget push nupkg\*.nupkg -SkipDuplicate -Source https://api.nuget.org/v3/index.json -NoSymbols
 
