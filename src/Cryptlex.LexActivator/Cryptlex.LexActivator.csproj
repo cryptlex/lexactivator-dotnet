@@ -11,6 +11,10 @@
     <PropertyGroup Condition="'$(Configuration)'=='Release'">
       <DocumentationFile>bin\release\Cryptlex.LexActivator.xml</DocumentationFile>
     </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>lexactivator.snk</AssemblyOriginatorKeyFile>
+     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0" />
     </ItemGroup>
