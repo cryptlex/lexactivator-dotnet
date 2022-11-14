@@ -131,6 +131,12 @@ namespace Cryptlex
                 case LexStatusCodes.LA_E_RELEASE_VERSION_NOT_ALLOWED:
                     return "The release version is not allowed.";
 
+                case LexStatusCodes.LA_E_RELEASE_PLATFORM_LENGTH:
+                    return "Release platform length is more than 256 characters.";
+
+                case LexStatusCodes.LA_E_RELEASE_CHANNEL_LENGTH:
+                    return "Release channel length is more than 256 characters.";
+
                 case LexStatusCodes.LA_E_VM:
                     return "Application is being run inside a virtual machine / hypervisor, and activation has been disallowed in the VM.";
 

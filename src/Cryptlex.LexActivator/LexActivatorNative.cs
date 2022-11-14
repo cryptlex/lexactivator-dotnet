@@ -95,6 +95,24 @@ namespace Cryptlex
         public static extern int SetReleaseVersionA(string releaseVersion);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetReleasePublishedDate(uint releasePublishedDate);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetReleasePublishedDate", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetReleasePublishedDateA(uint releasePublishedDate);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetReleasePlatform(string releasePlatform);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetReleasePlatform", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetReleasePlatformA(string releasePlatform);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetReleaseChannel(string releaseChannel);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetReleaseChannel", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetReleaseChannelA(string releaseChannel);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetOfflineActivationRequestMeterAttributeUses(string name, uint uses);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetOfflineActivationRequestMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
@@ -165,6 +183,12 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseMaintenanceExpiryDate(ref uint maintenanceExpiryDate);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseMaxAllowedReleaseVersion(StringBuilder maxAllowedReleaseVersion, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetLicenseMaxAllowedReleaseVersion", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseMaxAllowedReleaseVersionA(StringBuilder maxAllowedReleaseVersion, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseUserEmail(StringBuilder email, int length);
@@ -366,6 +390,15 @@ namespace Cryptlex
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetReleaseVersion", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetReleaseVersion_x86(string releaseVersion);
 
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetReleasePublishedDate", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetReleasePublishedDate_x86(uint releasePublishedDate);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetReleasePlatform", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetReleasePlatform_x86(string releasePlatform);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetReleaseChannel", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetReleaseChannel_x86(string releaseChannel);
+
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetOfflineActivationRequestMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetOfflineActivationRequestMeterAttributeUses_x86(string name, uint uses);
 
@@ -407,6 +440,9 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseMaintenanceExpiryDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseMaintenanceExpiryDate_x86(ref uint maintenanceExpiryDate);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseMaxAllowedReleaseVersion", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseMaxAllowedReleaseVersion_x86(StringBuilder maxAllowedReleaseVersion, int length);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseUserEmail", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseUserEmail_x86(StringBuilder email, int length);

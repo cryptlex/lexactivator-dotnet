@@ -361,6 +361,75 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Sets the release published date of your application.
+        ///
+        /// </summary>
+        /// <param name="releasePublishedDate"> unix timestamp of release published date. </param>
+        public static void SetReleasePublishedDate(uint releasePublishedDate)
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetReleasePublishedDate_x86(releasePublishedDate) : LexActivatorNative.SetReleasePublishedDate(releasePublishedDate);
+            }
+            else
+            {
+                status = LexActivatorNative.SetReleasePublishedDateA(releasePublishedDate);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        
+        }
+
+        /// <summary>
+        /// Sets the release platform e.g. windows, macos, linux
+        /// 
+        /// The release platform appears along with the activation details in dashboard..
+        /// </summary>
+        /// <param name="releasePlatform"> release platform e.g. windows, macos, linux
+        public static void SetReleasePlatform(string releasePlatform)
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetReleasePlatform_x86(releasePlatform) : LexActivatorNative.SetReleasePlatform(releasePlatform);
+            }
+            else
+            {
+                status = LexActivatorNative.SetReleasePlatformA(releasePlatform);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
+        /// Sets the release channel e.g. stable, beta
+        /// 
+        /// The release channel appears along with the activation details in dashboard..
+        /// </summary>
+        /// <param name="releaseChannel"> release channel e.g. stable
+        public static void SetReleaseChannel(string releaseChannel)
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetReleaseChannel_x86(releaseChannel) : LexActivatorNative.SetReleaseChannel(releaseChannel);
+            }
+            else
+            {
+                status = LexActivatorNative.SetReleaseChannelA(releaseChannel);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
         /// Sets the meter attribute uses for the offline activation request.
         /// 
         /// This function should only be called before GenerateOfflineActivationRequest()
@@ -707,6 +776,29 @@ namespace Cryptlex
                 default:
                     throw new LexActivatorException(status);
             }
+        }
+
+        /// <summary>
+        /// Gets the maximum allowed release version of the license.
+        /// </summary>
+        /// <returns>Returns the max allowed release version.</returns>
+        public static string GetLicenseMaxAllowedReleaseVersion()
+        {
+            var builder = new StringBuilder(512);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseMaxAllowedReleaseVersion_x86(builder, builder.Capacity) : LexActivatorNative.GetLicenseMaxAllowedReleaseVersion(builder, builder.Capacity);
+            }
+            else
+            {
+                status = LexActivatorNative.GetLicenseMaxAllowedReleaseVersionA(builder, builder.Capacity);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                return builder.ToString();
+            }
+            throw new LexActivatorException(status);
         }
 
         /// <summary>
