@@ -129,6 +129,29 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Enables network logs.
+        /// This function should be used for network testing only in case of network errors.
+        /// By default logging is disabled.
+        /// </summary>
+        /// <param name="enable">0 or 1 to disable or enable logging.</param>
+        public static void SetDebugMode(uint enable)
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetDebugMode_x86(enable) : LexActivatorNative.SetDebugMode(enable);
+            }
+            else
+            {
+                status = LexActivatorNative.SetDebugMode(enable);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
         /// In case you don't want to use the LexActivator's advanced
         /// device fingerprinting algorithm, this function can be used to set a custom
         /// device fingerprint.
@@ -255,7 +278,7 @@ namespace Cryptlex
             }
             else
             {
-                status = LexActivatorNative.SetActivationLeaseDurationA(leaseDuration);
+                status = LexActivatorNative.SetActivationLeaseDuration(leaseDuration);
             }
             if (LexStatusCodes.LA_OK != status)
             {
@@ -374,7 +397,7 @@ namespace Cryptlex
             }
             else
             {
-                status = LexActivatorNative.SetReleasePublishedDateA(releasePublishedDate);
+                status = LexActivatorNative.SetReleasePublishedDate(releasePublishedDate);
             }
             if (LexStatusCodes.LA_OK != status)
             {
