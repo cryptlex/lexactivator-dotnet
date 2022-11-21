@@ -143,7 +143,7 @@ namespace Cryptlex
             }
             else
             {
-                status = LexActivatorNative.SetDebugModeA(enable);
+                status = LexActivatorNative.SetDebugMode(enable);
             }
             if (LexStatusCodes.LA_OK != status)
             {
@@ -278,7 +278,7 @@ namespace Cryptlex
             }
             else
             {
-                status = LexActivatorNative.SetActivationLeaseDurationA(leaseDuration);
+                status = LexActivatorNative.SetActivationLeaseDuration(leaseDuration);
             }
             if (LexStatusCodes.LA_OK != status)
             {
@@ -397,7 +397,7 @@ namespace Cryptlex
             }
             else
             {
-                status = LexActivatorNative.SetReleasePublishedDateA(releasePublishedDate);
+                status = LexActivatorNative.SetReleasePublishedDate(releasePublishedDate);
             }
             if (LexStatusCodes.LA_OK != status)
             {

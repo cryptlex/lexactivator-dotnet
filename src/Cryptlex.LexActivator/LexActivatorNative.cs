@@ -46,9 +46,6 @@ namespace Cryptlex
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetDebugMode(uint enable);
 
-        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetDebugMode", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SetDebugModeA(uint enable);
-
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetCustomDeviceFingerprint(string fingerprint);
 
@@ -72,9 +69,6 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetActivationLeaseDuration(uint leaseDuration);
-
-        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetActivationLeaseDuration", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SetActivationLeaseDurationA(uint leaseDuration);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetActivationMetadata(string key, string value);
@@ -102,9 +96,6 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetReleasePublishedDate(uint releasePublishedDate);
-
-        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetReleasePublishedDate", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int SetReleasePublishedDateA(uint releasePublishedDate);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetReleasePlatform(string releasePlatform);
