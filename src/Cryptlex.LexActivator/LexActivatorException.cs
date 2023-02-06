@@ -149,6 +149,15 @@ namespace Cryptlex
                 case LexStatusCodes.LA_E_CONTAINER:
                     return "Application is being run inside a container and activation has been disallowed in the container.";
 
+                case LexStatusCodes.LA_E_RELEASE_VERSION:
+                    return "Invalid release version. Make sure the release version uses the following formats: x.x, x.x.x, x.x.x.x (where x is a number).";
+
+                case LexStatusCodes.LA_E_RELEASE_PLATFORM:
+                    return "Release platform not set.";
+
+                case LexStatusCodes.LA_E_RELEASE_CHANNEL:
+                    return "Release channel not set.";
+
                 case LexStatusCodes.LA_E_RATE_LIMIT:
                     return "Rate limit for API has reached, try again later.";
 

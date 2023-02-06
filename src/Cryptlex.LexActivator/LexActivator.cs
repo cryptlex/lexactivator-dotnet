@@ -14,13 +14,24 @@ namespace Cryptlex
             LA_IN_MEMORY = 4
         }
 
+        public enum ReleaseFlags : uint
+        {
+            LA_RELEASES_ALL = 1,
+            LA_RELEASES_ALLOWED = 2
+        }
+
         private const int MetadataBufferSize = 4096;
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void CallbackType(uint status);
 
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void ReleaseCallbackType(uint status, string releaseJson);
+
         /* To prevent garbage collection of delegate, need to keep a reference */
         static readonly List<CallbackType> callbackList = new List<CallbackType>();
+
+        static readonly List<ReleaseCallbackType> releaseCallbackList = new List<ReleaseCallbackType>();
 
         /// <summary>
         /// Sets the absolute path of the Product.dat file.
@@ -250,6 +261,7 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
+                
                 status = IntPtr.Size == 4 ? LexActivatorNative.SetLicenseCallback_x86(wrappedCallback) : LexActivatorNative.SetLicenseCallback(wrappedCallback);
             }
             else
@@ -1164,6 +1176,51 @@ namespace Cryptlex
             throw new LexActivatorException(status);
         }
 
+        /// <summary>
+        /// Checks whether a new release is available for the product.
+        /// 
+        /// This function should only be used if you manage your releases through
+        /// Cryptlex release management API.
+        ///
+        /// When this function is called the release update callback function gets invoked 
+        /// which returns the following parameters:
+        ///
+        /// status - determines if any update is available or not. It also determines whether 
+        /// an update is allowed or not. Expected values are LA_RELEASE_UPDATE_AVAILABLE,
+        /// LA_RELEASE_UPDATE_NOT_AVAILABLE, LA_RELEASE_UPDATE_AVAILABLE_NOT_ALLOWED.
+        ///
+        /// releaseJson- returns json string of the latest available release, depending on the 
+        /// flag LA_RELEASES_ALLOWED or LA_RELEASES_ALL passed to the CheckReleaseUpdate().
+        /// </summary>
+        /// <param name="releaseCallback">name of the callback function</param>
+        /// <param name="releaseFlags">If an update only related to the allowed release is required, then use LA_RELEASES_ALLOWED. Otherwise, if an update for all the releases is required, then use LA_RELEASES_ALL.</param>
+        public static void CheckReleaseUpdate(ReleaseCallbackType releaseCallback, ReleaseFlags releaseFlags)
+        {
+            var wrappedCallback = releaseCallback;
+#if NETFRAMEWORK
+            var syncTarget = releaseCallback.Target as System.Windows.Forms.Control;
+            if (syncTarget != null)
+            {
+                wrappedCallback = (v, u) => syncTarget.Invoke(releaseCallback, new object[] { v, u });
+            }
+#endif
+            releaseCallbackList.Add(wrappedCallback);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.CheckReleaseUpdate_x86(wrappedCallback, releaseFlags) : LexActivatorNative.CheckReleaseUpdate(wrappedCallback, releaseFlags);
+            }
+            else
+            {
+                status = LexActivatorNative.CheckReleaseUpdateA(wrappedCallback, releaseFlags);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+        
+        
         /// <summary>
         /// Checks whether a new release is available for the product.
         /// 
