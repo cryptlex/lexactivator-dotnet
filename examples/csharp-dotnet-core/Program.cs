@@ -10,7 +10,7 @@ namespace Sample
             // LexActivator.SetProductFile ("ABSOLUTE_PATH_OF_PRODUCT.DAT_FILE");
             LexActivator.SetProductData("PASTE_CONTENT_OF_PRODUCT.DAT_FILE");
             LexActivator.SetProductId("PASTE_PRODUCT_ID", LexActivator.PermissionFlags.LA_USER);
-            LexActivator.SetReleaseVersion("PASTE_YOUR_RELEASE_VERSION");
+            LexActivator.SetReleaseVersion("1.0.0");  // Set this to the release version of your app
         }
 
         static void Activate()

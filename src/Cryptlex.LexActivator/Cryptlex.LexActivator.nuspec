@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Cryptlex.LexActivator</id>
-    <version>3.20.6</version>
+    <version>3.20.10</version>
         <title>Cryptlex Licensing Library</title>
         <authors>Cryptlex</authors>
         <owners>Cryptlex LLP</owners>
@@ -17,7 +17,7 @@
             <group targetFramework="net45" />
             <group targetFramework="netstandard1.1"/>
         </dependencies>
-        <copyright>Copyright (c) 2022 Cryptlex LLP </copyright>
+        <copyright>Copyright (c) 2023 Cryptlex LLP </copyright>
         <tags>lexactivator cryptlex licensing-library</tags>
         <references>
             <reference file="Cryptlex.LexActivator.dll" />
@@ -33,6 +33,8 @@
         <file src="runtimes\linux-arm64\native\*.so" target="runtimes\linux-arm64\native" />
         <file src="runtimes\linux-arm\native\*.so" target="runtimes\linux-arm\native" />
         <file src="runtimes\linux-musl-x64\native\*.so" target="runtimes\linux-musl-x64\native" />
+        <file src="runtimes\linux-musl-arm64\native\*.so" target="runtimes\linux-musl-arm64\native" />
+        <file src="runtimes\linux-musl-arm\native\*.so" target="runtimes\linux-musl-arm\native" />
         <file src="bin\Release\net45\Cryptlex.LexActivator.dll" target="lib\net45" />
         <file src="bin\Release\Cryptlex.LexActivator.xml" target="lib\net45" />
         <file src="bin\Release\netstandard1.1\Cryptlex.LexActivator.dll" target="lib\netstandard1.1" />
