@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Cryptlex
 {
@@ -913,6 +914,58 @@ namespace Cryptlex
             if (LexStatusCodes.LA_OK == status)
             {
                 return builder.ToString();
+            }
+            throw new LexActivatorException(status);
+        }
+
+        /// <summary>
+        /// Gets the name associated with the license organization.
+        /// </summary>
+        /// <returns>Returns the license organization name.</returns>
+        public static string GetLicenseOrganizationName()
+        {
+            var builder = new StringBuilder(512);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseOrganizationName_x86(builder, builder.Capacity) : LexActivatorNative.GetLicenseOrganizationName(builder, builder.Capacity);
+            }
+            else
+            {
+                status = LexActivatorNative.GetLicenseOrganizationNameA(builder, builder.Capacity);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                return builder.ToString();
+            }
+            throw new LexActivatorException(status);
+        }
+
+        /// <summary>
+        /// Gets the license organization address.
+        /// </summary>
+        /// <returns>Returns the license organization address.</returns>
+        public static OrganizationAddress GetLicenseOrganizationAddress()
+        {
+            var builder = new StringBuilder(512);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseOrganizationAddressInternal_x86(builder, builder.Capacity) : LexActivatorNative.GetLicenseOrganizationAddressInternal(builder, builder.Capacity);
+            }
+            else
+            {
+                status = LexActivatorNative.GetLicenseOrganizationAddressInternalA(builder, builder.Capacity);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                string jsonAddress = builder.ToString();
+                if (jsonAddress.Length > 0)
+                {
+                    OrganizationAddress organizationAddress = JsonConvert.DeserializeObject<OrganizationAddress>(jsonAddress);
+                    return organizationAddress;
+                }
+                return null;
             }
             throw new LexActivatorException(status);
         }

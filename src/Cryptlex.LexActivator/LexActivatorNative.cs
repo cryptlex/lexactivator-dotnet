@@ -212,6 +212,18 @@ namespace Cryptlex
         public static extern int GetLicenseUserMetadataA(string key, StringBuilder value, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseOrganizationName(StringBuilder organizationName, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetLicenseOrganizationName", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseOrganizationNameA(StringBuilder organizationName, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseOrganizationAddressInternal(StringBuilder jsonAddress, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetLicenseOrganizationAddressInternal", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseOrganizationAddressInternalA(StringBuilder jsonAddress, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseType(StringBuilder licenseType, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetLicenseType", CallingConvention = CallingConvention.Cdecl)]
@@ -455,6 +467,12 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseUserMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseUserMetadata_x86(string key, StringBuilder value, int length);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseOrganizationName", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseOrganizationName_x86(StringBuilder organizationName, int length);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseOrganizationAddressInternal", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseOrganizationAddressInternal_x86(StringBuilder jsonAddress, int length);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseType", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseType_x86(StringBuilder licenseType, int length);
