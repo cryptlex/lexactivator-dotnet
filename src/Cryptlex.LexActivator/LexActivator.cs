@@ -962,8 +962,8 @@ namespace Cryptlex
                 string jsonAddress = builder.ToString();
                 if (jsonAddress.Length > 0)
                 {
-                    OrganizationAddress address = JsonConvert.DeserializeObject<OrganizationAddress>(jsonAddress);
-                    return new OrganizationAddress(address.AddressLine1, address.AddressLine2, address.City, address.State, address.Country, address.PostalCode);
+                    OrganizationAddress organizationAddress = JsonConvert.DeserializeObject<OrganizationAddress>(jsonAddress);
+                    return organizationAddress;
                 }
                 return null;
             }
