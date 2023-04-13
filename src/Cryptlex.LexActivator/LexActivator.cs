@@ -15,13 +15,27 @@ namespace Cryptlex
             LA_IN_MEMORY = 4
         }
 
+        public enum ReleaseFlags : uint
+        {
+            LA_RELEASES_ALL = 1,
+            LA_RELEASES_ALLOWED = 2
+        }
+
         private const int MetadataBufferSize = 4096;
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void CallbackType(uint status);
 
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void InternalReleaseCallbackType(uint status, string releaseJson);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void ReleaseUpdateCallbackType(uint status, Release release);
+
         /* To prevent garbage collection of delegate, need to keep a reference */
         static readonly List<CallbackType> callbackList = new List<CallbackType>();
+
+        static readonly List<ReleaseUpdateCallbackType> releaseCallbackList = new List<ReleaseUpdateCallbackType>();
 
         /// <summary>
         /// Sets the absolute path of the Product.dat file.
@@ -251,6 +265,7 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
+                
                 status = IntPtr.Size == 4 ? LexActivatorNative.SetLicenseCallback_x86(wrappedCallback) : LexActivatorNative.SetLicenseCallback(wrappedCallback);
             }
             else
@@ -1217,6 +1232,56 @@ namespace Cryptlex
             throw new LexActivatorException(status);
         }
 
+        /// <summary>
+        /// Checks whether a new release is available for the product.
+        /// 
+        /// This function should only be used if you manage your releases through
+        /// Cryptlex release management API.
+        ///
+        /// When this function is called the release update callback function gets invoked 
+        /// which passes the following parameters:
+        ///
+        /// status - determines if any update is available or not. It also determines whether 
+        /// an update is allowed or not. Expected values are LA_RELEASE_UPDATE_AVAILABLE,
+        /// LA_RELEASE_UPDATE_NOT_AVAILABLE, LA_RELEASE_UPDATE_AVAILABLE_NOT_ALLOWED.
+        ///
+        /// release - object of the latest available release, depending on the 
+        /// flag LA_RELEASES_ALLOWED or LA_RELEASES_ALL passed to the CheckReleaseUpdate().
+        /// </summary>
+        /// <param name="releaseUpdateCallback">name of the callback function</param>
+        /// <param name="releaseFlags">If an update only related to the allowed release is required, then use LA_RELEASES_ALLOWED. Otherwise, if an update for all the releases is required, then use LA_RELEASES_ALL.</param>
+        public static void CheckReleaseUpdate(ReleaseUpdateCallbackType releaseUpdateCallback, ReleaseFlags releaseFlags)
+        {
+            InternalReleaseCallbackType internalReleaseCallback = (releaseStatus, releaseJson) =>
+            {
+                Release release = JsonConvert.DeserializeObject<Release>(releaseJson);
+                releaseUpdateCallback(releaseStatus, release);
+            };
+            var wrappedCallback = releaseUpdateCallback;
+#if NETFRAMEWORK
+            var syncTarget = releaseUpdateCallback.Target as System.Windows.Forms.Control;
+            if (syncTarget != null)
+            {
+                wrappedCallback = (v, u) => syncTarget.Invoke(releaseUpdateCallback, new object[] { v, u });
+            }
+#endif
+            releaseCallbackList.Add(wrappedCallback);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.CheckReleaseUpdateInternal_x86(internalReleaseCallback, releaseFlags) : LexActivatorNative.CheckReleaseUpdateInternal(internalReleaseCallback, releaseFlags);
+            }
+            else
+            {
+                status = LexActivatorNative.CheckReleaseUpdateInternalA(internalReleaseCallback, releaseFlags);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+        
+        
         /// <summary>
         /// Checks whether a new release is available for the product.
         /// 
