@@ -1258,7 +1258,7 @@ namespace Cryptlex
 
         public static void CheckReleaseUpdate(ReleaseUpdateCallbackType releaseUpdateCallback, ReleaseFlags releaseFlags, object userData)
         {
-            InternalReleaseCallbackType internalReleaseCallback = (releaseStatus, releaseJson, unused) =>
+            InternalReleaseCallbackType internalReleaseCallback = (releaseStatus, releaseJson, _userData) =>
             {
                 Release release = JsonConvert.DeserializeObject<Release>(releaseJson);
                 releaseUpdateCallback(releaseStatus, release, userData);
