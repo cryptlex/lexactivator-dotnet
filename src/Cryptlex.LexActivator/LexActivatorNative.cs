@@ -275,10 +275,10 @@ namespace Cryptlex
         public static extern int GetLibraryVersionA(StringBuilder libraryVersion, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int CheckReleaseUpdateInternal(LexActivator.InternalReleaseCallbackType InternalReleaseCallback, LexActivator.ReleaseFlags releaseFlags);
+        public static extern int CheckReleaseUpdateInternal(LexActivator.InternalReleaseCallbackType internalReleaseCallback, LexActivator.ReleaseFlags releaseFlags, IntPtr unused);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "CheckReleaseUpdateInternal", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int CheckReleaseUpdateInternalA(LexActivator.InternalReleaseCallbackType InternalReleaseCallback, LexActivator.ReleaseFlags releaseFlags);
+        public static extern int CheckReleaseUpdateInternalA(LexActivator.InternalReleaseCallbackType internalReleaseCallback, LexActivator.ReleaseFlags releaseFlags, IntPtr unused);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int CheckForReleaseUpdate(string platform, string version, string channel, LexActivator.CallbackType callback);
@@ -511,7 +511,7 @@ namespace Cryptlex
         public static extern int GetLibraryVersion_x86(StringBuilder libraryVersion, int length);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "CheckReleaseUpdateInternal", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int CheckReleaseUpdateInternal_x86(LexActivator.InternalReleaseCallbackType InternalReleaseCallback, LexActivator.ReleaseFlags releaseFlags);
+        public static extern int CheckReleaseUpdateInternal_x86(LexActivator.InternalReleaseCallbackType internalReleaseCallback, LexActivator.ReleaseFlags releaseFlags, IntPtr unused);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "CheckForReleaseUpdate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int CheckForReleaseUpdate_x86(string platform, string version, string channel, LexActivator.CallbackType callback);
