@@ -27,7 +27,7 @@ namespace Cryptlex
         public delegate void CallbackType(uint status);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void InternalReleaseCallbackType(uint status, string releaseJson, IntPtr unused);
+        public delegate void InternalReleaseCallbackType(uint status, string releaseJson, IntPtr _userData);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void ReleaseUpdateCallbackType(uint status, Release release, object userData);
