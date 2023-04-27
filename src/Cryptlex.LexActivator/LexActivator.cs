@@ -27,10 +27,10 @@ namespace Cryptlex
         public delegate void CallbackType(uint status);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void InternalReleaseCallbackType(uint status, string releaseJson);
+        public delegate void InternalReleaseCallbackType(uint status, string releaseJson, IntPtr _userData);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void ReleaseUpdateCallbackType(uint status, Release release);
+        public delegate void ReleaseUpdateCallbackType(uint status, Release release, object userData);
 
         /* To prevent garbage collection of delegate, need to keep a reference */
         static readonly List<CallbackType> callbackList = new List<CallbackType>();
@@ -1247,33 +1247,39 @@ namespace Cryptlex
         ///
         /// release - object of the latest available release, depending on the 
         /// flag LA_RELEASES_ALLOWED or LA_RELEASES_ALL passed to the CheckReleaseUpdate().
+        /// 
+        /// userData - data that is passed to the callback function when it is registered
+	    /// using the CheckReleaseUpdate function. This parameter is optional and can be null if no user data
+	    /// is passed to the CheckReleaseUpdate function.
         /// </summary>
         /// <param name="releaseUpdateCallback">name of the callback function</param>
-        /// <param name="releaseFlags">If an update only related to the allowed release is required, then use LA_RELEASES_ALLOWED. Otherwise, if an update for all the releases is required, then use LA_RELEASES_ALL.</param>
-        public static void CheckReleaseUpdate(ReleaseUpdateCallbackType releaseUpdateCallback, ReleaseFlags releaseFlags)
+        /// <param name="releaseFlags">if an update only related to the allowed release is required, then use LA_RELEASES_ALLOWED. Otherwise, if an update for all the releases is required, then use LA_RELEASES_ALL.</param>
+        /// <param name="userData">data that can be passed to the callback function. This parameter has to be null if no user data needs to be passed to the callback.</param>
+
+        public static void CheckReleaseUpdate(ReleaseUpdateCallbackType releaseUpdateCallback, ReleaseFlags releaseFlags, object userData)
         {
-            InternalReleaseCallbackType internalReleaseCallback = (releaseStatus, releaseJson) =>
+            InternalReleaseCallbackType internalReleaseCallback = (releaseStatus, releaseJson, _userData) =>
             {
                 Release release = JsonConvert.DeserializeObject<Release>(releaseJson);
-                releaseUpdateCallback(releaseStatus, release);
+                releaseUpdateCallback(releaseStatus, release, userData);
             };
             var wrappedCallback = releaseUpdateCallback;
 #if NETFRAMEWORK
             var syncTarget = releaseUpdateCallback.Target as System.Windows.Forms.Control;
             if (syncTarget != null)
             {
-                wrappedCallback = (v, u) => syncTarget.Invoke(releaseUpdateCallback, new object[] { v, u });
+                wrappedCallback = (u, v, w) => syncTarget.Invoke(releaseUpdateCallback, new object[] {u, v, w});
             }
 #endif
             releaseCallbackList.Add(wrappedCallback);
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.CheckReleaseUpdateInternal_x86(internalReleaseCallback, releaseFlags) : LexActivatorNative.CheckReleaseUpdateInternal(internalReleaseCallback, releaseFlags);
+                status = IntPtr.Size == 4 ? LexActivatorNative.CheckReleaseUpdateInternal_x86(internalReleaseCallback, releaseFlags, IntPtr.Zero) : LexActivatorNative.CheckReleaseUpdateInternal(internalReleaseCallback, releaseFlags, IntPtr.Zero);
             }
             else
             {
-                status = LexActivatorNative.CheckReleaseUpdateInternalA(internalReleaseCallback, releaseFlags);
+                status = LexActivatorNative.CheckReleaseUpdateInternalA(internalReleaseCallback, releaseFlags, IntPtr.Zero);
             }
             if (LexStatusCodes.LA_OK != status)
             {
