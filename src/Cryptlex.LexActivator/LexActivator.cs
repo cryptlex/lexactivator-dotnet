@@ -27,7 +27,11 @@ namespace Cryptlex
         public delegate void CallbackType(uint status);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void InternalReleaseCallbackType(uint status, string releaseJson, IntPtr _userData);
+        public delegate void InternalReleaseCallbackTypeA(uint status, string releaseJson, IntPtr _userData);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void InternalReleaseCallbackType(uint status, IntPtr releaseJson, IntPtr _userData);
+
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void ReleaseUpdateCallbackType(uint status, Release release, object userData);
@@ -1260,6 +1264,12 @@ namespace Cryptlex
         {
             InternalReleaseCallbackType internalReleaseCallback = (releaseStatus, releaseJson, _userData) =>
             {
+                string releaseJsonString = Marshal.PtrToStringUni(releaseJson);
+                Release release = JsonConvert.DeserializeObject<Release>(releaseJsonString);
+                releaseUpdateCallback(releaseStatus, release, userData);
+            };
+            InternalReleaseCallbackTypeA internalReleaseCallbackA = (releaseStatus, releaseJson, _userData) =>
+            {
                 Release release = JsonConvert.DeserializeObject<Release>(releaseJson);
                 releaseUpdateCallback(releaseStatus, release, userData);
             };
@@ -1279,7 +1289,7 @@ namespace Cryptlex
             }
             else
             {
-                status = LexActivatorNative.CheckReleaseUpdateInternalA(internalReleaseCallback, releaseFlags, IntPtr.Zero);
+                status = LexActivatorNative.CheckReleaseUpdateInternalA(internalReleaseCallbackA, releaseFlags, IntPtr.Zero);
             }
             if (LexStatusCodes.LA_OK != status)
             {
