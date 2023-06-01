@@ -278,7 +278,7 @@ namespace Cryptlex
         public static extern int CheckReleaseUpdateInternal(LexActivator.InternalReleaseCallbackType internalReleaseCallback, LexActivator.ReleaseFlags releaseFlags, IntPtr _userData);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "CheckReleaseUpdateInternal", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int CheckReleaseUpdateInternalA(LexActivator.InternalReleaseCallbackTypeA internalReleaseCallback, LexActivator.ReleaseFlags releaseFlags, IntPtr _userData);
+        public static extern int CheckReleaseUpdateInternalA(LexActivator.InternalReleaseCallbackAType internalReleaseCallbackA, LexActivator.ReleaseFlags releaseFlags, IntPtr _userData);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int CheckForReleaseUpdate(string platform, string version, string channel, LexActivator.CallbackType callback);
