@@ -27,19 +27,19 @@ namespace Cryptlex
         public delegate void CallbackType(uint status);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void InternalReleaseCallbackTypeA(uint status, string releaseJson, IntPtr _userData);
+        public delegate void InternalReleaseCallbackAType(uint status, string releaseJson, IntPtr _userData);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void InternalReleaseCallbackType(uint status, IntPtr releaseJson, IntPtr _userData);
 
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void ReleaseUpdateCallbackType(uint status, Release release, object userData);
 
         /* To prevent garbage collection of delegate, need to keep a reference */
         static readonly List<CallbackType> callbackList = new List<CallbackType>();
 
-        static readonly List<ReleaseUpdateCallbackType> releaseCallbackList = new List<ReleaseUpdateCallbackType>();
+        static readonly List<InternalReleaseCallbackAType> internalReleaseCallbackAList = new List<InternalReleaseCallbackAType>();
+
+        static readonly List<InternalReleaseCallbackType> internalReleaseCallbackList = new List<InternalReleaseCallbackType>();
 
         /// <summary>
         /// Sets the absolute path of the Product.dat file.
@@ -981,8 +981,9 @@ namespace Cryptlex
                 string jsonAddress = builder.ToString();
                 if (jsonAddress.Length > 0)
                 {
-                    OrganizationAddress organizationAddress = JsonConvert.DeserializeObject<OrganizationAddress>(jsonAddress);
-                    return organizationAddress;
+                    OrganizationAddress organizationAddress = null;
+                    organizationAddress = JsonConvert.DeserializeObject<OrganizationAddress>(jsonAddress);
+                    return organizationAddress; 
                 }
                 return null;
             }
@@ -1265,15 +1266,9 @@ namespace Cryptlex
             InternalReleaseCallbackType internalReleaseCallback = (releaseStatus, releaseJson, _userData) =>
             {
                 string releaseJsonString = Marshal.PtrToStringUni(releaseJson);
-                Release release = JsonConvert.DeserializeObject<Release>(releaseJsonString);
-                releaseUpdateCallback(releaseStatus, release, userData);
-            };
-            InternalReleaseCallbackTypeA internalReleaseCallbackA = (releaseStatus, releaseJson, _userData) =>
-            {
-                Release release = JsonConvert.DeserializeObject<Release>(releaseJson);
-                releaseUpdateCallback(releaseStatus, release, userData);
-            };
-            var wrappedCallback = releaseUpdateCallback;
+                Release release = null;
+                release = JsonConvert.DeserializeObject<Release>(releaseJsonString);
+                var wrappedCallback = releaseUpdateCallback;
 #if NETFRAMEWORK
             var syncTarget = releaseUpdateCallback.Target as System.Windows.Forms.Control;
             if (syncTarget != null)
@@ -1281,7 +1276,16 @@ namespace Cryptlex
                 wrappedCallback = (u, v, w) => syncTarget.Invoke(releaseUpdateCallback, new object[] {u, v, w});
             }
 #endif
-            releaseCallbackList.Add(wrappedCallback);
+                wrappedCallback(releaseStatus, release, userData);
+            };
+            internalReleaseCallbackList.Add(internalReleaseCallback);
+            InternalReleaseCallbackAType internalReleaseCallbackA = (releaseStatus, releaseJson, _userData) =>
+            {
+                Release release = null;
+                release = JsonConvert.DeserializeObject<Release>(releaseJson);
+                releaseUpdateCallback(releaseStatus, release, userData);
+            };
+            internalReleaseCallbackAList.Add(internalReleaseCallbackA);
             int status;
             if (LexActivatorNative.IsWindows())
             {
