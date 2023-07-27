@@ -768,6 +768,61 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Gets the license creation date timestamp.
+        /// </summary>
+        /// <returns>Returns the timestamp.</returns>
+        public static uint GetLicenseCreationDate()
+        {
+            uint creationDate = 0;
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseCreationDate_x86(ref creationDate) : LexActivatorNative.GetLicenseCreationDate(ref creationDate);
+            }
+            else
+            {
+                status =  LexActivatorNative.GetLicenseCreationDate(ref creationDate);
+            }
+            switch (status)
+            {
+                case LexStatusCodes.LA_OK:
+                    return creationDate;
+                case LexStatusCodes.LA_FAIL:
+                    return 0;
+                default:
+                    throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
+        /// Gets the activation creation date timestamp.
+        /// </summary>
+        /// <returns>Returns the timestamp.</returns>
+        public static uint GetLicenseActivationDate()
+        {
+            uint activationDate = 0;
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseActivationDate_x86(ref activationDate) : LexActivatorNative.GetLicenseActivationDate(ref activationDate);
+            }
+            else
+            {
+                status =  LexActivatorNative.GetLicenseActivationDate(ref activationDate);
+            }
+            switch (status)
+            {
+                case LexStatusCodes.LA_OK:
+                    return activationDate;
+                case LexStatusCodes.LA_FAIL:
+                    return 0;
+                default:
+                    throw new LexActivatorException(status);
+            }
+        }
+
+
+        /// <summary>
         /// Gets the license expiry date timestamp.
         /// </summary>
         /// <returns>Returns the timestamp.</returns>
