@@ -991,6 +991,39 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Gets the user licenses for the product.
+        ///
+        /// This function sends a network request to Cryptlex servers to get the licenses.
+        ///
+        /// Make sure AuthenticateUser() function is called before calling this function.
+        /// </summary>
+        /// <returns>Returns the list of user licenses.</returns>
+        public static List<UserLicense> GetUserLicenses()
+        {
+            var builder = new StringBuilder(4096);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetUserLicensesInternal_x86(builder, builder.Capacity) : LexActivatorNative.GetUserLicensesInternal(builder, builder.Capacity);
+            }
+            else
+            {
+                status = LexActivatorNative.GetUserLicensesInternalA(builder, builder.Capacity);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                string userLicensesJson = builder.ToString();
+                List<UserLicense> userLicenses = new List<UserLicense>();
+                if (userLicensesJson.Length >0) {
+                    userLicenses = JsonConvert.DeserializeObject<List<UserLicense>>(userLicensesJson);
+                    return userLicenses;
+                }
+                return userLicenses;
+            }
+            throw new LexActivatorException(status);
+        }
+
+        /// <summary>
         /// Gets the license type (node-locked or hosted-floating).
         /// </summary>
         /// <returns>Returns the license type.</returns>
@@ -1338,6 +1371,32 @@ namespace Cryptlex
             }
         }
 
+        /// <summary>
+        /// It sends the request to the Cryptlex servers to authenticate the user.
+        /// </summary>
+        /// <param name="email">user email address</param>
+        /// <param name="password">user password</param> 
+        /// <returns>LA_OK</returns>
+        public static int AuthenticateUser(string email, string password)
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.AuthenticateUser_x86(email, password) : LexActivatorNative.AuthenticateUser(email, password);
+            }
+            else
+            {
+                status = LexActivatorNative.AuthenticateUserA(email, password);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                return LexStatusCodes.LA_OK;
+            }
+            else
+            {
+                throw new LexActivatorException(status);
+            }
+        }
         /// <summary>
         /// Activates the license by contacting the Cryptlex servers. It
         /// validates the key and returns with encrypted and digitally signed token
