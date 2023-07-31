@@ -42,7 +42,7 @@ namespace Sample
                     Console.WriteLine("Days left:" + daysLeft);
 
                     // Checking for software release update
-                    // LexActivator.CheckForReleaseUpdate("windows", "1.0.0", "stable", SoftwareReleaseUpdateCallback);
+                    // LexActivator.CheckReleaseUpdate(SoftwareReleaseUpdateCallback, LexActivator.ReleaseFlags.LA_RELEASES_ALL, null);
                 }
                 else if (LexStatusCodes.LA_EXPIRED == status)
                 {
@@ -116,19 +116,24 @@ namespace Sample
             }
         }
 
-        // Software release update callback is invoked when CheckForReleaseUpdate() gets a response from the server
-        static void SoftwareReleaseUpdateCallback(uint status)
+        // Software release update callback is invoked when CheckReleaseUpdate() gets a response from the server
+        static void SoftwareReleaseUpdateCallback(uint status, Release release, object userData)
         {
             switch (status)
             {
                 case LexStatusCodes.LA_RELEASE_UPDATE_AVAILABLE:
-                    Console.WriteLine("An update is available for the app.");
+                    Console.WriteLine("A new update is available for the app!");
+                    Console.WriteLine("Release Notes: "+ release.Notes);
                     break;
-                case LexStatusCodes.LA_RELEASE_NO_UPDATE_AVAILABLE:
-                    // Current version is already latest.
+                case LexStatusCodes.LA_RELEASE_UPDATE_AVAILABLE_NOT_ALLOWED:
+                    Console.WriteLine("A new update is available for the app but it's not allowed!");
+                    Console.WriteLine("Release: "+ release.Notes);
+                    break;
+                case LexStatusCodes.LA_RELEASE_UPDATE_NOT_AVAILABLE:
+                    Console.WriteLine("Current version is already latest!");
                     break;
                 default:
-                    Console.WriteLine("Release status code: " + status.ToString());
+                    Console.WriteLine("Error code: " + status.ToString());
                     break;
             }
         }
