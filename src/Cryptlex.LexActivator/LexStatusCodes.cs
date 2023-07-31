@@ -428,7 +428,7 @@ namespace Cryptlex
         /*
             CODE: LA_E_USER_NOT_AUTHENTICATED
 
-            MESSAGE: Permission denied.
+            MESSAGE: The user is not authenticated.
         */
         public const int LA_E_USER_NOT_AUTHENTICATED = 87;
 
