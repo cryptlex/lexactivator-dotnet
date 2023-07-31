@@ -1069,7 +1069,8 @@ namespace Cryptlex
             {
                 string userLicensesJson = builder.ToString();
                 List<UserLicense> userLicenses = new List<UserLicense>();
-                if (userLicensesJson.Length >0) {
+                if (userLicensesJson != "") 
+                {
                     userLicenses = JsonConvert.DeserializeObject<List<UserLicense>>(userLicensesJson);
                     return userLicenses;
                 }
