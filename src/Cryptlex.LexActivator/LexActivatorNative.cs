@@ -224,6 +224,12 @@ namespace Cryptlex
         public static extern int GetLicenseOrganizationNameA(StringBuilder organizationName, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetUserLicensesInternal(StringBuilder userLicensesJson, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetUserLicensesInternal", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetUserLicensesInternalA(StringBuilder userLicensesJson, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseOrganizationAddressInternal(StringBuilder jsonAddress, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetLicenseOrganizationAddressInternal", CallingConvention = CallingConvention.Cdecl)]
@@ -291,6 +297,12 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "CheckForReleaseUpdate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int CheckForReleaseUpdateA(string platform, string version, string channel, LexActivator.CallbackType callback);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int AuthenticateUser(string email, string password);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "AuthenticateUser", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int AuthenticateUserA(string email, string password);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ActivateLicense();
@@ -396,6 +408,9 @@ namespace Cryptlex
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetLicenseUserCredential", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetLicenseUserCredential_x86(string email, string password);
 
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "AuthenticateUser", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int AuthenticateUser_x86(string email, string password);
+
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetLicenseCallback", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetLicenseCallback_x86(LexActivator.CallbackType callback);
 
@@ -491,6 +506,9 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseOrganizationAddressInternal", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseOrganizationAddressInternal_x86(StringBuilder jsonAddress, int length);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetUserLicensesInternal", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetUserLicensesInternal_x86(StringBuilder userLicensesJson, int length);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseType", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseType_x86(StringBuilder licenseType, int length);
