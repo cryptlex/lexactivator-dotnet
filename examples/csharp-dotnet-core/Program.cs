@@ -11,9 +11,6 @@ namespace Sample
             LexActivator.SetProductData("PASTE_CONTENT_OF_PRODUCT.DAT_FILE");
             LexActivator.SetProductId("PASTE_PRODUCT_ID", LexActivator.PermissionFlags.LA_USER);
             LexActivator.SetReleaseVersion("1.0.0");  // Set this to the release version of your app
-            LexActivator.SetReleaseChannel("RELEASE_CHANNEL"); // Set this to the release channel of your app
-            LexActivator.SetReleasePlatform("RELEASE_PLATFORM"); // Set this to the release platform of your app
-
         }
 
         static void Activate()
