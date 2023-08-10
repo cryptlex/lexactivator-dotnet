@@ -433,6 +433,20 @@ namespace Cryptlex
         public const int LA_E_USER_NOT_AUTHENTICATED = 87;
 
         /*
+            CODE: LA_E_TWO_FACTOR_AUTHENTICATION_CODE_MISSING
+
+            MESSAGE: The two-factor authentication code for the user authentication is missing.
+        */
+        public const int LA_E_TWO_FACTOR_AUTHENTICATION_CODE_MISSING = 88;
+
+        /*
+            CODE: LA_E_TWO_FACTOR_AUTHENTICATION_CODE_INVALID
+
+            MESSAGE: The two-factor authentication code provided by the user is invalid.
+        */
+        public const int LA_E_TWO_FACTOR_AUTHENTICATION_CODE_INVALID = 89;
+
+        /*
             CODE: LA_E_RATE_LIMIT
 
             MESSAGE: Rate limit for API has reached, try again later.
@@ -452,5 +466,13 @@ namespace Cryptlex
             MESSAGE: Client error.
         */
         public const int LA_E_CLIENT = 92;
+
+        /*
+            CODE: LA_E_LOGIN_TEMPORARILY_LOCKED
+
+            MESSAGE: The user account has been temporarily locked for 5 mins due to 5 failed attempts.
+        */
+        public const int LA_E_LOGIN_TEMPORARILY_LOCKED = 100;
+
     }
 }
