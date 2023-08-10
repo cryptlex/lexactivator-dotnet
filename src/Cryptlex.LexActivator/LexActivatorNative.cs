@@ -128,6 +128,12 @@ namespace Cryptlex
         public static extern int SetCryptlexHostA(string host);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetTwoFactorAuthenticationCode(string twoFactorAuthenticationCode);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetTwoFactorAuthenticationCode", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetTwoFactorAuthenticationCodeA(string twoFactorAuthenticationCode);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetProductMetadata(string key, StringBuilder value, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetProductMetadata", CallingConvention = CallingConvention.Cdecl)]
@@ -446,6 +452,9 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetCryptlexHost", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetCryptlexHost_x86(string host);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetTwoFactorAuthenticationCode", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetTwoFactorAuthenticationCode_x86(string twoFactorAuthenticationCode);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetProductMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetProductMetadata_x86(string key, StringBuilder value, int length);

@@ -161,6 +161,12 @@ namespace Cryptlex
                 case LexStatusCodes.LA_E_USER_NOT_AUTHENTICATED:
                     return "The user is not authenticated.";
 
+                case LexStatusCodes.LA_E_TWO_FACTOR_AUTHENTICATION_CODE_MISSING:
+                    return "The two-factor authentication code for the user authentication is missing.";
+
+                case LexStatusCodes.LA_E_TWO_FACTOR_AUTHENTICATION_CODE_INVALID:
+                    return "The two-factor authentication code provided by the user is invalid.";
+
                 case LexStatusCodes.LA_E_RATE_LIMIT:
                     return "Rate limit for API has reached, try again later.";
 
@@ -169,6 +175,9 @@ namespace Cryptlex
 
                 case LexStatusCodes.LA_E_CLIENT:
                     return "Client error.";
+
+                case LexStatusCodes.LA_E_LOGIN_TEMPORARILY_LOCKED:
+                    return "The user account has been temporarily locked for 5 mins due to 5 failed attempts.";
 
                 default:
                     return "Unknown error!";

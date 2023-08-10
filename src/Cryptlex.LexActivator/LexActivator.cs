@@ -546,6 +546,28 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Sets the two-factor authentication code for the user authentication.
+        /// 
+        /// </summary>
+        /// <param name="twoFactorAuthenticationCode">the 2FA code</param>
+        public static void SetTwoFactorAuthenticationCode(string twoFactorAuthenticationCode)
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetTwoFactorAuthenticationCode_x86(twoFactorAuthenticationCode) : LexActivatorNative.SetTwoFactorAuthenticationCode(twoFactorAuthenticationCode);
+            }
+            else
+            {
+                status = LexActivatorNative.SetTwoFactorAuthenticationCodeA(twoFactorAuthenticationCode);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
         /// Gets the product metadata as set in the dashboard.
         /// 
         /// This is available for trial as well as license activations.
