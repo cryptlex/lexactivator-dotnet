@@ -15,10 +15,10 @@
         <description>Cryptlex lets you license your software apps effortlessly. You can easily generate license keys using the REST API or Dashboard and validate the license keys in your software apps using LexActivator (Cryptlex client library).</description>
         <dependencies>
           <group targetFramework="net45">
-            <dependency id="Newtonsoft.Json" version="13.0.3" />
+            <dependency id="Newtonsoft.Json" version="12.0.3" />
           </group>
           <group targetFramework="netstandard1.1">
-            <dependency id="Newtonsoft.Json" version="13.0.3" />
+            <dependency id="Newtonsoft.Json" version="12.0.3" />
           </group>
         </dependencies>
         <copyright>Copyright (c) 2023 Cryptlex LLP </copyright>
