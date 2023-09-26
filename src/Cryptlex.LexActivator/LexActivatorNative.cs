@@ -311,6 +311,12 @@ namespace Cryptlex
         public static extern int AuthenticateUserA(string email, string password);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int AuthenticateUserWithIdToken(string idToken);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "AuthenticateUserWithIdToken", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int AuthenticateUserWithIdTokenA(string idToken);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ActivateLicense();
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
@@ -413,9 +419,6 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetLicenseUserCredential", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetLicenseUserCredential_x86(string email, string password);
-
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "AuthenticateUser", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int AuthenticateUser_x86(string email, string password);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetLicenseCallback", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetLicenseCallback_x86(LexActivator.CallbackType callback);
@@ -555,6 +558,12 @@ namespace Cryptlex
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "CheckForReleaseUpdate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int CheckForReleaseUpdate_x86(string platform, string version, string channel, LexActivator.CallbackType callback);
 
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "AuthenticateUser", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int AuthenticateUser_x86(string email, string password);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "AuthenticateUserWithIdToken", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int AuthenticateUserWithIdToken_x86(string idToken);
+        
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "ActivateLicense", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ActivateLicense_x86();
 
