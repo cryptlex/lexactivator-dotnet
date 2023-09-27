@@ -151,6 +151,8 @@ namespace Cryptlex
         /// Enables network logs.
         /// This function should be used for network testing only in case of network errors.
         /// By default logging is disabled.
+        /// This function generates the lexactivator-logs.log file in the same directory
+        /// where the application is running.
         /// </summary>
         /// <param name="enable">0 or 1 to disable or enable logging.</param>
         public static void SetDebugMode(uint enable)
@@ -1475,6 +1477,33 @@ namespace Cryptlex
                 throw new LexActivatorException(status);
             }
         }
+
+        /// <summary>
+        /// Authenticates the user via OIDC Id token.
+        /// </summary>
+        /// <param name="idToken">The id token obtained from the OIDC provider.</param>
+        /// <returns>LA_OK</returns>
+        public static int AuthenticateUserWithIdToken(string idToken)
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.AuthenticateUserWithIdToken_x86(idToken) : LexActivatorNative.AuthenticateUserWithIdToken(idToken);
+            }
+            else
+            {
+                status = LexActivatorNative.AuthenticateUserWithIdTokenA(idToken);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                return LexStatusCodes.LA_OK;
+            }
+            else
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+
         /// <summary>
         /// Activates the license by contacting the Cryptlex servers. It
         /// validates the key and returns with encrypted and digitally signed token
