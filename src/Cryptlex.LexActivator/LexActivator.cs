@@ -1127,6 +1127,29 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Gets the activation id.
+        /// </summary>
+        /// <returns>Returns the activation id.</returns>
+        public static string GetActivationId()
+        {
+            var builder = new StringBuilder(512);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetActivationId_x86(builder, builder.Capacity) : LexActivatorNative.GetActivationId(builder, builder.Capacity);
+            }
+            else
+            {
+                status = LexActivatorNative.GetActivationIdA(builder, builder.Capacity);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                return builder.ToString();
+            }
+            throw new LexActivatorException(status);
+        }
+
+        /// <summary>
         /// Gets the activation metadata.
         /// </summary>
         /// <param name="key">key to retrieve the value</param>

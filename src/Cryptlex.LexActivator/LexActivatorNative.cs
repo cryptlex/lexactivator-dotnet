@@ -248,6 +248,12 @@ namespace Cryptlex
         public static extern int GetLicenseTypeA(StringBuilder licenseType, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetActivationId(StringBuilder id, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetActivationId", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetActivationIdA(StringBuilder id, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationMetadata(string key, StringBuilder value, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
@@ -524,6 +530,9 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseType", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseType_x86(StringBuilder licenseType, int length);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationId", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetActivationId_x86(StringBuilder id, int length);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationMetadata_x86(string key, StringBuilder value, int length);
