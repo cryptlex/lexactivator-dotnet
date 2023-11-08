@@ -495,5 +495,11 @@ namespace Cryptlex
         */
         public const int LA_E_USERS_LIMIT_REACHED = 103;
 
+        /*
+            CODE: LA_E_OS_USER
+
+            MESSAGE: OS user has changed since activation and the license is user-locked.
+        */
+        public const int LA_E_OS_USER = 104;
     }
 }

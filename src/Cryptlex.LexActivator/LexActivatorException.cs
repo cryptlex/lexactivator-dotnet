@@ -188,6 +188,9 @@ namespace Cryptlex
                 case LexStatusCodes.LA_E_USERS_LIMIT_REACHED:
                     return "The allowed users for this account has reached its limit.";
 
+                case LexStatusCodes.LA_E_OS_USER:
+                    return "OS user has changed since activation and the license is user-locked.";
+
                 default:
                     return "Unknown error!";
 
