@@ -790,6 +790,60 @@ namespace Cryptlex
                     throw new LexActivatorException(status);
             }
         }
+        
+        /// <summary>
+        /// Gets the allowed deactivations of the license.
+        /// </summary>
+        /// <returns>Returns the allowed deactivations.</returns>
+        public static uint GetLicenseAllowedDeactivations()
+        {
+            uint allowedDeactivations = 0;
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseAllowedDeactivations_x86(ref allowedDeactivations) : LexActivatorNative.GetLicenseAllowedActivations(ref allowedDeactivations);
+            }
+            else
+            {
+                status =  LexActivatorNative.GetLicenseAllowedDeactivations(ref allowedDeactivations);
+            }
+            switch (status)
+            {
+                case LexStatusCodes.LA_OK:
+                    return allowedDeactivations;
+                case LexStatusCodes.LA_FAIL:
+                    return 0;
+                default:
+                    throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
+        /// Gets the total deactivations of the license.
+        /// </summary>
+        /// <returns>Returns the total deactivations.</returns>
+        public static uint GetLicenseTotalDeactivations()
+        {
+            uint totalDeactivations = 0;
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseTotalDeactivations_x86(ref totalDeactivations) : LexActivatorNative.GetLicenseTotalActivations(ref totalDeactivations);
+            }
+            else
+            {
+                status =  LexActivatorNative.GetLicenseTotalDeactivations(ref totalDeactivations);
+            }
+            switch (status)
+            {
+                case LexStatusCodes.LA_OK:
+                    return totalDeactivations;
+                case LexStatusCodes.LA_FAIL:
+                    return 0;
+                default:
+                    throw new LexActivatorException(status);
+            }
+        }
 
         /// <summary>
         /// Gets the license creation date timestamp.
