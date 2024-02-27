@@ -270,7 +270,7 @@ namespace Cryptlex
         /*
             CODE: LA_E_METADATA_VALUE_LENGTH
 
-            MESSAGE: Metadata value length is more than 256 characters.
+            MESSAGE: Metadata value length is more than 4096 characters.
         */
         public const int LA_E_METADATA_VALUE_LENGTH = 65;
 
