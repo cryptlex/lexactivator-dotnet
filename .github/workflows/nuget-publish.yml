@@ -42,7 +42,7 @@ jobs:
     runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2
-    - run: git pull origin master --ff-only
+    - run: git pull origin main --ff-only
       
     - name: Setup NuGet
       uses: nuget/setup-nuget@v1
