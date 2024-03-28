@@ -10,9 +10,15 @@ namespace Cryptlex
     {
         public enum PermissionFlags : uint
         {
+            /// This flag indicates that the application does not require admin or root permissions to run.
             LA_USER = 1,
+            /// This flag indicates that the application must be run with admin or root permissions.
             LA_SYSTEM = 2,
-            LA_IN_MEMORY = 4
+            /// This flag is specifically designed for Windows and should be used for system-wide activations.
+            LA_ALL_USERS = 3,
+            /// This flag will store activation data in memory. Thus, requires re-activation on every start of the application and should only be used in floating licenses.      
+            LA_IN_MEMORY = 4,
+            
         }
 
         public enum ReleaseFlags : uint
@@ -100,7 +106,14 @@ namespace Cryptlex
         /// or SetProductData() function.
         /// </summary>
         /// <param name="productId">the unique product id of your application as mentioned on the product page in the dashboard</param>
-        /// <param name="flags">depending upon whether your application requires admin/root permissions to run or not, this parameter can have one of the following values: LA_SYSTEM, LA_USER, LA_IN_MEMORY</param>
+        /// <param name="flags">
+        ///     depending on your application's requirements, choose one of the following values: LA_SYSTEM, LA_USER, LA_IN_MEMORY, LA_ALL_USERS.
+        ///     
+        ///     - LA_USER: This flag indicates that the application does not require admin or root permissions to run.
+        ///     - LA_SYSTEM: This flag indicates that the application must be run with admin or root permissions.
+        ///     - LA_IN_MEMORY: This flag will store activation data in memory. Thus, requires re-activation on every start of the application and should only be used in floating licenses.      
+        ///     - LA_ALL_USERS: This flag is specifically designed for Windows and should be used for system-wide activations.
+        /// </param>
         public static void SetProductId(string productId, PermissionFlags flags)
         {
             int status;
