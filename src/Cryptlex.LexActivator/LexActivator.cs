@@ -186,6 +186,32 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Enables or disables in-memory caching for LexActivator.
+        /// This function is designed to control caching behavior to suit specific application requirements.
+        /// Caching is enabled by default to enhance performance.
+        /// Disabling caching is recommended in environments where multiple processes access the same license on a
+        /// single machine and require real-time updates to the license state.
+        /// </summary>
+        /// <param name="enable">false or true to disable or enable logging.</param>
+        public static void SetCacheMode(bool enable)
+        {
+            int status;
+            uint enableFlag = enable ? (uint)1 : (uint)0;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetCacheMode_x86(enableFlag) : LexActivatorNative.SetCacheMode(enableFlag);
+            }
+            else
+            {
+                status = LexActivatorNative.SetCacheMode(enableFlag);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
         /// In case you don't want to use the LexActivator's advanced
         /// device fingerprinting algorithm, this function can be used to set a custom
         /// device fingerprint.
