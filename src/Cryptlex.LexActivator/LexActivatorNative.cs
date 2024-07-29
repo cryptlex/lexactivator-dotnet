@@ -167,10 +167,10 @@ namespace Cryptlex
         public static extern int GetLicenseMetadataA(string key, StringBuilder value, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetLicenseMeterAttribute(string name, ref uint allowedUses, ref uint totalUses, ref uint grossUses);
+        public static extern int GetLicenseMeterAttribute(string name, ref long allowedUses, ref ulong totalUses, ref ulong grossUses);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetLicenseMeterAttribute", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetLicenseMeterAttributeA(string name, ref uint allowedUses, ref uint totalUses, ref uint grossUses);
+        public static extern int GetLicenseMeterAttributeA(string name, ref long allowedUses, ref ulong totalUses, ref ulong grossUses);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseKey(StringBuilder licenseKey, int length);
@@ -179,13 +179,13 @@ namespace Cryptlex
         public static extern int GetLicenseKeyA(StringBuilder licenseKey, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetLicenseAllowedActivations(ref uint allowedActivations);
+        public static extern int GetLicenseAllowedActivations(ref long allowedActivations);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseTotalActivations(ref uint totalActivations);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetLicenseAllowedDeactivations(ref uint allowedDeactivations);
+        public static extern int GetLicenseAllowedDeactivations(ref long allowedDeactivations);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseTotalDeactivations(ref uint totalDeactivations);
@@ -493,19 +493,19 @@ namespace Cryptlex
         public static extern int GetLicenseMetadata_x86(string key, StringBuilder value, int length);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseMeterAttribute", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetLicenseMeterAttribute_x86(string name, ref uint allowedUses, ref uint totalUses, ref uint grossUses);
+        public static extern int GetLicenseMeterAttribute_x86(string name, ref long allowedUses, ref ulong totalUses, ref ulong grossUses);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseKey", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseKey_x86(StringBuilder licenseKey, int length);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseAllowedActivations", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetLicenseAllowedActivations_x86(ref uint allowedActivations);
+        public static extern int GetLicenseAllowedActivations_x86(ref long allowedActivations);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseTotalActivations", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseTotalActivations_x86(ref uint totalActivations);
         
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseAllowedDeactivations", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetLicenseAllowedDeactivations_x86(ref uint allowedDeactivations);
+        public static extern int GetLicenseAllowedDeactivations_x86(ref long allowedDeactivations);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseTotalDeactivations", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseTotalDeactivations_x86(ref uint totalDeactivations);

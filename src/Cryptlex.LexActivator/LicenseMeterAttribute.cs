@@ -9,13 +9,13 @@ namespace Cryptlex
 
         public string Name;
 
-        public uint AllowedUses;
+        public long AllowedUses; // make sure to add doc here for -1
 
-        public uint TotalUses;
+        public ulong TotalUses;
 
-        public uint GrossUses;
+        public ulong GrossUses;
 
-        public LicenseMeterAttribute(string name, uint allowedUses, uint totalUses, uint grossUses)
+        public LicenseMeterAttribute(string name, long allowedUses, ulong totalUses, ulong grossUses)
         {
             this.Name = name;
             this.AllowedUses = allowedUses;
