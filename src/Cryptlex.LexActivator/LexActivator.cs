@@ -329,8 +329,9 @@ namespace Cryptlex
         /// The activation lease duration is honoured when the allow client
         /// lease duration property is enabled.
         /// </summary>
-        /// <param name="leaseDuration"></param>
-        public static void SetActivationLeaseDuration(uint leaseDuration)
+        /// <param name="leaseDuration">value of the lease duration. 
+        /// A value of -1 indicates unlimited lease duration.</param>
+        public static void SetActivationLeaseDuration(long leaseDuration)
         {
             int status;
             if (LexActivatorNative.IsWindows())
