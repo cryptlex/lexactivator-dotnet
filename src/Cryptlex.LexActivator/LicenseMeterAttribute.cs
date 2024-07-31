@@ -7,12 +7,24 @@ namespace Cryptlex
     public class LicenseMeterAttribute
     {
 
+        /// <summary>
+        /// The name of the meter attribute.
+        /// </summary>
         public string Name;
 
-        public long AllowedUses; // make sure to add doc here for -1
+        /// <summary>
+        /// The allowed uses of the meter attribute. A value of -1 indicates unlimited allowed uses.
+        /// </summary>
+        public long AllowedUses;
 
+        /// <summary>
+        /// The total uses of the meter attribute.
+        /// </summary>
         public ulong TotalUses;
 
+        /// <summary>
+        /// The gross uses of the meter attribute.
+        /// </summary>
         public ulong GrossUses;
 
         public LicenseMeterAttribute(string name, long allowedUses, ulong totalUses, ulong grossUses)
