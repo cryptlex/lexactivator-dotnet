@@ -329,8 +329,9 @@ namespace Cryptlex
         /// The activation lease duration is honoured when the allow client
         /// lease duration property is enabled.
         /// </summary>
-        /// <param name="leaseDuration"></param>
-        public static void SetActivationLeaseDuration(uint leaseDuration)
+        /// <param name="leaseDuration">value of the lease duration. 
+        /// A value of -1 indicates unlimited lease duration.</param>
+        public static void SetActivationLeaseDuration(long leaseDuration)
         {
             int status;
             if (LexActivatorNative.IsWindows())
@@ -736,7 +737,8 @@ namespace Cryptlex
         /// <returns>Returns the values of meter attribute allowed, total and gross uses.</returns>
         public static LicenseMeterAttribute GetLicenseMeterAttribute(string name)
         {
-            uint allowedUses = 0, totalUses = 0, grossUses = 0;
+            long allowedUses = 0;
+            ulong totalUses = 0, grossUses = 0;
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -780,9 +782,9 @@ namespace Cryptlex
         /// Gets the allowed activations of the license.
         /// </summary>
         /// <returns>Returns the allowed activations.</returns>
-        public static uint GetLicenseAllowedActivations()
+        public static long GetLicenseAllowedActivations()
         {
-            uint allowedActivations = 0;
+            long allowedActivations = 0;
             int status;
             if (LexActivatorNative.IsWindows())
             {
@@ -834,9 +836,9 @@ namespace Cryptlex
         /// Gets the allowed deactivations of the license.
         /// </summary>
         /// <returns>Returns the allowed deactivations.</returns>
-        public static uint GetLicenseAllowedDeactivations()
+        public static long GetLicenseAllowedDeactivations()
         {
-            uint allowedDeactivations = 0;
+            long allowedDeactivations = 0;
             int status;
             if (LexActivatorNative.IsWindows())
             {
