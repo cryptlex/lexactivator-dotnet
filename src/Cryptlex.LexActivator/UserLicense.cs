@@ -12,7 +12,7 @@ namespace Cryptlex
         public long AllowedActivations;
 
         /// <summary>
-        /// The allowed deactivations of the license. A value of -1 indicates unlimited number of activations.
+        /// The allowed deactivations of the license. A value of -1 indicates unlimited number of deactivations.
         /// </summary>
         public long AllowedDeactivations;
 
