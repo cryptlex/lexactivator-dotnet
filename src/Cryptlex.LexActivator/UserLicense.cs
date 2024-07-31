@@ -6,12 +6,24 @@ namespace Cryptlex
 {
     public class UserLicense
     {
-        public int AllowedActivations;
+        /// <summary>
+        /// The allowed activations of the license. A value of -1 indicates unlimited number of activations.
+        /// </summary>
+        public long AllowedActivations;
 
-        public int AllowedDeactivations;
+        /// <summary>
+        /// The allowed deactivations of the license. A value of -1 indicates unlimited number of activations.
+        /// </summary>
+        public long AllowedDeactivations;
 
+        /// <summary>
+        /// The license key.
+        /// </summary>
         public string Key;
 
+        /// <summary>
+        /// The license type (node-locked or hosted-floating).
+        /// </summary>
         public string Type;
     }
 }
