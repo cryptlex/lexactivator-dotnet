@@ -25,5 +25,16 @@ namespace Cryptlex
         /// The license type (node-locked or hosted-floating).
         /// </summary>
         public string Type;
+        
+        /// <summary>
+        /// The license metadata.
+        /// </summary>
+        public List<Metadata> Metadata = new List<Metadata>();
+    }
+        
+    public class Metadata
+    {
+        public string Key;
+        public string Value;
     }
 }
