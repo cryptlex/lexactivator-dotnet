@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Cryptlex;
 
 namespace Sample
@@ -8,14 +9,14 @@ namespace Sample
         static void Init()
         {
             // LexActivator.SetProductFile ("ABSOLUTE_PATH_OF_PRODUCT.DAT_FILE");
-            LexActivator.SetProductData("PASTE_CONTENT_OF_PRODUCT.DAT_FILE");
-            LexActivator.SetProductId("PASTE_PRODUCT_ID", LexActivator.PermissionFlags.LA_USER);
+            LexActivator.SetProductData("OTRGRkZERUUxQTI3N0MxRjRDOUJENTA5NzFGNDdDOTA=.Bs0xRO7X8Vyvlb1xwwcZrnjDRSkJCQLZRoUbywxpZ6AF9iAl4dJKmsDZv1bxQdPA3RzbwMzf2B6b4NdPCEb4JXYxgVuyFluYXFyrTeleGgXlEko3UyzDLz/nnRgKzhhf+MnFfDzumXjtVfzLqHYKciIQeojarD//Ez6g+mDT15Qmh33mPrRBZKHJJPTB4VetX1R0ioFpvKPLnQPgA9strh5X7HUf0K4u6UEZlI4rY6SIAnnCi5+Eqhs4jWS54sdB0YVYqYBU0ZVY63gTUh1bF69LI1YnaWJqadbRX2DR6JqivSM2YvEd85AM49Ayn8jnrx/ZlmRw6qmOOOdcEdGtnqB3ZNgyqET2yRanzpvMkGmjh09TomOLfxGkrFVJS69bY3IhNwoZ0lsgQfJ/dfDdBdEK44ypVwnwEekUA+RrS1R8FzHrP8x7YU2b4DQ/vnGHmS/yW2VBoWDdQ3bXZTWEckpLfPeepsSwiFrxBnGIAiVwUwRGXibJ5wnvOPwus09Vruo2HGEDC22yh1kH/csk4WC3nohOcKOX1FbDTbYd9E9XECP+JHGthlirHpnvtYMvqlzeVC3tvVIQx1XcebJn0RHHxMrLXkWmazU+LnbR4TwuSKXmzZ/D/Vnb0G+ljdCTrK4XQ1IZ9rLQH3r6w3YNCU2nhshdk8YadbcVnufumJkwAPxAKxr3e/Lx3cozKeisVAkiQApdhIUL/rORj4UddVlC7tCGj84pvJRHhqINgT1G+u6tRJ9d0LQs1iEZ9hIp0l58278tRsKtdt3R3+x9mQRyWgyEP6oYTV09kWqxt3Vo1E/wxez1KiK4WtFj1Fox");
+            LexActivator.SetProductId("de5c962f-75b0-417d-a72a-5b474b8cb4bb", LexActivator.PermissionFlags.LA_USER);
             LexActivator.SetReleaseVersion("1.0.0");  // Set this to the release version of your app
         }
 
         static void Activate()
         {
-            LexActivator.SetLicenseKey("PASTE_LICENSE_KEY");
+            LexActivator.SetLicenseKey("064DA0-12BB7F-4EA489-F13C48-742ACE-FFFB2C");
             LexActivator.SetActivationMetadata("key1", "value1");
             int status = LexActivator.ActivateLicense();
             if (LexStatusCodes.LA_OK == status || LexStatusCodes.LA_EXPIRED == status || LexStatusCodes.LA_SUSPENDED == status)
@@ -27,13 +28,54 @@ namespace Sample
                 Console.WriteLine("License activation failed: ", status);
             }
         }
+        static void DisplayUserLicenses(List<UserLicense> licenses)
+{
+    foreach (var license in licenses)
+    {
+        Console.WriteLine($"Key: {license.Key}");
+        Console.WriteLine($"Allowed Activations: {license.AllowedActivations}");
+        Console.WriteLine($"Allowed Deactivations: {license.AllowedDeactivations}");
+        Console.WriteLine($"Type: {license.Type}");
+
+        // Display metadata in the desired format
+        Console.Write("Metadata: [");
+        for (int i = 0; i < license.Metadata.Count; i++)
+        {
+            var metadata = license.Metadata[i];
+            Console.Write($"{{ key: \"{metadata.Key}\", length : \"{metadata.length}\", value: \"{metadata.Value}\" }}");
+
+            // Add a comma between metadata items, but not after the last item
+            if (i < license.Metadata.Count - 1)
+            {
+                Console.Write(", ");
+            }
+        }
+        Console.WriteLine("]"); // Close the array-like output
+
+        Console.WriteLine(); // Add a blank line between licenses for readability
+    }
+}
+
         static void Main(string[] args)
         {
             try
             {
                 Init();
                 LexActivator.SetLicenseCallback(LicenseCallback);
-                int status = LexActivator.IsLicenseGenuine();
+                int status = LexActivator.AuthenticateUser("muneebkq05+01@gmail.com","qwerty@123");
+                if (LexStatusCodes.LA_OK == status)
+                {
+                    Console.WriteLine("user autheticated successfully");
+                    List<UserLicense> userLicenses = LexActivator.GetUserLicenses();
+                    DisplayUserLicenses(userLicenses);
+                    
+                }
+                else{
+                    Console.WriteLine("user not autheticated successfully");
+                }
+                List<UserLicense> userlicenses = LexActivator.GetUserLicenses();
+                    Console.WriteLine("user autheticated successfully: ",userlicenses);
+                status = LexActivator.IsLicenseGenuine();
                 if (LexStatusCodes.LA_OK == status)
                 {
                     Console.WriteLine("License is genuinely activated!");
@@ -58,38 +100,7 @@ namespace Sample
                 }
                 else
                 {
-                    int trialStatus;
-                    trialStatus = LexActivator.IsTrialGenuine();
-                    if (LexStatusCodes.LA_OK == trialStatus)
-                    {
-                        uint trialExpiryDate = LexActivator.GetTrialExpiryDate();
-                        int daysLeft = (int)(trialExpiryDate - DateTimeOffset.Now.ToUnixTimeSeconds()) / 86400;
-                        Console.WriteLine("Trial days left: " + daysLeft);
-                    }
-                    else if (LexStatusCodes.LA_TRIAL_EXPIRED == trialStatus)
-                    {
-                        Console.WriteLine("Trial has expired!");
-
-                        // Time to buy the product key and activate the app
-                        Activate();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Either trial has not started or has been tampered!");
-                        // Activating the trial
-                        trialStatus = LexActivator.ActivateTrial(); // Ideally on a button click inside a dialog
-                        if (LexStatusCodes.LA_OK == trialStatus)
-                        {
-                            uint trialExpiryDate = LexActivator.GetTrialExpiryDate();
-                            int daysLeft = (int)(trialExpiryDate - DateTimeOffset.Now.ToUnixTimeSeconds()) / 86400;
-                            Console.WriteLine("Trial days left: " + daysLeft);
-                        }
-                        else
-                        {
-                            // Trial was tampered or has expired
-                            Console.WriteLine("Trial activation failed: " + trialStatus);
-                        }
-                    }
+                    Activate();
                 }
 
             }
