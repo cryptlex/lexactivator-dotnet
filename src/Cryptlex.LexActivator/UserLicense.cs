@@ -27,7 +27,7 @@ namespace Cryptlex
         public string Type;
         
         /// <summary>
-        /// The license metadata.
+        /// License metadata with view_permission set to "user".
         /// </summary>
         public List<Metadata> Metadata = new List<Metadata>();
     }
