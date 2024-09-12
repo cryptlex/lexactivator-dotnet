@@ -31,10 +31,4 @@ namespace Cryptlex
         /// </summary>
         public List<Metadata> Metadata = new List<Metadata>();
     }
-        
-    public class Metadata
-    {
-        public string Key;
-        public string Value;
-    }
 }
