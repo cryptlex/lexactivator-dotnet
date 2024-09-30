@@ -842,7 +842,7 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseAllowedDeactivations_x86(ref allowedDeactivations) : LexActivatorNative.GetLicenseAllowedActivations(ref allowedDeactivations);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseAllowedDeactivations_x86(ref allowedDeactivations) : LexActivatorNative.GetLicenseAllowedDeactivations(ref allowedDeactivations);
             }
             else
             {
@@ -869,7 +869,7 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseTotalDeactivations_x86(ref totalDeactivations) : LexActivatorNative.GetLicenseTotalActivations(ref totalDeactivations);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseTotalDeactivations_x86(ref totalDeactivations) : LexActivatorNative.GetLicenseTotalDeactivations(ref totalDeactivations);
             }
             else
             {
