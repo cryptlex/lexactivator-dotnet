@@ -31,6 +31,7 @@
         <file src="build\Cryptlex.LexActivator.targets" target="build\Cryptlex.LexActivator.targets" />
         <file src="runtimes\win-x86\native\*.dll" target="runtimes\win-x86\native" />
         <file src="runtimes\win-x64\native\*.dll" target="runtimes\win-x64\native" />
+        <file src="runtimes\win-arm64\native\*.dll" target="runtimes\win-arm64\native" />
         <file src="runtimes\osx-x64\native\*.dylib" target="runtimes\osx-x64\native" />
         <file src="runtimes\osx-arm64\native\*.dylib" target="runtimes\osx-arm64\native" />
         <file src="runtimes\linux-x64\native\*.so" target="runtimes\linux-x64\native" />
