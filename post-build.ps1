@@ -10,6 +10,7 @@ $output = "$PSScriptRoot\tmp\LexActivator-Win.zip"
 Expand-Archive "$PSScriptRoot\tmp\LexActivator-Win.zip" -DestinationPath "$PSScriptRoot\tmp\LexActivator-Win"
 Copy-Item -Path "$PSScriptRoot\tmp\LexActivator-Win\libs\vc14\x64\LexActivator.dll" -Destination "$PSScriptRoot\src\Cryptlex.LexActivator\runtimes\win-x64\native\LexActivator.dll"
 Copy-Item -Path "$PSScriptRoot\tmp\LexActivator-Win\libs\vc14\x86\LexActivator.dll" -Destination "$PSScriptRoot\src\Cryptlex.LexActivator\runtimes\win-x86\native\LexActivator32.dll"
+Copy-Item -Path "$PSScriptRoot\tmp\LexActivator-Win\libs\vc17\arm64\LexActivator.dll" -Destination "$PSScriptRoot\src\Cryptlex.LexActivator\runtimes\win-arm64\native\LexActivator.dll"
 
 $url = "$base_url/$lexactivator_version/LexActivator-Linux.zip"
 Write-Host $url
