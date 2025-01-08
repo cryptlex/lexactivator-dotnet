@@ -959,7 +959,7 @@ namespace Cryptlex
             switch (status)
             {
                 case LexStatusCodes.LA_OK:
-                    return activationDate;
+                    return activationCreationDate;
                 case LexStatusCodes.LA_FAIL:
                     return 0;
                 default:
