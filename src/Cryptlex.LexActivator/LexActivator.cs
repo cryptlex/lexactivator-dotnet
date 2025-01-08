@@ -939,6 +939,33 @@ namespace Cryptlex
                     throw new LexActivatorException(status);
             }
         }
+        
+        /// <summary>
+        /// Gets the activation creation date timestamp for the current activation.
+        /// </summary>
+        /// <returns>Returns the timestamp.</returns>
+        public static uint GetActivationCreationDate()
+        {
+            uint activationCreationDate = 0;
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetActivationCreationDate_x86(ref activationCreationDate) : LexActivatorNative.GetActivationCreationDate(ref activationCreationDate);
+            }
+            else
+            {
+                status =  LexActivatorNative.GetActivationCreationDate(ref activationCreationDate);
+            }
+            switch (status)
+            {
+                case LexStatusCodes.LA_OK:
+                    return activationCreationDate;
+                case LexStatusCodes.LA_FAIL:
+                    return 0;
+                default:
+                    throw new LexActivatorException(status);
+            }
+        }
 
 
         /// <summary>
