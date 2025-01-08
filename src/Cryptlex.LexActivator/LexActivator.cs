@@ -946,11 +946,11 @@ namespace Cryptlex
         /// <returns>Returns the timestamp.</returns>
         public static uint GetActivationCreationDate()
         {
-            uint activationDate = 0;
+            uint activationCreationDate = 0;
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.GetActivationCreationDate_x86(ref activationDate) : LexActivatorNative.GetActivationCreationDate(ref activationDate);
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetActivationCreationDate_x86(ref activationCreationDate) : LexActivatorNative.GetActivationCreationDate(ref activationCreationDate);
             }
             else
             {

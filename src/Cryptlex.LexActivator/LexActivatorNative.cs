@@ -197,7 +197,7 @@ namespace Cryptlex
         public static extern int GetLicenseActivationDate(ref uint activationDate);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetActivationCreationDate(ref uint activationDate);
+        public static extern int GetActivationCreationDate(ref uint activationCreationDate);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseExpiryDate(ref uint expiryDate);
