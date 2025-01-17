@@ -47,6 +47,41 @@ namespace Cryptlex
 
         static readonly List<InternalReleaseCallbackType> internalReleaseCallbackList = new List<InternalReleaseCallbackType>();
 
+        private static T InvokePlatformSpecificFunction<T>(Func<T> windowsX86Function, Func<T> windowsX64Function, Func<T> windowsArm64Function, Func<T> nonWindowsFunction)
+        {
+            if (LexActivatorNative.IsWindows())
+            {
+#if NETFRAMEWORK
+                // .NET Framework: Use IntPtr.Size for 32-bit or 64-bit detection
+                return IntPtr.Size == 4
+                    ? windowsX86Function()      // 32-bit Windows
+                    : windowsX64Function();     // 64-bit Windows
+#else
+                // .NET Core/.NET Standard: Use explicit OS architecture detection
+                if (RuntimeInformation.OSArchitecture == Architecture.X86)
+                {
+                    return windowsX86Function();
+                }
+                else if (RuntimeInformation.OSArchitecture == Architecture.X64)
+                {
+                    return windowsX64Function();
+                }
+                else if (RuntimeInformation.OSArchitecture == Architecture.Arm64)
+                {
+                    return windowsArm64Function();
+                }
+                else
+                {
+                    throw new PlatformNotSupportedException("Unsupported Windows architecture.");
+                }
+#endif
+            }
+            else
+            {
+                return nonWindowsFunction();    // Linux/macOS
+            }
+        }
+
         /// <summary>
         /// Sets the absolute path of the Product.dat file.
         /// 
@@ -116,16 +151,14 @@ namespace Cryptlex
         /// </param>
         public static void SetProductId(string productId, PermissionFlags flags)
         {
-            int status;
-            if (LexActivatorNative.IsWindows())
-            {
-                status = IntPtr.Size == 4 ? LexActivatorNative.SetProductId_x86(productId, flags) : LexActivatorNative.SetProductId(productId, flags);
-            }
-            else
-            {
-                status = LexActivatorNative.SetProductIdA(productId, flags);
-            }
-            if (LexStatusCodes.LA_OK != status)
+            int status = InvokePlatformSpecificFunction(
+                () => LexActivatorNative.SetProductId_x86(productId, flags),   // Windows x86
+                () => LexActivatorNative.SetProductId(productId, flags),       // Windows x64
+                () => LexActivatorNative.SetProductId_arm64(productId, flags), // Windows ARM64
+                () => LexActivatorNative.SetProductIdA(productId, flags)       // Non-Windows
+            );
+
+            if (status != LexStatusCodes.LA_OK)
             {
                 throw new LexActivatorException(status);
             }
@@ -135,10 +168,10 @@ namespace Cryptlex
         /// In case you want to change the default directory used by LexActivator to
         /// store the activation data on Linux and macOS, this function can be used to
         /// set a different directory.
-        
+
         /// If you decide to use this function, then it must be called on every start of
         /// your program before calling SetProductFile() or SetProductData() function.
-        
+
         /// Please ensure that the directory exists and your app has read and write
         /// permissions in the directory.
         /// </summary>
@@ -310,12 +343,12 @@ namespace Cryptlex
             int status;
             if (LexActivatorNative.IsWindows())
             {
-                
+
                 status = IntPtr.Size == 4 ? LexActivatorNative.SetLicenseCallback_x86(wrappedCallback) : LexActivatorNative.SetLicenseCallback(wrappedCallback);
             }
             else
             {
-                status =  LexActivatorNative.SetLicenseCallback(wrappedCallback);
+                status = LexActivatorNative.SetLicenseCallback(wrappedCallback);
             }
             if (LexStatusCodes.LA_OK != status)
             {
@@ -465,7 +498,7 @@ namespace Cryptlex
             {
                 throw new LexActivatorException(status);
             }
-        
+
         }
 
         /// <summary>
@@ -792,7 +825,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.GetLicenseAllowedActivations(ref allowedActivations);
+                status = LexActivatorNative.GetLicenseAllowedActivations(ref allowedActivations);
             }
             switch (status)
             {
@@ -819,7 +852,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.GetLicenseTotalActivations(ref totalActivations);
+                status = LexActivatorNative.GetLicenseTotalActivations(ref totalActivations);
             }
             switch (status)
             {
@@ -831,7 +864,7 @@ namespace Cryptlex
                     throw new LexActivatorException(status);
             }
         }
-        
+
         /// <summary>
         /// Gets the allowed deactivations of the license.
         /// </summary>
@@ -846,7 +879,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.GetLicenseAllowedDeactivations(ref allowedDeactivations);
+                status = LexActivatorNative.GetLicenseAllowedDeactivations(ref allowedDeactivations);
             }
             switch (status)
             {
@@ -873,7 +906,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.GetLicenseTotalDeactivations(ref totalDeactivations);
+                status = LexActivatorNative.GetLicenseTotalDeactivations(ref totalDeactivations);
             }
             switch (status)
             {
@@ -900,7 +933,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.GetLicenseCreationDate(ref creationDate);
+                status = LexActivatorNative.GetLicenseCreationDate(ref creationDate);
             }
             switch (status)
             {
@@ -927,7 +960,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.GetLicenseActivationDate(ref activationDate);
+                status = LexActivatorNative.GetLicenseActivationDate(ref activationDate);
             }
             switch (status)
             {
@@ -939,7 +972,7 @@ namespace Cryptlex
                     throw new LexActivatorException(status);
             }
         }
-        
+
         /// <summary>
         /// Gets the activation creation date timestamp for the current activation.
         /// </summary>
@@ -954,7 +987,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.GetActivationCreationDate(ref activationCreationDate);
+                status = LexActivatorNative.GetActivationCreationDate(ref activationCreationDate);
             }
             switch (status)
             {
@@ -982,7 +1015,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.GetLicenseExpiryDate(ref expiryDate);
+                status = LexActivatorNative.GetLicenseExpiryDate(ref expiryDate);
             }
             switch (status)
             {
@@ -1009,7 +1042,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.GetLicenseMaintenanceExpiryDate(ref maintenanceExpiryDate);
+                status = LexActivatorNative.GetLicenseMaintenanceExpiryDate(ref maintenanceExpiryDate);
             }
             switch (status)
             {
@@ -1184,7 +1217,7 @@ namespace Cryptlex
                 {
                     OrganizationAddress organizationAddress = null;
                     organizationAddress = JsonConvert.DeserializeObject<OrganizationAddress>(jsonAddress);
-                    return organizationAddress; 
+                    return organizationAddress;
                 }
                 return null;
             }
@@ -1215,7 +1248,7 @@ namespace Cryptlex
             {
                 string userLicensesJson = builder.ToString();
                 List<UserLicense> userLicenses = new List<UserLicense>();
-                if (!string.IsNullOrEmpty(userLicensesJson)) 
+                if (!string.IsNullOrEmpty(userLicensesJson))
                 {
                     userLicenses = JsonConvert.DeserializeObject<List<UserLicense>>(userLicensesJson);
                     return userLicenses;
@@ -1315,7 +1348,7 @@ namespace Cryptlex
             }
             if (LexStatusCodes.LA_OK == status)
             {
-                 return new ActivationMode(initialModeBuilder.ToString(), currentModeBuilder.ToString());
+                return new ActivationMode(initialModeBuilder.ToString(), currentModeBuilder.ToString());
             }
             throw new LexActivatorException(status);
         }
@@ -1358,7 +1391,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.GetServerSyncGracePeriodExpiryDate(ref expiryDate);
+                status = LexActivatorNative.GetServerSyncGracePeriodExpiryDate(ref expiryDate);
             }
             switch (status)
             {
@@ -1409,7 +1442,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.GetTrialExpiryDate(ref trialExpiryDate);
+                status = LexActivatorNative.GetTrialExpiryDate(ref trialExpiryDate);
             }
             switch (status)
             {
@@ -1459,7 +1492,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.GetLocalTrialExpiryDate(ref trialExpiryDate);
+                status = LexActivatorNative.GetLocalTrialExpiryDate(ref trialExpiryDate);
             }
             switch (status)
             {
@@ -1558,8 +1591,8 @@ namespace Cryptlex
                 throw new LexActivatorException(status);
             }
         }
-        
-        
+
+
         /// <summary>
         /// Checks whether a new release is available for the product.
         /// 
@@ -1667,7 +1700,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.ActivateLicense();
+                status = LexActivatorNative.ActivateLicense();
             }
             switch (status)
             {
@@ -1754,7 +1787,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.DeactivateLicense();
+                status = LexActivatorNative.DeactivateLicense();
             }
             switch (status)
             {
@@ -1821,7 +1854,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.IsLicenseGenuine();
+                status = LexActivatorNative.IsLicenseGenuine();
             }
             switch (status)
             {
@@ -1859,7 +1892,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.IsLicenseValid();
+                status = LexActivatorNative.IsLicenseValid();
             }
             switch (status)
             {
@@ -1895,7 +1928,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.ActivateTrial();
+                status = LexActivatorNative.ActivateTrial();
             }
             switch (status)
             {
@@ -1978,7 +2011,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.IsTrialGenuine();
+                status = LexActivatorNative.IsTrialGenuine();
             }
             switch (status)
             {
@@ -2010,7 +2043,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.ActivateLocalTrial(trialLength);
+                status = LexActivatorNative.ActivateLocalTrial(trialLength);
             }
             switch (status)
             {
@@ -2043,7 +2076,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.IsLocalTrialGenuine();
+                status = LexActivatorNative.IsLocalTrialGenuine();
             }
             switch (status)
             {
@@ -2074,7 +2107,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.ExtendLocalTrial(trialExtensionLength);
+                status = LexActivatorNative.ExtendLocalTrial(trialExtensionLength);
             }
             switch (status)
             {
@@ -2168,7 +2201,7 @@ namespace Cryptlex
             }
             else
             {
-                status =  LexActivatorNative.Reset();
+                status = LexActivatorNative.Reset();
             }
             if (LexStatusCodes.LA_OK != status)
             {

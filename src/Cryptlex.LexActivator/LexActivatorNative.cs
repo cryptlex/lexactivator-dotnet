@@ -7,7 +7,8 @@ namespace Cryptlex
     static class LexActivatorNative
     {
         private const string DLL_FILE_NAME = "LexActivator";
-        private const string DLL_FILE_NAME_X86 = "LexActivator32";
+        private const string DLL_FILE_NAME_WIN_X86 = "LexActivator-x86";
+        private const string DLL_FILE_NAME_WIN_ARM64 = "LexActivator-arm64";
 
         public static bool IsWindows()
         {
@@ -18,7 +19,7 @@ namespace Cryptlex
 #endif
         }
 
-
+        #region Windows x64 and Non-Windows platforms
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetProductFile(string filePath);
 
@@ -75,7 +76,7 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetActivationMetadata(string key, string value);
-        
+
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetActivationMetadataA(string key, string value);
 
@@ -411,244 +412,251 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int Reset();
+        #endregion
 
-
-
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetProductFile", CallingConvention = CallingConvention.Cdecl)]
+        #region Windows x86 and ARM64 platforms
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetProductFile", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetProductFile_x86(string filePath);
+        [DllImport(DLL_FILE_NAME_WIN_ARM64, CharSet = CharSet.Unicode, EntryPoint = "SetProductFile", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetProductFile_arm64(string filePath);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetProductData", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetProductData", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetProductData_x86(string productData);
+        [DllImport(DLL_FILE_NAME_WIN_ARM64, CharSet = CharSet.Unicode, EntryPoint = "SetProductData", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetProductData_arm64(string productData);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetProductId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetProductId", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetProductId_x86(string productId, LexActivator.PermissionFlags flags);
+        [DllImport(DLL_FILE_NAME_WIN_ARM64, CharSet = CharSet.Unicode, EntryPoint = "SetProductId", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetProductId_arm64(string productId, LexActivator.PermissionFlags flags);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetDataDirectory", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetDataDirectory", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetDataDirectory_x86(string directoryPath);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetDebugMode", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetDebugMode", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetDebugMode_x86(uint enable);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetCacheMode", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetCacheMode", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetCacheMode_x86(uint enable);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetCustomDeviceFingerprint", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetCustomDeviceFingerprint", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetCustomDeviceFingerprint_x86(string fingerprint);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetLicenseKey", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetLicenseKey", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetLicenseKey_x86(string licenseKey);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetLicenseUserCredential", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetLicenseUserCredential", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetLicenseUserCredential_x86(string email, string password);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetLicenseCallback", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetLicenseCallback", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetLicenseCallback_x86(LexActivator.CallbackType callback);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetActivationLeaseDuration", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetActivationLeaseDuration", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetActivationLeaseDuration_x86(long leaseDuration);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetActivationMetadata_x86(string key, string value);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetTrialActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetTrialActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetTrialActivationMetadata_x86(string key, string value);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetAppVersion", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetAppVersion", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetAppVersion_x86(string appVersion);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetReleaseVersion", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetReleaseVersion", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetReleaseVersion_x86(string releaseVersion);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetReleasePublishedDate", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetReleasePublishedDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetReleasePublishedDate_x86(uint releasePublishedDate);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetReleasePlatform", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetReleasePlatform", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetReleasePlatform_x86(string releasePlatform);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetReleaseChannel", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetReleaseChannel", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetReleaseChannel_x86(string releaseChannel);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetOfflineActivationRequestMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetOfflineActivationRequestMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetOfflineActivationRequestMeterAttributeUses_x86(string name, uint uses);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetNetworkProxy", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetNetworkProxy", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetNetworkProxy_x86(string proxy);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetCryptlexHost", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetCryptlexHost", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetCryptlexHost_x86(string host);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetTwoFactorAuthenticationCode", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "SetTwoFactorAuthenticationCode", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetTwoFactorAuthenticationCode_x86(string twoFactorAuthenticationCode);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetProductMetadata", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetProductMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetProductMetadata_x86(string key, StringBuilder value, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetProductVersionName", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetProductVersionName", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetProductVersionName_x86(StringBuilder name, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetProductVersionDisplayName", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetProductVersionDisplayName", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetProductVersionDisplayName_x86(StringBuilder displayName, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetProductVersionFeatureFlag", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetProductVersionFeatureFlag", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetProductVersionFeatureFlag_x86(string name, ref uint enabled, StringBuilder data, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseMetadata", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseMetadata_x86(string key, StringBuilder value, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseMeterAttribute", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseMeterAttribute", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseMeterAttribute_x86(string name, ref long allowedUses, ref ulong totalUses, ref ulong grossUses);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseKey", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseKey", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseKey_x86(StringBuilder licenseKey, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseAllowedActivations", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseAllowedActivations", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseAllowedActivations_x86(ref long allowedActivations);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseTotalActivations", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseTotalActivations", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseTotalActivations_x86(ref uint totalActivations);
-        
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseAllowedDeactivations", CallingConvention = CallingConvention.Cdecl)]
+
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseAllowedDeactivations", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseAllowedDeactivations_x86(ref long allowedDeactivations);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseTotalDeactivations", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseTotalDeactivations", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseTotalDeactivations_x86(ref uint totalDeactivations);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseCreationDate", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseCreationDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseCreationDate_x86(ref uint creationDate);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseActivationDate", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseActivationDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseActivationDate_x86(ref uint activationDate);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationCreationDate", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationCreationDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationCreationDate_x86(ref uint activationCreationDate);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseExpiryDate", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseExpiryDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseExpiryDate_x86(ref uint expiryDate);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseMaintenanceExpiryDate", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseMaintenanceExpiryDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseMaintenanceExpiryDate_x86(ref uint maintenanceExpiryDate);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseMaxAllowedReleaseVersion", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseMaxAllowedReleaseVersion", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseMaxAllowedReleaseVersion_x86(StringBuilder maxAllowedReleaseVersion, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseUserEmail", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseUserEmail", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseUserEmail_x86(StringBuilder email, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseUserName", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseUserName", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseUserName_x86(StringBuilder name, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseUserCompany", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseUserCompany", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseUserCompany_x86(StringBuilder company, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseUserMetadata", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseUserMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseUserMetadata_x86(string key, StringBuilder value, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseOrganizationName", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseOrganizationName", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseOrganizationName_x86(StringBuilder organizationName, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseOrganizationAddressInternal", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseOrganizationAddressInternal", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseOrganizationAddressInternal_x86(StringBuilder jsonAddress, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetUserLicensesInternal", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetUserLicensesInternal", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetUserLicensesInternal_x86(StringBuilder userLicensesJson, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseType", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseType", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseType_x86(StringBuilder licenseType, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationId", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationId_x86(StringBuilder id, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationMetadata_x86(string key, StringBuilder value, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationMode", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationMode", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationMode_x86(StringBuilder initialMode, int initialModeLength, StringBuilder currentMode, int currentModeLength);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationMeterAttributeUses_x86(string name, ref uint uses);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetServerSyncGracePeriodExpiryDate", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetServerSyncGracePeriodExpiryDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetServerSyncGracePeriodExpiryDate_x86(ref uint expiryDate);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetTrialActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetTrialActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetTrialActivationMetadata_x86(string key, StringBuilder value, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetTrialExpiryDate", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetTrialExpiryDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetTrialExpiryDate_x86(ref uint trialExpiryDate);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetTrialId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetTrialId", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetTrialId_x86(StringBuilder trialId, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLocalTrialExpiryDate", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLocalTrialExpiryDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLocalTrialExpiryDate_x86(ref uint trialExpiryDate);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLibraryVersion", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLibraryVersion", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLibraryVersion_x86(StringBuilder libraryVersion, int length);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "CheckReleaseUpdateInternal", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "CheckReleaseUpdateInternal", CallingConvention = CallingConvention.Cdecl)]
         public static extern int CheckReleaseUpdateInternal_x86(LexActivator.InternalReleaseCallbackType internalReleaseCallback, LexActivator.ReleaseFlags releaseFlags, IntPtr _userData);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "CheckForReleaseUpdate", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "CheckForReleaseUpdate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int CheckForReleaseUpdate_x86(string platform, string version, string channel, LexActivator.CallbackType callback);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "AuthenticateUser", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "AuthenticateUser", CallingConvention = CallingConvention.Cdecl)]
         public static extern int AuthenticateUser_x86(string email, string password);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "AuthenticateUserWithIdToken", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "AuthenticateUserWithIdToken", CallingConvention = CallingConvention.Cdecl)]
         public static extern int AuthenticateUserWithIdToken_x86(string idToken);
-        
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "ActivateLicense", CallingConvention = CallingConvention.Cdecl)]
+
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "ActivateLicense", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ActivateLicense_x86();
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "ActivateLicenseOffline", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "ActivateLicenseOffline", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ActivateLicenseOffline_x86(string filePath);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GenerateOfflineActivationRequest", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GenerateOfflineActivationRequest", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GenerateOfflineActivationRequest_x86(string filePath);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "DeactivateLicense", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "DeactivateLicense", CallingConvention = CallingConvention.Cdecl)]
         public static extern int DeactivateLicense_x86();
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GenerateOfflineDeactivationRequest", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GenerateOfflineDeactivationRequest", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GenerateOfflineDeactivationRequest_x86(string filePath);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "IsLicenseGenuine", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "IsLicenseGenuine", CallingConvention = CallingConvention.Cdecl)]
         public static extern int IsLicenseGenuine_x86();
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "IsLicenseValid", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "IsLicenseValid", CallingConvention = CallingConvention.Cdecl)]
         public static extern int IsLicenseValid_x86();
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "ActivateTrial", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "ActivateTrial", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ActivateTrial_x86();
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "ActivateTrialOffline", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "ActivateTrialOffline", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ActivateTrialOffline_x86(string filePath);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GenerateOfflineTrialActivationRequest", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "GenerateOfflineTrialActivationRequest", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GenerateOfflineTrialActivationRequest_x86(string filePath);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "IsTrialGenuine", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "IsTrialGenuine", CallingConvention = CallingConvention.Cdecl)]
         public static extern int IsTrialGenuine_x86();
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "ActivateLocalTrial", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "ActivateLocalTrial", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ActivateLocalTrial_x86(uint trialLength);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "IsLocalTrialGenuine", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "IsLocalTrialGenuine", CallingConvention = CallingConvention.Cdecl)]
         public static extern int IsLocalTrialGenuine_x86();
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "ExtendLocalTrial", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "ExtendLocalTrial", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ExtendLocalTrial_x86(uint trialExtensionLength);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "IncrementActivationMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "IncrementActivationMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
         public static extern int IncrementActivationMeterAttributeUses_x86(string name, uint increment);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "DecrementActivationMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "DecrementActivationMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
         public static extern int DecrementActivationMeterAttributeUses_x86(string name, uint decrement);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "ResetActivationMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "ResetActivationMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ResetActivationMeterAttributeUses_x86(string name);
 
-        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "Reset", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DLL_FILE_NAME_WIN_X86, CharSet = CharSet.Unicode, EntryPoint = "Reset", CallingConvention = CallingConvention.Cdecl)]
         public static extern int Reset_x86();
+        #endregion
     }
 }
