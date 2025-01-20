@@ -191,6 +191,12 @@ namespace Cryptlex
                 case LexStatusCodes.LA_E_OS_USER:
                     return "OS user has changed since activation and the license is user-locked.";
 
+                case LexStatusCodes.LA_E_INVALID_PERMISSION_FLAG:
+                    return "Invalid permission flag.";
+                
+                case LexStatusCodes.LA_E_FREE_PLAN_ACTIVATION_LIMIT_REACHED:
+                    return "The free plan has reached it's activation limit.";
+
                 default:
                     return "Unknown error!";
 
