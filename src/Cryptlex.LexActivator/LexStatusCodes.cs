@@ -512,7 +512,7 @@ namespace Cryptlex
         /*
             CODE: LA_E_FREE_PLAN_ACTIVATION_LIMIT_REACHED
             
-            MESSAGE: The free plan has reached it's activation limit.
+            MESSAGE: The free plan has reached its activation limit.
         */
         public const int LA_E_FREE_PLAN_ACTIVATION_LIMIT_REACHED = 106;
     }
