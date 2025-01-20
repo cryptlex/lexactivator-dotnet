@@ -195,7 +195,7 @@ namespace Cryptlex
                     return "Invalid permission flag.";
                 
                 case LexStatusCodes.LA_E_FREE_PLAN_ACTIVATION_LIMIT_REACHED:
-                    return "The free plan has reached it's activation limit.";
+                    return "The free plan has reached its activation limit.";
 
                 default:
                     return "Unknown error!";
