@@ -15,7 +15,7 @@
             <CopyToPublishDirectory>Always</CopyToPublishDirectory>
         </Content>
     </ItemGroup>
-    <ItemGroup Condition=" '$(OS)' == 'Windows_NT' AND  ('$(Platform)' == 'arm64' OR '$(Platform)' == 'AnyCPU') ">
+    <ItemGroup Condition=" '$(OS)' == 'Windows_NT' AND  ('$(Platform)' == 'arm64') ">
         <Content Include="$(MSBuildThisFileDirectory)..\runtimes\win-arm64\native\*.dll">
             <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
