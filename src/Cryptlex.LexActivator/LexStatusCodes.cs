@@ -501,5 +501,19 @@ namespace Cryptlex
             MESSAGE: OS user has changed since activation and the license is user-locked.
         */
         public const int LA_E_OS_USER = 104;
+        
+        /*
+            CODE: LA_E_INVALID_PERMISSION_FLAG
+           
+            MESSAGE: Invalid permission flag.
+        */
+        public const int LA_E_INVALID_PERMISSION_FLAG = 105;
+
+        /*
+            CODE: LA_E_FREE_PLAN_ACTIVATION_LIMIT_REACHED
+            
+            MESSAGE: The free plan has reached its activation limit.
+        */
+        public const int LA_E_FREE_PLAN_ACTIVATION_LIMIT_REACHED = 106;
     }
 }
