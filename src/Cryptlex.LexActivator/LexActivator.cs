@@ -1224,6 +1224,37 @@ namespace Cryptlex
             }
             throw new LexActivatorException(status);
         }
+        public static List<FeatureEntitlement> GetLicenseFeatureEntitlement(string featureName)
+        {
+            var builder = new StringBuilder(4096);
+            int status;
+
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 
+                    ? LexActivatorNative.GetLicenseFeatureEntitlementInternal_x86(featureName, builder, builder.Capacity) 
+                    : LexActivatorNative.GetLicenseFeatureEntitlementInternal(featureName, builder, builder.Capacity);
+            }
+            else
+            {
+                status = LexActivatorNative.GetLicenseFeatureEntitlementInternalA(featureName, builder, builder.Capacity);
+            }
+
+            if (LexStatusCodes.LA_OK == status)
+            {
+                string featureEntitlementJson = builder.ToString();
+                List<FeatureEntitlement> featureEntitlements = new List<FeatureEntitlement>();
+                if (!string.IsNullOrEmpty(featureEntitlementJson))
+                {
+                    featureEntitlements = JsonConvert.DeserializeObject<FeatureEntitlement>(featureEntitlementJson);
+                    return featureEntitlements
+                }
+                return featureEntitlements;
+            }
+
+            throw new LexActivatorException(status);
+        }
+
 
         /// <summary>
         /// Gets the license type (node-locked or hosted-floating).
