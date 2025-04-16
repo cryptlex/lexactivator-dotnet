@@ -236,6 +236,30 @@ namespace Cryptlex
         public static extern int GetLicenseUserMetadataA(string key, StringBuilder value, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseEntitlementSetName(StringBuilder name, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetLicenseEntitlementSetName", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseEntitlementSetNameA(StringBuilder name, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseEntitlementSetDisplayName(StringBuilder displayName, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetLicenseEntitlementSetDisplayName", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseEntitlementSetDisplayNameA(StringBuilder displayName, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetFeatureEntitlementsInternal(StringBuilder featureEntitlementsJson, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetFeatureEntitlementsInternal", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetFeatureEntitlementsInternalA(StringBuilder featureEntitlementsJson, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetFeatureEntitlementInternal(string featureName, StringBuilder featureEntitlementJson, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetFeatureEntitlementInternal", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetFeatureEntitlementInternalA(string featureName, StringBuilder featureEntitlementJson, int length);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseOrganizationName(StringBuilder organizationName, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetLicenseOrganizationName", CallingConvention = CallingConvention.Cdecl)]
@@ -549,6 +573,18 @@ namespace Cryptlex
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseOrganizationAddressInternal", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseOrganizationAddressInternal_x86(StringBuilder jsonAddress, int length);
 
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseEntitlementSetName", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseEntitlementSetName_x86(StringBuilder name, int length);
+    
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseEntitlementSetDisplayName", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLicenseEntitlementSetDisplayName_x86(StringBuilder displayName, int length);
+        
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetFeatureEntitlementsInternal", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetFeatureEntitlementsInternal_x86(StringBuilder featureEntitlementsJson, int length);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetFeatureEntitlementInternal", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetFeatureEntitlementInternal_x86(string featureName, StringBuilder featureEntitlement, int length);
+    
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetUserLicensesInternal", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetUserLicensesInternal_x86(StringBuilder userLicensesJson, int length);
 

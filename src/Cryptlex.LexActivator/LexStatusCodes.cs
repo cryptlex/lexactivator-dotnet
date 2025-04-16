@@ -468,6 +468,13 @@ namespace Cryptlex
         public const int LA_E_CLIENT = 92;
 
         /*
+            CODE: LA_E_ACCOUNT_ID
+
+            MESSAGE: Invalid account ID.
+        */
+        public const int LA_E_ACCOUNT_ID = 93;
+
+        /*
             CODE: LA_E_LOGIN_TEMPORARILY_LOCKED
 
             MESSAGE: The user account has been temporarily locked for 5 mins due to 5 failed attempts.
@@ -515,5 +522,26 @@ namespace Cryptlex
             MESSAGE: The free plan has reached its activation limit.
         */
         public const int LA_E_FREE_PLAN_ACTIVATION_LIMIT_REACHED = 106;
+       
+        /*
+            CODE: LA_E_FEATURE_ENTITLEMENTS_INVALID
+
+            MESSAGE: The feature entitlements are invalid.
+        */
+        public const int LA_E_FEATURE_ENTITLEMENTS_INVALID = 107;   
+
+        /*
+            CODE: LA_E_FEATURE_ENTITLEMENT_NOT_FOUND
+
+            MESSAGE: The feature entitlement does not exist.
+        */
+        public const int LA_E_FEATURE_ENTITLEMENT_NOT_FOUND = 108;
+
+        /*
+            CODE: LA_E_ENTITLEMENT_SET_NOT_LINKED
+
+            MESSAGE: The entitlement set is not linked.
+        */
+        public const int LA_E_ENTITLEMENT_SET_NOT_LINKED = 109; 
     }
 }

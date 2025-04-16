@@ -176,6 +176,9 @@ namespace Cryptlex
                 case LexStatusCodes.LA_E_CLIENT:
                     return "Client error.";
 
+                case LexStatusCodes.LA_E_ACCOUNT_ID:
+                    return "Invalid account ID.";
+
                 case LexStatusCodes.LA_E_LOGIN_TEMPORARILY_LOCKED:
                     return "The user account has been temporarily locked for 5 mins due to 5 failed attempts.";
 
@@ -196,6 +199,15 @@ namespace Cryptlex
                 
                 case LexStatusCodes.LA_E_FREE_PLAN_ACTIVATION_LIMIT_REACHED:
                     return "The free plan has reached its activation limit.";
+                
+                case LexStatusCodes.LA_E_FEATURE_ENTITLEMENTS_INVALID:
+                    return "The feature entitlements are invalid.";
+                
+                case LexStatusCodes.LA_E_FEATURE_ENTITLEMENT_NOT_FOUND:
+                    return "The feature entitlement does not exist.";
+
+                case LexStatusCodes.LA_E_ENTITLEMENT_SET_NOT_LINKED:
+                    return "No entitlement set is linked.";
 
                 default:
                     return "Unknown error!";
