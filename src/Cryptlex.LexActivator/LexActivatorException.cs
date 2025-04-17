@@ -201,7 +201,7 @@ namespace Cryptlex
                     return "The free plan has reached its activation limit.";
                 
                 case LexStatusCodes.LA_E_FEATURE_ENTITLEMENTS_INVALID:
-                    return "The feature entitlements are invalid.";
+                    return "Invalid feature entitlements.";
                 
                 case LexStatusCodes.LA_E_FEATURE_ENTITLEMENT_NOT_FOUND:
                     return "The feature entitlement does not exist.";
