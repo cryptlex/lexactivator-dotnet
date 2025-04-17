@@ -7,12 +7,12 @@ namespace Cryptlex
     public class FeatureEntitlement
     {
         /// <summary>
-        /// Feature entitlement name.
+        /// The name of the feature
         /// </summary>
         public string FeatureName;
 
         /// <summary>
-        /// Feature entitlement value.
+        /// The value of the feature
         /// </summary>
         public string Value;
     
