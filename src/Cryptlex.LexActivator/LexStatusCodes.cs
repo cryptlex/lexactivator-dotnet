@@ -526,7 +526,7 @@ namespace Cryptlex
         /*
             CODE: LA_E_FEATURE_ENTITLEMENTS_INVALID
 
-            MESSAGE: The feature entitlements are invalid.
+            MESSAGE: Invalid feature entitlements.
         */
         public const int LA_E_FEATURE_ENTITLEMENTS_INVALID = 107;   
 
