@@ -1361,13 +1361,7 @@ namespace Cryptlex
             if (LexStatusCodes.LA_OK == status)
             {
                 string featureEntitlementJson = builder.ToString();
-                if (featureEntitlementJson.Length > 0)
-                {
-                    FeatureEntitlement featureEntitlement = null;
-                    featureEntitlement = JsonConvert.DeserializeObject<FeatureEntitlement>(featureEntitlementJson);
-                    return featureEntitlement; 
-                }
-                return null;
+                return JsonConvert.DeserializeObject<FeatureEntitlement>(featureEntitlementJson);
             }
             throw new LexActivatorException(status);
         }

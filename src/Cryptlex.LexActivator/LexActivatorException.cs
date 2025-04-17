@@ -207,7 +207,7 @@ namespace Cryptlex
                     return "The feature entitlement does not exist.";
 
                 case LexStatusCodes.LA_E_ENTITLEMENT_SET_NOT_LINKED:
-                    return "No entitlement set is linked.";
+                    return "No entitlement set is linked to the license.";
 
                 default:
                     return "Unknown error!";
