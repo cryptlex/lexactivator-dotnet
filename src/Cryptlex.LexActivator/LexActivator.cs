@@ -52,6 +52,9 @@ namespace Cryptlex
         /// 
         /// This function must be called on every start of your program
         /// before any other functions are called.
+        ///
+        /// <b>Deprecated.</b> This function is deprecated. Use SetProductData() instead.
+        ///
         /// </summary>
         /// <param name="filePath">absolute path of the product file (Product.dat)</param>
         public static void SetProductFile(string filePath)
@@ -266,6 +269,9 @@ namespace Cryptlex
         /// 
         /// This function must be called before ActivateLicense() or IsLicenseGenuine()
         /// function if 'requireAuthentication' property of the license is set to true.
+        /// 
+        /// <b>Deprecated.</b> This function is deprecated. Use AuthenticateUser() instead.
+        ///
         /// </summary>
         /// <param name="email">user email address</param>
         /// <param name="password">user password</param>
@@ -403,6 +409,9 @@ namespace Cryptlex
         /// 
         /// The app version appears along with the activation details in dashboard. It
         /// is also used to generate app analytics.
+        ///
+        /// <b>Deprecated.</b> This function is deprecated. Use SetReleaseVersion() instead.
+        ///
         /// </summary>
         /// <param name="appVersion"></param>
         public static void SetAppVersion(string appVersion)
@@ -637,6 +646,9 @@ namespace Cryptlex
 
         /// <summary>
         /// Gets the product version name.
+        /// 
+        /// <b>Deprecated.</b> This function is deprecated. Use GetLicenseEntitlementSetName() instead.
+        ///
         /// </summary>
         /// <returns>Returns the value of the product version name.</returns>
         public static string GetProductVersionName()
@@ -660,6 +672,9 @@ namespace Cryptlex
 
         /// <summary>
         /// Gets the product version display name.
+        /// 
+        /// <b>Deprecated.</b> This function is deprecated. Use GetLicenseEntitlementSetDisplayName() instead.
+        ///
         /// </summary>
         /// <returns>Returns the value of the product version display name.</returns>
         public static string GetProductVersionDisplayName()
@@ -1247,6 +1262,110 @@ namespace Cryptlex
             }
             throw new LexActivatorException(status);
         }
+        
+        /// <summary>
+        /// Gets the name of the license entitlement set.
+        /// </summary>
+        /// <returns>Returns the name of the license entitlement set.</returns>
+        public static string GetLicenseEntitlementSetName()
+        {
+            var builder = new StringBuilder(512);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseEntitlementSetName_x86(builder, builder.Capacity) : LexActivatorNative.GetLicenseEntitlementSetName(builder, builder.Capacity);
+            }
+            else
+            {
+                status = LexActivatorNative.GetLicenseEntitlementSetNameA(builder, builder.Capacity);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                return builder.ToString();
+            }
+            throw new LexActivatorException(status);
+        }
+        
+        /// <summary>
+        /// Gets the display name of the license entitlement set.
+        /// </summary>
+        /// <returns>Returns the display name of the license entitlement set.</returns>
+        public static string GetLicenseEntitlementSetDisplayName()
+        {
+            var builder = new StringBuilder(512);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseEntitlementSetDisplayName_x86(builder, builder.Capacity) : LexActivatorNative.GetLicenseEntitlementSetDisplayName(builder, builder.Capacity);
+            }
+            else
+            {
+                status = LexActivatorNative.GetLicenseEntitlementSetDisplayNameA(builder, builder.Capacity);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                return builder.ToString();
+            }
+            throw new LexActivatorException(status);
+        }
+        
+        /// <summary>
+        /// Gets the feature entitlements for the license.
+        /// </summary>
+        /// <returns>Returns the list of feature entitlements.</returns>
+        public static List<FeatureEntitlement> GetFeatureEntitlements()
+        {
+            var builder = new StringBuilder(4096);
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetFeatureEntitlementsInternal_x86(builder, builder.Capacity) : LexActivatorNative.GetFeatureEntitlementsInternal(builder, builder.Capacity);
+            }
+            else
+            {
+                status = LexActivatorNative.GetFeatureEntitlementsInternalA(builder, builder.Capacity);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                string featureEntitlementsJson = builder.ToString();
+                List<FeatureEntitlement> featureEntitlements = new List<FeatureEntitlement>();
+                if (!string.IsNullOrEmpty(featureEntitlementsJson)) 
+                {
+                    featureEntitlements = JsonConvert.DeserializeObject<List<FeatureEntitlement>>(featureEntitlementsJson);
+                    return featureEntitlements;
+                }
+                return featureEntitlements;
+            }
+            throw new LexActivatorException(status);
+        }
+ 
+        /// <summary>
+        /// Gets the feature entitlement for the license.
+        /// </summary>
+        /// <param name="featureName">The name of the feature.</param>
+        /// <returns>The feature entitlement for the license.</returns>
+        public static FeatureEntitlement GetFeatureEntitlement(string featureName)
+        {
+            var builder = new StringBuilder(512);
+            int status;
+
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetFeatureEntitlementInternal_x86(featureName, builder, builder.Capacity) : LexActivatorNative.GetFeatureEntitlementInternal(featureName, builder, builder.Capacity);
+            }
+            else
+            {
+                status = LexActivatorNative.GetFeatureEntitlementInternalA(featureName, builder, builder.Capacity);
+            }
+
+            if (LexStatusCodes.LA_OK == status)
+            {
+                string featureEntitlementJson = builder.ToString();
+                return JsonConvert.DeserializeObject<FeatureEntitlement>(featureEntitlementJson);
+            }
+            throw new LexActivatorException(status);
+        }
+
 
         /// <summary>
         /// Gets the activation id.
@@ -1565,6 +1684,9 @@ namespace Cryptlex
         /// 
         /// This function should only be used if you manage your releases through
         /// Cryptlex release management API.
+        /// 
+        /// <b>Deprecated.</b> This function is deprecated. Use CheckReleaseUpdate() instead.
+        /// 
         /// </summary>
         /// <param name="platform">release platform e.g. windows, macos, linux</param>
         /// <param name="version">current release version</param>
