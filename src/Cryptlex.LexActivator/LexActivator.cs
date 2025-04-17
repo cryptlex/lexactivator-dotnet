@@ -1346,7 +1346,7 @@ namespace Cryptlex
         /// <returns>The feature entitlement for the license.</returns>
         public static FeatureEntitlement GetFeatureEntitlement(string featureName)
         {
-            var builder = new StringBuilder(4096);
+            var builder = new StringBuilder(512);
             int status;
 
             if (LexActivatorNative.IsWindows())
