@@ -209,6 +209,9 @@ namespace Cryptlex
                 case LexStatusCodes.LA_E_ENTITLEMENT_SET_NOT_LINKED:
                     return "No entitlement set is linked to the license.";
 
+                case LexStatusCodes.LA_E_LICENSE_NOT_EFFECTIVE:
+                    return "The license cannot be activated before its effective date.";
+
                 default:
                     return "Unknown error!";
 

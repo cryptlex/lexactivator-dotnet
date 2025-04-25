@@ -540,8 +540,15 @@ namespace Cryptlex
         /*
             CODE: LA_E_ENTITLEMENT_SET_NOT_LINKED
 
-            MESSAGE: The entitlement set is not linked.
+            MESSAGE: The entitlement set is not linked to the license.
         */
         public const int LA_E_ENTITLEMENT_SET_NOT_LINKED = 109; 
+
+        /*
+            CODE: LA_E_LICENSE_NOT_EFFECTIVE
+
+            MESSAGE: The license cannot be activated before its effective date.
+        */
+        public const int LA_E_LICENSE_NOT_EFFECTIVE = 110;
     }
 }
