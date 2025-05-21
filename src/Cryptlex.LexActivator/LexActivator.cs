@@ -969,6 +969,8 @@ namespace Cryptlex
 
         /// <summary>
         /// Gets the activation last synced date timestamp.
+        /// 
+        /// Initially, this timestamp matches the activation creation date, and then updates with each successful server sync.
         /// </summary>
         /// <returns>Returns the timestamp.</returns>
         public static uint GetActivationLastSyncedDate()
