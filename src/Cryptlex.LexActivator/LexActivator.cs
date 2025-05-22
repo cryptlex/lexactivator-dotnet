@@ -967,6 +967,34 @@ namespace Cryptlex
             }
         }
 
+        /// <summary>
+        /// Gets the activation last synced date timestamp.
+        /// 
+        /// Initially, this timestamp matches the activation creation date, and then updates with each successful server sync.
+        /// </summary>
+        /// <returns>Returns the timestamp.</returns>
+        public static uint GetActivationLastSyncedDate()
+        {
+            uint activationLastSyncedDate = 0;
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetActivationLastSyncedDate_x86(ref activationLastSyncedDate) : LexActivatorNative.GetActivationLastSyncedDate(ref activationLastSyncedDate);
+            }
+            else
+            {
+                status =  LexActivatorNative.GetActivationLastSyncedDate(ref activationLastSyncedDate);
+            }
+            switch (status)
+            {
+                case LexStatusCodes.LA_OK:
+                    return activationLastSyncedDate;
+                case LexStatusCodes.LA_FAIL:
+                    return 0;
+                default:
+                    throw new LexActivatorException(status);
+            }
+        }        
 
         /// <summary>
         /// Gets the license expiry date timestamp.

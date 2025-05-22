@@ -200,6 +200,9 @@ namespace Cryptlex
         public static extern int GetActivationCreationDate(ref uint activationCreationDate);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetActivationLastSyncedDate(ref uint activationLastSyncedDate);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseExpiryDate(ref uint expiryDate);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
@@ -521,6 +524,9 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationCreationDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetActivationCreationDate_x86(ref uint activationCreationDate);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetActivationLastSyncedDate", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetActivationLastSyncedDate_x86(ref uint activationLastSyncedDate);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLicenseExpiryDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLicenseExpiryDate_x86(ref uint expiryDate);
