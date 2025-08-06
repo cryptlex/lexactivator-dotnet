@@ -21,7 +21,7 @@
             <dependency id="Newtonsoft.Json" version="12.0.3" />
           </group>
         </dependencies>
-        <copyright>Copyright (c) 2023 Cryptlex LLP </copyright>
+        <copyright>Copyright (c) 2025 Cryptlex LLP </copyright>
         <tags>lexactivator cryptlex licensing-library</tags>
         <references>
             <reference file="Cryptlex.LexActivator.dll" />
