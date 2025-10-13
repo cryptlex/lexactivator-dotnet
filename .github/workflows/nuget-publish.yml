@@ -59,15 +59,15 @@ jobs:
     - name: Build Solution
       run: msbuild Cryptlex.LexActivator.sln /p:platform="Any CPU" /p:configuration="Release" /p:VisualStudioVersion="17.0"
     
-    - name: Signing DLLs
-      uses: GabrielAcostaEngler/signtool-code-sign@main
-      with:
-        certificate: '${{ secrets.SIGNING_CERTIFICATE }}'
-        cert-password: '${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}'
-        cert-sha1: '${{ secrets.SIGNING_CERTIFICATE_SHA }}'
-        folder: '.\src\Cryptlex.LexActivator\bin\Release\'
-        recursive: true
-        timestamp-server: 'http://timestamp.sectigo.com'
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v3
+      with: 
+        credentials_json: ${{ secrets.GCP_KMS_SIGNER_KEY }}
+
+    - name: Run code signing script
+      shell: powershell
+      run: |
+          .\code-sign.ps1
 
     - name: Download Native Libs
       run: .\post-build.ps1
