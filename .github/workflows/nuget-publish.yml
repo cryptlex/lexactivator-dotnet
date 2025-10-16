@@ -67,7 +67,13 @@ jobs:
     - name: Run code signing script
       shell: powershell
       run: |
-          .\code-sign.ps1
+          .\code-sign.ps1 -SignType "dll"
+
+    - name: Setup Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        version: 'latest'
+        install_components: 'gcloud'
 
     - name: Download Native Libs
       run: .\post-build.ps1
@@ -76,6 +82,11 @@ jobs:
     - name: Pack NuGet Package
       run: nuget pack src\Cryptlex.LexActivator\Cryptlex.LexActivator.nuspec -NonInteractive -OutputDirectory nupkg -Properties Configuration=Release -Verbosity Detailed
     
+    - name: Run NuGet package code signing script
+      shell: powershell
+      run: |
+          .\code-sign.ps1 -SignType "nupkg"
+
     - name: Sign NuGet Package
       run: nuget sign .\nupkg\*.nupkg -CertificateFingerprint ${{ secrets.SIGNING_CERTIFICATE_SHA }} -CertificateStoreLocation LocalMachine -CertificateStoreName My -Timestamper http://timestamp.sectigo.com
 
