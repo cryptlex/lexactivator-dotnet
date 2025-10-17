@@ -64,16 +64,16 @@ jobs:
       with: 
         credentials_json: ${{ secrets.GCP_KMS_SIGNER_KEY }}
 
-    - name: Run code signing script
-      shell: powershell
-      run: |
-          .\code-sign.ps1 -SignType "dll"
-
     - name: Setup Google Cloud SDK
       uses: google-github-actions/setup-gcloud@v1
       with:
         version: 'latest'
         install_components: 'gcloud'
+
+    - name: Run code signing script
+      shell: powershell
+      run: |
+          .\code-sign.ps1 -SignType "dll"
 
     - name: Download Native Libs
       run: .\post-build.ps1
