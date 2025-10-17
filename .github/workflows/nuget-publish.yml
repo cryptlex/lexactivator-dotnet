@@ -87,9 +87,6 @@ jobs:
       run: |
           .\code-sign.ps1 -SignType "nupkg"
 
-    - name: Sign NuGet Package
-      run: nuget sign .\nupkg\*.nupkg -CertificateFingerprint ${{ secrets.SIGNING_CERTIFICATE_SHA }} -CertificateStoreLocation LocalMachine -CertificateStoreName My -Timestamper http://timestamp.sectigo.com
-
     - name: Push NuGet Package
       run: nuget push nupkg\*.nupkg -SkipDuplicate -Source https://api.nuget.org/v3/index.json -NoSymbols
 
