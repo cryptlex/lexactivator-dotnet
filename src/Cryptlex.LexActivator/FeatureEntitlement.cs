@@ -21,5 +21,10 @@ namespace Cryptlex
         /// </summary>
         public string Value;
     
+        /// <summary>
+        /// Timestamp when the license feature entitlement will expire
+        /// </summary>
+        public long ExpiresAt;
+
     }
 }
