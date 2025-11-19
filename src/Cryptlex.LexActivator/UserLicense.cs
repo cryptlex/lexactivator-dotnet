@@ -22,6 +22,16 @@ namespace Cryptlex
         public string Key;
 
         /// <summary>
+        /// Total number of activations for the license.
+        /// </summary>
+        public uint TotalActivations;
+
+        /// <summary>
+        /// Total number of deactivations for the license.
+        /// </summary>
+        public uint TotalDeactivations;
+
+        /// <summary>
         /// The license type (node-locked or hosted-floating).
         /// </summary>
         public string Type;
