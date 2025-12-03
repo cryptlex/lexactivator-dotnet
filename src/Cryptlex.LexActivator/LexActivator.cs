@@ -1519,6 +1519,31 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Gets the error code that caused the activation data to be cleared.
+        /// </summary>
+        /// <returns>Returns the error code that caused the activation data to be cleared.</returns>
+        public static uint GetLastActivationError()
+        {
+            uint errorCode = 0;
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLastActivationError_x86(ref errorCode) : LexActivatorNative.GetLastActivationError(ref errorCode);
+            }
+            else
+            {
+                status =  LexActivatorNative.GetLastActivationError(ref errorCode);
+            }
+            switch (status)
+            {
+                case LexStatusCodes.LA_OK:
+                    return errorCode;
+                default:
+                    throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
         /// Gets the trial activation metadata.
         /// </summary>
         /// <param name="key">key to retrieve the value</param>

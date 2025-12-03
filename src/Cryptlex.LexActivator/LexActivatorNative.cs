@@ -314,6 +314,9 @@ namespace Cryptlex
         public static extern int GetServerSyncGracePeriodExpiryDate(ref uint expiryDate);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLastActivationError(ref uint errorCode);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetTrialActivationMetadata(string key, StringBuilder value, int length);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "GetTrialActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
@@ -611,6 +614,9 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetServerSyncGracePeriodExpiryDate", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetServerSyncGracePeriodExpiryDate_x86(ref uint expiryDate);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetLastActivationError", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLastActivationError_x86(ref uint errorCode);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "GetTrialActivationMetadata", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetTrialActivationMetadata_x86(string key, StringBuilder value, int length);
