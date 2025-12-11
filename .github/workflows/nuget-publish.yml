@@ -2,43 +2,9 @@ name: Build Cryptlex.LexActivator package
 
 on:
   workflow_dispatch:
-    inputs:
-      libraryVersion:
-        description: 'Library Version'
-        required: true
-        default: ''
-      packageVersion:
-        description: 'Package Version'
-        required: true
-        default: ''
-
+    
 jobs:
-  update-version:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      
-      - name: Update Package Version
-        run: |
-          sed -i '/<version>/!b;c \ \ \ \ <version>${{ github.event.inputs.packageVersion }}</version>' ./src/Cryptlex.LexActivator/Cryptlex.LexActivator.nuspec    
-      
-      - name: Update Library Version
-        run: |
-          sed -i '/lexactivator_version =/!b;c$lexactivator_version ="v${{ github.event.inputs.libraryVersion }}"' post-build.ps1
-     
-      - name: Commit, Tag and Push
-        run: |
-          git add ./src/Cryptlex.LexActivator/Cryptlex.LexActivator.nuspec
-          git add post-build.ps1
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git commit -m "chore(package version): updated version" | exit 0
-          git tag ${{ github.event.inputs.packageVersion }}
-          git push & git push --tags
-     
   build-publish:
-    needs: update-version
     runs-on: windows-2022
     steps:
     - uses: actions/checkout@v2
