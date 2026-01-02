@@ -56,3 +56,11 @@ jobs:
     - name: Push NuGet Package
       run: nuget push nupkg\*.nupkg -SkipDuplicate -Source https://api.nuget.org/v3/index.json -NoSymbols
 
+    - name: Extract version and create tag
+      shell: bash
+      run: |
+        VERSION=$(sed -n 's/^[[:space:]]*<version>\([^<]*\)<\/version>.*/\1/p' src/Cryptlex.LexActivator/Cryptlex.LexActivator.nuspec)
+
+        git tag "$VERSION" 2>/dev/null || echo "Tag already exists"
+        git push origin "$VERSION" || true
+
