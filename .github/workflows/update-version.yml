@@ -20,7 +20,7 @@ jobs:
       PACKAGE_VERSION: ${{ github.event.inputs.packageVersion }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Update Package Version
         run: |
@@ -33,7 +33,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          branch: release/${{ env.PACKAGE_VERSION }}
+          branch: ci/${{ env.PACKAGE_VERSION }}
           title: "chore: bump package version to ${{ env.PACKAGE_VERSION }}"
           commit-message: "chore(package version): updated version"
           body: |

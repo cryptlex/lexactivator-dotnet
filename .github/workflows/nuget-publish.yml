@@ -7,7 +7,7 @@ jobs:
   build-publish:
     runs-on: windows-2022
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - run: git pull origin main --ff-only
       
     - name: Setup NuGet
@@ -61,6 +61,17 @@ jobs:
       run: |
         VERSION=$(sed -n 's/^[[:space:]]*<version>\([^<]*\)<\/version>.*/\1/p' src/Cryptlex.LexActivator/Cryptlex.LexActivator.nuspec)
 
+        [ -n "$VERSION" ] || exit 1
+
         git tag "$VERSION" 2>/dev/null || echo "Tag already exists"
         git push origin "$VERSION" || true
 
+    - name: Notify slack releases channel
+      uses: slackapi/slack-github-action@v2
+      with:
+        webhook: ${{ secrets.SLACK_RELEASES_PROD_WEBHOOK_URL }}
+        webhook-type: webhook-trigger
+        payload: |
+          status: "${{ job.status }}"
+          environment: "PRODUCTION"
+          project: "LexActivator .NET"
