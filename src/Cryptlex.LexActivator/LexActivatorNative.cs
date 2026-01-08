@@ -440,6 +440,9 @@ namespace Cryptlex
         public static extern int ResetActivationMeterAttributeUsesA(string name);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int MigrateToSystemWideActivation(LexActivator.PermissionFlags oldPermissionFlag);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int Reset();
 
 
@@ -695,6 +698,9 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "ResetActivationMeterAttributeUses", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ResetActivationMeterAttributeUses_x86(string name);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "MigrateToSystemWideActivation", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int MigrateToSystemWideActivation_x86(LexActivator.PermissionFlags oldPermissionFlag);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "Reset", CallingConvention = CallingConvention.Cdecl)]
         public static extern int Reset_x86();
