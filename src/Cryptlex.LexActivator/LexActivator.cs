@@ -2338,7 +2338,7 @@ namespace Cryptlex
         /// NOTE: The function does not support migration from custom data directories.
         /// </summary>
         /// <param name="oldPermissionFlag">permission flag used previously</param>
-        /// <returns> LA_OK, LA_E_FILE_PERMISSION, LA_E_PRODUCT_DATA, LA_E_INVALID_PERMISSION_FLAG, LA_E_SYSTEM_PERMISSION, LA_FAIL</returns>
+        /// <returns> LA_OK, LA_FAIL</returns>
         public static int MigrateToSystemWideActivation(PermissionFlags oldPermissionFlag)
         {
            int status;
@@ -2354,14 +2354,6 @@ namespace Cryptlex
            {
                case LexStatusCodes.LA_OK:
                    return LexStatusCodes.LA_OK;
-               case LexStatusCodes.LA_E_FILE_PERMISSION:
-                   return LexStatusCodes.LA_E_FILE_PERMISSION;
-               case LexStatusCodes.LA_E_PRODUCT_DATA:
-                   return LexStatusCodes.LA_E_PRODUCT_DATA;
-               case LexStatusCodes.LA_E_INVALID_PERMISSION_FLAG:
-                   return LexStatusCodes.LA_E_INVALID_PERMISSION_FLAG;
-               case LexStatusCodes.LA_E_SYSTEM_PERMISSION:
-                   return LexStatusCodes.LA_E_SYSTEM_PERMISSION;
                case LexStatusCodes.LA_FAIL:
                    return LexStatusCodes.LA_FAIL;
                default:
