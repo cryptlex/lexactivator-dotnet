@@ -219,17 +219,18 @@ namespace Cryptlex
         /// This function should be used for network testing only in case of network errors.
         /// By default SSL peer verification is enabled except for Linux.
         /// </summary>
-        /// <param name="enable">0 or 1 to disable or enable SSL peer verification.</param>
-        public static void SetTlsPeerVerification(uint enable)
+        /// <param name="enable">false or true to disable or enable SSL peer verification.</param>
+        public static void SetTlsPeerVerification(bool enable)
         {
             int status;
+            uint enableFlag = enable ? (uint)1 : (uint)0;
             if (LexActivatorNative.IsWindows())
             {
-                status = IntPtr.Size == 4 ? LexActivatorNative.SetTlsPeerVerification_x86(enable) : LexActivatorNative.SetTlsPeerVerification(enable);
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetTlsPeerVerification_x86(enableFlag) : LexActivatorNative.SetTlsPeerVerification(enableFlag);
             }
             else
             {
-                status = LexActivatorNative.SetTlsPeerVerification(enable);
+                status = LexActivatorNative.SetTlsPeerVerification(enableFlag);
             }
             if (LexStatusCodes.LA_OK != status)
             {
