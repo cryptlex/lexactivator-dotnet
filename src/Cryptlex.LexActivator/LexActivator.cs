@@ -215,11 +215,14 @@ namespace Cryptlex
         }
 
         /// <summary>
-        /// Enables or disables SSL peer verification.
-        /// This function should be used for network testing only in case of network errors.
-        /// By default SSL peer verification is enabled except for Linux.
+        /// Enables or disables TLS/SSL peer certificate verification.
+        /// IMPORTANT: Disabling peer verification is strongly discouraged as it compromises connection security
+        /// and exposes traffic to man-in-the-middle attacks.
+        /// Only disable this if you fully understand the risks.
+        /// By default, TLS peer verification is enabled (except on Linux, where system certificate availability
+        /// may vary).
         /// </summary>
-        /// <param name="enable">false or true to disable or enable SSL peer verification.</param>
+        /// <param name="enable">false to disable peer verification, true to enable it.</param>
         public static void SetTlsPeerVerification(bool enable)
         {
             int status;
