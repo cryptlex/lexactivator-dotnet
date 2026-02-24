@@ -2328,6 +2328,40 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Migrates existing license data to system-wide storage.
+        ///
+        /// Call this function after SetProductData().
+        ///
+        /// If you intend to use a custom data directory after migration,
+        /// set it first using SetDataDirectory().
+        ///
+        /// NOTE: The function does not support migration from custom data directories.
+        /// </summary>
+        /// <param name="oldPermissionFlag">permission flag used previously</param>
+        /// <returns>LA_OK, LA_FAIL</returns>
+        public static int MigrateToSystemWideActivation(PermissionFlags oldPermissionFlag)
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.MigrateToSystemWideActivation_x86(oldPermissionFlag) : LexActivatorNative.MigrateToSystemWideActivation(oldPermissionFlag);
+            }
+            else
+            {
+                status =  LexActivatorNative.MigrateToSystemWideActivation(oldPermissionFlag);
+            }
+            switch (status)
+            {
+                case LexStatusCodes.LA_OK:
+                    return LexStatusCodes.LA_OK;
+                case LexStatusCodes.LA_FAIL:
+                    return LexStatusCodes.LA_FAIL;
+                default:
+                    throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
         /// Resets the activation and trial data stored in the machine.
         /// 
         /// This function is meant for developer testing only.
