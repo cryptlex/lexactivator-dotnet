@@ -1,12 +1,16 @@
-####################################################################################################
-Package:Newtonsoft.Json
-Version:12.0.3
-project URL:https://www.newtonsoft.com/json
-Description:Json.NET is a popular high-performance JSON framework for .NET
-licenseUrl:https://licenses.nuget.org/MIT
-license Type:MIT
-license text:
+lexactivator-dotnet uses third-party libraries or other resources that may be
+distributed under licenses different than the lexactivator-dotnet.
 
+In the event that we accidentally failed to list a required notice, please
+bring it to our attention. Post an issue or email us:
+
+           support@cryptlex.com
+
+The attached notices are provided for information only.
+
+License notice for:
+Newtonsoft.Json 12.0.3 - Copyright (c) 2007 James Newton-King
+-------------------------------------------------
 The MIT License (MIT)
 
 Copyright (c) 2007 James Newton-King
@@ -16,5 +20,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-####################################################################################################
