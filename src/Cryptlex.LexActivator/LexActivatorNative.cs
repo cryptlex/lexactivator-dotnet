@@ -50,6 +50,9 @@ namespace Cryptlex
         public static extern int SetCacheMode(uint enable);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetTlsPeerVerification(uint enable);
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetCustomDeviceFingerprint(string fingerprint);
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Ansi, EntryPoint = "SetCustomDeviceFingerprint", CallingConvention = CallingConvention.Cdecl)]
@@ -464,6 +467,9 @@ namespace Cryptlex
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetCacheMode", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetCacheMode_x86(uint enable);
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetTlsPeerVerification", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SetTlsPeerVerification_x86(uint enable);
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SetCustomDeviceFingerprint", CallingConvention = CallingConvention.Cdecl)]
         public static extern int SetCustomDeviceFingerprint_x86(string fingerprint);
