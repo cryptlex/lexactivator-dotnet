@@ -8,7 +8,7 @@
         <owners>Cryptlex LLP</owners>
         <projectUrl>https://cryptlex.com</projectUrl>
         <repository type="git" url="https://github.com/cryptlex/lexactivator-dotnet" />
-        <license type="expression">MIT</license>
+        <license type="file">LICENSE.md</license>
         <language>en-US</language>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <summary>LexActivator API wrapper for .NET (licensing library).</summary>
@@ -31,6 +31,9 @@
         </references>
     </metadata>
     <files>
+        <file src="..\..\LICENSE.md" target="" />
+        <file src="..\..\THIRD-PARTY-NOTICES.txt" target="" />
+        <file src="runtimes\THIRD-PARTY-NOTICES.txt" target="runtimes" />
         <file src="build\Cryptlex.LexActivator.targets" target="build\Cryptlex.LexActivator.targets" />
         <file src="runtimes\win-x86\native\*.dll" target="runtimes\win-x86\native" />
         <file src="runtimes\win-x64\native\*.dll" target="runtimes\win-x64\native" />
