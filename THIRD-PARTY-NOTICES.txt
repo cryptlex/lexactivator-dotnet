@@ -8,9 +8,9 @@ bring it to our attention by emailing us at:
 
 The attached notices are provided for information only.
 
-License notice for:
-Newtonsoft.Json 12.0.3 - Copyright (c) 2007 James Newton-King
+License notice for Newtonsoft.Json
 -------------------------------------------------
+
 The MIT License (MIT)
 
 Copyright (c) 2007 James Newton-King
