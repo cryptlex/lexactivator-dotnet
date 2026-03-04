@@ -1359,7 +1359,30 @@ namespace Cryptlex
             }
             throw new LexActivatorException(status);
         }
-        
+
+        /// <summary>
+        /// Gets the tier of the license entitlement set.
+        /// </summary>
+        /// <returns>Returns the tier of the license entitlement set.</returns>
+        public static long GetLicenseEntitlementSetTier()
+        {
+            long tier = 0;
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.GetLicenseEntitlementSetTier_x86(ref tier) : LexActivatorNative.GetLicenseEntitlementSetTier(ref tier);
+            }
+            else
+            {
+                status = LexActivatorNative.GetLicenseEntitlementSetTier(ref tier);
+            }
+            if (LexStatusCodes.LA_OK == status)
+            {
+                return tier;
+            }
+            throw new LexActivatorException(status);
+        }
+
         /// <summary>
         /// Gets the feature entitlements for the license.
         /// </summary>
