@@ -58,6 +58,10 @@ namespace Cryptlex
 
         private static T Deserialize<T>(string json)
         {
+            if (string.IsNullOrEmpty(json))
+            {
+                return default(T);
+            }
 #if NETSTANDARD2_0
             return JsonSerializer.Deserialize<T>(json, jsonOptions);
 #else
