@@ -2,7 +2,12 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Collections.Generic;
+#if NETSTANDARD2_0
+using System.Text.Json;
+#else
 using Newtonsoft.Json;
+#endif
+
 
 namespace Cryptlex
 {
@@ -46,6 +51,20 @@ namespace Cryptlex
         static readonly List<InternalReleaseCallbackAType> internalReleaseCallbackAList = new List<InternalReleaseCallbackAType>();
 
         static readonly List<InternalReleaseCallbackType> internalReleaseCallbackList = new List<InternalReleaseCallbackType>();
+
+#if NETSTANDARD2_0
+        private static readonly JsonSerializerOptions jsonOptions = new JsonSerializerOptions { IncludeFields = true, PropertyNameCaseInsensitive = true };
+#endif
+
+        private static T Deserialize<T>(string json)
+        {
+#if NETSTANDARD2_0
+            return JsonSerializer.Deserialize<T>(json, jsonOptions);
+#else
+            return JsonConvert.DeserializeObject<T>(json);
+#endif
+        }
+
 
         /// <summary>
         /// Sets the absolute path of the Product.dat file.
@@ -1226,7 +1245,7 @@ namespace Cryptlex
                 if (jsonAddress.Length > 0)
                 {
                     OrganizationAddress organizationAddress = null;
-                    organizationAddress = JsonConvert.DeserializeObject<OrganizationAddress>(jsonAddress);
+                    organizationAddress = Deserialize<OrganizationAddress>(jsonAddress);
                     return organizationAddress; 
                 }
                 return null;
@@ -1260,7 +1279,7 @@ namespace Cryptlex
                 List<UserLicense> userLicenses = new List<UserLicense>();
                 if (!string.IsNullOrEmpty(userLicensesJson)) 
                 {
-                    userLicenses = JsonConvert.DeserializeObject<List<UserLicense>>(userLicensesJson);
+                    userLicenses = Deserialize<List<UserLicense>>(userLicensesJson);
                     return userLicenses;
                 }
                 return userLicenses;
@@ -1359,7 +1378,7 @@ namespace Cryptlex
                 List<FeatureEntitlement> featureEntitlements = new List<FeatureEntitlement>();
                 if (!string.IsNullOrEmpty(featureEntitlementsJson)) 
                 {
-                    featureEntitlements = JsonConvert.DeserializeObject<List<FeatureEntitlement>>(featureEntitlementsJson);
+                    featureEntitlements = Deserialize<List<FeatureEntitlement>>(featureEntitlementsJson);
                     return featureEntitlements;
                 }
                 return featureEntitlements;
@@ -1389,7 +1408,7 @@ namespace Cryptlex
             if (LexStatusCodes.LA_OK == status)
             {
                 string featureEntitlementJson = builder.ToString();
-                return JsonConvert.DeserializeObject<FeatureEntitlement>(featureEntitlementJson);
+                return Deserialize<FeatureEntitlement>(featureEntitlementJson);
             }
             throw new LexActivatorException(status);
         }
@@ -1697,7 +1716,7 @@ namespace Cryptlex
             {
                 string releaseJsonString = Marshal.PtrToStringUni(releaseJson);
                 Release release = null;
-                release = JsonConvert.DeserializeObject<Release>(releaseJsonString);
+                release = Deserialize<Release>(releaseJsonString);
                 var wrappedCallback = releaseUpdateCallback;
 #if NETFRAMEWORK
             var syncTarget = releaseUpdateCallback.Target as System.Windows.Forms.Control;
@@ -1712,7 +1731,7 @@ namespace Cryptlex
             InternalReleaseCallbackAType internalReleaseCallbackA = (releaseStatus, releaseJson, _userData) =>
             {
                 Release release = null;
-                release = JsonConvert.DeserializeObject<Release>(releaseJson);
+                release = Deserialize<Release>(releaseJson);
                 releaseUpdateCallback(releaseStatus, release, userData);
             };
             internalReleaseCallbackAList.Add(internalReleaseCallbackA);

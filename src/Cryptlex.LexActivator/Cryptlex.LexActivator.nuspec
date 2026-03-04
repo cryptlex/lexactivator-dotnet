@@ -15,10 +15,13 @@
         <description>Cryptlex lets you license your software apps effortlessly. You can easily generate license keys using the REST API or Dashboard and validate the license keys in your software apps using LexActivator (Cryptlex client library).</description>
         <dependencies>
           <group targetFramework="net45">
-            <dependency id="Newtonsoft.Json" version="12.0.3" />
+            <dependency id="Newtonsoft.Json" version="13.0.3" />
           </group>
           <group targetFramework="netstandard1.1">
-            <dependency id="Newtonsoft.Json" version="12.0.3" />
+            <dependency id="Newtonsoft.Json" version="13.0.3" />
+          </group>
+          <group targetFramework="netstandard2.0">
+            <dependency id="System.Text.Json" version="8.0.6" />
           </group>
         </dependencies>
         <copyright>Copyright (c) 2026 Cryptlex LLP </copyright>
@@ -41,8 +44,10 @@
         <file src="runtimes\linux-musl-arm64\native\*.so" target="runtimes\linux-musl-arm64\native" />
         <file src="runtimes\linux-musl-arm\native\*.so" target="runtimes\linux-musl-arm\native" />
         <file src="bin\Release\net45\Cryptlex.LexActivator.dll" target="lib\net45" />
-        <file src="bin\Release\Cryptlex.LexActivator.xml" target="lib\net45" />
+        <file src="bin\Release\net45\Cryptlex.LexActivator.xml" target="lib\net45" />
         <file src="bin\Release\netstandard1.1\Cryptlex.LexActivator.dll" target="lib\netstandard1.1" />
-        <file src="bin\Release\Cryptlex.LexActivator.xml" target="lib\netstandard1.1" />
+        <file src="bin\Release\netstandard1.1\Cryptlex.LexActivator.xml" target="lib\netstandard1.1" />
+        <file src="bin\Release\netstandard2.0\Cryptlex.LexActivator.dll" target="lib\netstandard2.0" />
+        <file src="bin\Release\netstandard2.0\Cryptlex.LexActivator.xml" target="lib\netstandard2.0" />
     </files>
 </package>
