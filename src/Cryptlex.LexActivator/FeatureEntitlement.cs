@@ -20,6 +20,11 @@ namespace Cryptlex
         /// The value of the feature
         /// </summary>
         public string Value;
+
+        /// <summary>
+        /// The default value of the feature inherited from the entitlement set.
+        /// </summary>
+        public string BaseValue;
     
         /// <summary>
         /// Timestamp when the license feature entitlement will expire
