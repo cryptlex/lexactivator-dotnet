@@ -31,4 +31,4 @@ $output = "$PSScriptRoot\tmp\LexActivator-Mac.zip"
 Expand-Archive "$PSScriptRoot\tmp\LexActivator-Mac.zip" -DestinationPath "$PSScriptRoot\tmp\LexActivator-Mac"
 Copy-Item -Path "$PSScriptRoot\tmp\LexActivator-Mac\libs\clang\x86_64\libLexActivator.dylib" -Destination "$PSScriptRoot\src\Cryptlex.LexActivator\runtimes\osx-x64\native\libLexActivator.dylib"
 Copy-Item -Path "$PSScriptRoot\tmp\LexActivator-Mac\libs\clang\arm64\libLexActivator.dylib" -Destination "$PSScriptRoot\src\Cryptlex.LexActivator\runtimes\osx-arm64\native\libLexActivator.dylib"
-
+Copy-Item -Path "$PSScriptRoot\tmp\LexActivator-Mac\THIRD-PARTY-NOTICES.txt" -Destination "$PSScriptRoot\src/Cryptlex.LexActivator\runtimes\"
