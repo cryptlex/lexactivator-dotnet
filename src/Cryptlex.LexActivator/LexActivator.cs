@@ -238,6 +238,33 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Enables or disables TLS/SSL peer certificate verification.
+        /// IMPORTANT: Disabling peer verification is strongly discouraged as it compromises connection security
+        /// and exposes traffic to man-in-the-middle attacks.
+        /// Only disable this if you fully understand the risks.
+        /// By default, TLS peer verification is enabled (except on Linux, where system certificate availability
+        /// may vary).
+        /// </summary>
+        /// <param name="enable">false to disable peer verification, true to enable it.</param>
+        public static void SetTlsPeerVerification(bool enable)
+        {
+            int status;
+            uint enableFlag = enable ? (uint)1 : (uint)0;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SetTlsPeerVerification_x86(enableFlag) : LexActivatorNative.SetTlsPeerVerification(enableFlag);
+            }
+            else
+            {
+                status = LexActivatorNative.SetTlsPeerVerification(enableFlag);
+            }
+            if (LexStatusCodes.LA_OK != status)
+            {
+                throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
         /// In case you don't want to use the LexActivator's advanced
         /// device fingerprinting algorithm, this function can be used to set a custom
         /// device fingerprint.
