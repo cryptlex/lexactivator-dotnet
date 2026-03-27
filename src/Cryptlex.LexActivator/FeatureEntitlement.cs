@@ -17,9 +17,16 @@ namespace Cryptlex
         public string FeatureDisplayName;
 
         /// <summary>
-        /// The value of the feature
+        /// Effective value of the feature. Contains the overridden value if set at the license level;
+        /// otherwise, the entitlement set value.
         /// </summary>
         public string Value;
+
+        /// <summary>
+        ///  Default value of the feature defined in the entitlement set; empty for features not inherited
+        /// from an entitlement set.
+        /// </summary>
+        public string BaseValue;
     
         /// <summary>
         /// Timestamp when the license feature entitlement will expire
