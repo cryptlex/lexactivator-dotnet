@@ -2100,6 +2100,43 @@ namespace Cryptlex
         }
 
         /// <summary>
+        /// Syncs the activation data with the Cryptlex servers.
+        ///
+        /// This function should be called only if the license is already activated.
+        /// This is a blocking call that performs a one-time synchronization to refresh
+        /// the local license data.
+        ///
+        /// NOTE: For periodic validation, use IsLicenseGenuine() instead, which schedules background
+        /// sync at a defined interval.
+        /// </summary>
+        /// <returns>LA_OK, LA_EXPIRED, LA_SUSPENDED, LA_FAIL</returns>
+        public static int SyncLicenseActivation()
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SyncLicenseActivation_x86() : LexActivatorNative.SyncLicenseActivation();
+            }
+            else
+            {
+                status = LexActivatorNative.SyncLicenseActivation();
+            }
+            switch (status)
+            {
+                case LexStatusCodes.LA_OK:
+                    return LexStatusCodes.LA_OK;
+                case LexStatusCodes.LA_EXPIRED:
+                    return LexStatusCodes.LA_EXPIRED;
+                case LexStatusCodes.LA_SUSPENDED:
+                    return LexStatusCodes.LA_SUSPENDED;
+                case LexStatusCodes.LA_FAIL:
+                    return LexStatusCodes.LA_FAIL;
+                default:
+                    throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
         /// Starts the verified trial in your application by contacting the
         /// Cryptlex servers.
         /// 
@@ -2117,6 +2154,41 @@ namespace Cryptlex
             else
             {
                 status =  LexActivatorNative.ActivateTrial();
+            }
+            switch (status)
+            {
+                case LexStatusCodes.LA_OK:
+                    return LexStatusCodes.LA_OK;
+                case LexStatusCodes.LA_TRIAL_EXPIRED:
+                    return LexStatusCodes.LA_TRIAL_EXPIRED;
+                case LexStatusCodes.LA_FAIL:
+                    return LexStatusCodes.LA_FAIL;
+                default:
+                    throw new LexActivatorException(status);
+            }
+        }
+
+        /// <summary>
+        /// Syncs the trial activation data with the Cryptlex servers.
+        ///
+        /// This function should be called only if the trial is already activated.
+        /// This is a blocking call that performs a one-time synchronization to refresh
+        /// the local trial data.
+        ///
+        /// NOTE: Unlike IsTrialGenuine(), which validates the trial activation locally only, this
+        /// function forces an immediate server check.
+        /// </summary>
+        /// <returns>LA_OK, LA_TRIAL_EXPIRED, LA_FAIL</returns>
+        public static int SyncTrialActivation()
+        {
+            int status;
+            if (LexActivatorNative.IsWindows())
+            {
+                status = IntPtr.Size == 4 ? LexActivatorNative.SyncTrialActivation_x86() : LexActivatorNative.SyncTrialActivation();
+            }
+            else
+            {
+                status = LexActivatorNative.SyncTrialActivation();
             }
             switch (status)
             {
