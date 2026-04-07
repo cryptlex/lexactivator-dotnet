@@ -398,7 +398,13 @@ namespace Cryptlex
         public static extern int IsLicenseValid();
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SyncLicenseActivation();
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ActivateTrial();
+
+        [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SyncTrialActivation();
 
         [DllImport(DLL_FILE_NAME, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ActivateTrialOffline(string filePath);
@@ -675,8 +681,14 @@ namespace Cryptlex
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "IsLicenseValid", CallingConvention = CallingConvention.Cdecl)]
         public static extern int IsLicenseValid_x86();
 
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SyncLicenseActivation", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SyncLicenseActivation_x86();
+
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "ActivateTrial", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ActivateTrial_x86();
+
+        [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "SyncTrialActivation", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int SyncTrialActivation_x86();
 
         [DllImport(DLL_FILE_NAME_X86, CharSet = CharSet.Unicode, EntryPoint = "ActivateTrialOffline", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ActivateTrialOffline_x86(string filePath);
