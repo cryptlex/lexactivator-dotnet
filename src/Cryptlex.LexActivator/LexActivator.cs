@@ -2100,14 +2100,18 @@ namespace Cryptlex
         }
 
         /// <summary>
-        /// Syncs the activation data with the Cryptlex servers.
+        /// Synchronizes the activation data with the Cryptlex servers.
         ///
-        /// This function should be called only if the license is already activated.
-        /// This is a blocking call that performs a one-time synchronization to refresh
-        /// the local license data.
+        /// The license must already be activated when this function is called.
         ///
-        /// NOTE: For periodic validation, use IsLicenseGenuine() instead, which schedules background
-        /// sync at a defined interval.
+        /// This is a blocking call that performs a one-time synchronization to refresh the local license
+        /// data.
+        ///
+        /// In most cases, rely on IsLicenseGenuine(), which automatically handles periodic background
+        /// synchronization based on the configured interval.
+        ///
+        /// NOTE: Do not use this function in regular application flow. Use it only when an immediate
+        /// synchronization is required.
         /// </summary>
         /// <returns>LA_OK, LA_EXPIRED, LA_SUSPENDED, LA_FAIL</returns>
         public static int SyncLicenseActivation()
@@ -2169,14 +2173,18 @@ namespace Cryptlex
         }
 
         /// <summary>
-        /// Syncs the trial activation data with the Cryptlex servers.
+        /// Synchronizes the trial activation data with the Cryptlex servers.
         ///
-        /// This function should be called only if the trial is already activated.
-        /// This is a blocking call that performs a one-time synchronization to refresh
-        /// the local trial data.
+        /// The trial must already be activated when this function is called.
         ///
-        /// NOTE: Unlike IsTrialGenuine(), which validates the trial activation locally only, this
-        /// function forces an immediate server check.
+        /// This is a blocking call that performs a one-time synchronization to refresh the local trial
+        /// data.
+        ///
+        /// Unlike IsTrialGenuine(), which validates the trial activation locally, this function
+        /// performs an immediate synchronization with the servers.
+        ///
+        /// NOTE: Use this function to immediately reflect server-side changes on the user's machine,
+        /// such as trial extensions.
         /// </summary>
         /// <returns>LA_OK, LA_TRIAL_EXPIRED, LA_FAIL</returns>
         public static int SyncTrialActivation()
