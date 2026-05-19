@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard1.1;net45</TargetFrameworks>
     <IsPackable>true</IsPackable>
+    <FileVersion>3.0.0.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <DocumentationFile>bin\release\Cryptlex.LexActivator.xml</DocumentationFile>

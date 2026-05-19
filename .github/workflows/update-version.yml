@@ -25,6 +25,7 @@ jobs:
       - name: Update Package Version
         run: |
           sed -i -E 's/^([[:space:]]*<version>)[^<]+(<\/version>)/\1${{ env.PACKAGE_VERSION }}\2/' ./src/Cryptlex.LexActivator/Cryptlex.LexActivator.nuspec
+          sed -i -E 's/(<FileVersion>)[^<]+(<\/FileVersion>)/\1${{ env.PACKAGE_VERSION }}\2/' ./src/Cryptlex.LexActivator/Cryptlex.LexActivator.csproj
 
       - name: Update Library Version
         run: |
@@ -41,6 +42,7 @@ jobs:
           base: master
           add-paths: |
             ./src/Cryptlex.LexActivator/Cryptlex.LexActivator.nuspec
+            ./src/Cryptlex.LexActivator/Cryptlex.LexActivator.csproj
             post-build.ps1
 
      
